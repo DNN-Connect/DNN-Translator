@@ -1,0 +1,536 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{DC7B7B19-07A7-44C9-A624-67895E092C52}</ProjectGuid>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DotNetNuke.Translator</RootNamespace>
+    <AssemblyName>Translator</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <MyType>Custom</MyType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <IncrementalBuild>true</IncrementalBuild>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Translator.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42314</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <IncrementalBuild>false</IncrementalBuild>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Translator.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42314</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Text</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>DotNetNuke.Translator.Application</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit">
+      <HintPath>_References\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.0.5.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>_References\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="RibbonControlsLibrary" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="Application.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Common\ApplicationState.vb" />
+    <Compile Include="Common\Bing\Bing.vb" />
+    <Compile Include="Common\Bing\AdmAccessToken.vb" />
+    <Compile Include="Common\Bing\AdmAuthentication.vb" />
+    <Compile Include="Common\BoolToVisibilityConverter.vb" />
+    <Compile Include="Common\DataGridContextHelper.vb" />
+    <Compile Include="Common\Extensions.vb" />
+    <Compile Include="Common\Globals.vb" />
+    <Compile Include="Common\LEService\DTConverter.vb" />
+    <Compile Include="Common\LEService\LEService.vb" />
+    <Compile Include="Common\LEService\TextInfo.vb" />
+    <Compile Include="Common\ParameterObject.vb" />
+    <Compile Include="Common\PasswordHelper.vb" />
+    <Compile Include="Common\Snapshot.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Snapshot.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Snapshot.vb">
+      <DependentUpon>Snapshot.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ActionableViewModel.vb" />
+    <Compile Include="ViewModel\BrowserViewModel.vb" />
+    <Compile Include="ViewModel\ResourceFolderTreeViewModel.vb" />
+    <Compile Include="ViewModel\ResourceFileTreeViewModel.vb" />
+    <Compile Include="ViewModel\InstalledPackageViewModel.vb" />
+    <Compile Include="Common\ProjectSettings.vb" />
+    <Compile Include="Common\ResourceFile.vb" />
+    <Compile Include="Common\SortableObservableCollection.vb" />
+    <Compile Include="Common\TranslatorSettings.vb" />
+    <Compile Include="Data\RecentLocation.vb" />
+    <Compile Include="Data\RecentLocations.vb" />
+    <Compile Include="Common\RelayCommand.vb" />
+    <Compile Include="Common\TranslatorData.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TranslatorData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Common\TranslatorData.vb">
+      <DependentUpon>TranslatorData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.vb">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ResourceKey.vb" />
+    <Compile Include="Model\ResourceKeys.vb" />
+    <Compile Include="Resources\Template.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Template.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\MicrosoftTranslatorService\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsWindow.xaml.vb">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\CommandViewModel.vb" />
+    <Compile Include="ViewModel\HtmlKeyViewModel.vb" />
+    <Compile Include="ViewModel\LEMergeViewModel.vb" />
+    <Compile Include="ViewModel\SearchViewModel.vb" />
+    <Compile Include="ViewModel\SnapshotComparisonViewModel.vb" />
+    <Compile Include="ViewModel\SpecialKeysCollectionViewModel.vb" />
+    <Compile Include="ViewModel\ResourceCollectionViewModel.vb" />
+    <Compile Include="ViewModel\SettingsViewModelBase.vb" />
+    <Compile Include="ViewModel\ProjectSettingsViewModel.vb" />
+    <Compile Include="ViewModel\FolderViewModel.vb" />
+    <Compile Include="ViewModel\MainWindowViewModel.vb" />
+    <Compile Include="ViewModel\RecentLocationViewModel.vb" />
+    <Compile Include="ViewModel\FileViewModel.vb" />
+    <Compile Include="ViewModel\ResourceFileViewModel.vb" />
+    <Compile Include="ViewModel\ResourceKeyViewModel.vb" />
+    <Compile Include="ViewModel\SettingsViewModel.vb" />
+    <Compile Include="ViewModel\TranslatorSettingsViewModel.vb" />
+    <Compile Include="ViewModel\TreeViewItemViewModel.vb" />
+    <Compile Include="ViewModel\ViewModelBase.vb" />
+    <Compile Include="ViewModel\WorkspaceViewModel.vb" />
+    <Compile Include="Application.xaml.vb">
+      <DependentUpon>Application.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\DNNBrowser.xaml.vb">
+      <DependentUpon>DNNBrowser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DNNDetails.xaml.vb">
+      <DependentUpon>DNNDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HtmlKeyView.xaml.vb">
+      <DependentUpon>HtmlKeyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LEMergeView.xaml.vb">
+      <DependentUpon>LEMergeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ResourceFileView.xaml.vb">
+      <DependentUpon>ResourceFileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SnapshotComparisonView.xaml.vb">
+      <DependentUpon>SnapshotComparisonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProjectSettingsView.xaml.vb">
+      <DependentUpon>ProjectSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TranslatorSettingsView.xaml.vb">
+      <DependentUpon>TranslatorSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindowResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DNNBrowser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DNNDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HtmlKeyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LEMergeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ResourceFileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SnapshotComparisonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProjectSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TranslatorSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="System.Globalization" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows" />
+    <Import Include="System.Windows.Controls" />
+    <Import Include="System.Windows.Data" />
+    <Import Include="System.Windows.Documents" />
+    <Import Include="System.Windows.Input" />
+    <Import Include="System.Windows.Shapes" />
+    <Import Include="System.Windows.Media" />
+    <Import Include="System.Windows.Media.Imaging" />
+    <Import Include="System.Windows.Navigation" />
+    <Import Include="Microsoft.Windows.Controls.Ribbon" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="My Project\AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="My Project\MyExtensions\MyWpfExtension.vb">
+      <VBMyExtensionTemplateID>Microsoft.VisualBasic.WPF.MyExtension</VBMyExtensionTemplateID>
+      <VBMyExtensionTemplateVersion>1.0.0.0</VBMyExtensionTemplateVersion>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Template.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Template.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Common\Snapshot.xsc">
+      <DependentUpon>Snapshot.xsd</DependentUpon>
+    </None>
+    <None Include="Common\Snapshot.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Snapshot.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Common\Snapshot.xss">
+      <DependentUpon>Snapshot.xsd</DependentUpon>
+    </None>
+    <None Include="Common\TranslatorData.xsc">
+      <DependentUpon>TranslatorData.xsd</DependentUpon>
+    </None>
+    <None Include="Common\TranslatorData.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TranslatorData.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Common\TranslatorData.xss">
+      <DependentUpon>TranslatorData.xsd</DependentUpon>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <AppDesigner Include="My Project\" />
+    <None Include="Service References\MicrosoftTranslatorService\DotNetNuke.Translator.MicrosoftTranslatorService.GetTranslationsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MicrosoftTranslatorService\DotNetNuke.Translator.MicrosoftTranslatorService.TranslateArrayResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MicrosoftTranslatorService\soap.wsdl" />
+    <None Include="Service References\MicrosoftTranslatorService\soap.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MicrosoftTranslatorService\soap1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MicrosoftTranslatorService\soap2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MicrosoftTranslatorService\soap3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MicrosoftTranslatorService\SoapService.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LargeIcon.png" />
+    <Resource Include="Images\SmallIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\TextFile1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\MicrosoftTranslatorService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MicrosoftTranslatorService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MicrosoftTranslatorService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MicrosoftTranslatorService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\speech_balloon_16.png" />
+    <Resource Include="Images\speech_balloon_32.png" />
+    <Resource Include="Images\sphere_16.png" />
+    <Resource Include="Images\sphere_32.png" />
+    <Resource Include="Images\square_16.png" />
+    <Resource Include="Images\square_32.png" />
+    <Resource Include="Images\star_16.png" />
+    <Resource Include="Images\star_32.png" />
+    <Resource Include="Images\stats_16.png" />
+    <Resource Include="Images\stats_32.png" />
+    <Resource Include="Images\stop_16.png" />
+    <Resource Include="Images\stop_32.png" />
+    <Resource Include="Images\system_16.png" />
+    <Resource Include="Images\system_32.png" />
+    <Resource Include="Images\traffic_lights_16.png" />
+    <Resource Include="Images\traffic_lights_32.png" />
+    <Resource Include="Images\unlock_16.png" />
+    <Resource Include="Images\unlock_32.png" />
+    <Resource Include="Images\up_16.png" />
+    <Resource Include="Images\up_32.png" />
+    <Resource Include="Images\user_16.png" />
+    <Resource Include="Images\user_32.png" />
+    <Resource Include="Images\webcam_16.png" />
+    <Resource Include="Images\webcam_32.png" />
+    <Resource Include="Images\windows_16.png" />
+    <Resource Include="Images\windows_32.png" />
+    <Resource Include="Images\windows_restore_16.png" />
+    <Resource Include="Images\windows_restore_32.png" />
+    <Resource Include="Images\window_16.png" />
+    <Resource Include="Images\window_32.png" />
+    <Resource Include="Images\wizard_16.png" />
+    <Resource Include="Images\wizard_32.png" />
+    <Resource Include="Images\world_16.png" />
+    <Resource Include="Images\world_32.png" />
+    <Resource Include="Images\world_upload_16.png" />
+    <Resource Include="Images\world_upload_32.png" />
+    <Resource Include="Images\zoom_16.png" />
+    <Resource Include="Images\zoom_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\last_16.png" />
+    <Resource Include="Images\last_32.png" />
+    <Resource Include="Images\lock_16.png" />
+    <Resource Include="Images\lock_32.png" />
+    <Resource Include="Images\mailbox_16.png" />
+    <Resource Include="Images\mailbox_32.png" />
+    <Resource Include="Images\mail_16.png" />
+    <Resource Include="Images\mail_32.png" />
+    <Resource Include="Images\microphone_16.png" />
+    <Resource Include="Images\microphone_32.png" />
+    <Resource Include="Images\monitor_16.png" />
+    <Resource Include="Images\monitor_32.png" />
+    <Resource Include="Images\music_16.png" />
+    <Resource Include="Images\music_32.png" />
+    <Resource Include="Images\network_16.png" />
+    <Resource Include="Images\network_32.png" />
+    <Resource Include="Images\next_16.png" />
+    <Resource Include="Images\next_32.png" />
+    <Resource Include="Images\paint_16.png" />
+    <Resource Include="Images\paint_32.png" />
+    <Resource Include="Images\paste_16.png" />
+    <Resource Include="Images\paste_32.png" />
+    <Resource Include="Images\pause_16.png" />
+    <Resource Include="Images\pause_32.png" />
+    <Resource Include="Images\pen_16.png" />
+    <Resource Include="Images\pen_32.png" />
+    <Resource Include="Images\phone_16.png" />
+    <Resource Include="Images\phone_32.png" />
+    <Resource Include="Images\play_16.png" />
+    <Resource Include="Images\play_32.png" />
+    <Resource Include="Images\preview_16.png" />
+    <Resource Include="Images\preview_32.png" />
+    <Resource Include="Images\printer_16.png" />
+    <Resource Include="Images\printer_32.png" />
+    <Resource Include="Images\pyramid_16.png" />
+    <Resource Include="Images\pyramid_32.png" />
+    <Resource Include="Images\recycle_bin_16.png" />
+    <Resource Include="Images\recycle_bin_32.png" />
+    <Resource Include="Images\refresh_16.png" />
+    <Resource Include="Images\refresh_32.png" />
+    <Resource Include="Images\reload_16.png" />
+    <Resource Include="Images\reload_32.png" />
+    <Resource Include="Images\rewinding_16.png" />
+    <Resource Include="Images\rewinding_32.png" />
+    <Resource Include="Images\scissors_16.png" />
+    <Resource Include="Images\scissors_32.png" />
+    <Resource Include="Images\shopping_cart_16.png" />
+    <Resource Include="Images\shopping_cart_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add_16.png" />
+    <Resource Include="Images\add_32.png" />
+    <Resource Include="Images\administrator_16.png" />
+    <Resource Include="Images\administrator_32.png" />
+    <Resource Include="Images\attachment_16.png" />
+    <Resource Include="Images\attachment_32.png" />
+    <Resource Include="Images\back_16.png" />
+    <Resource Include="Images\back_32.png" />
+    <Resource Include="Images\binoculars_16.png" />
+    <Resource Include="Images\binoculars_32.png" />
+    <Resource Include="Images\book_16.png" />
+    <Resource Include="Images\book_32.png" />
+    <Resource Include="Images\briefcase_16.png" />
+    <Resource Include="Images\briefcase_32.png" />
+    <Resource Include="Images\bulb_16.png" />
+    <Resource Include="Images\bulb_32.png" />
+    <Resource Include="Images\button_cancel_16.png" />
+    <Resource Include="Images\button_cancel_32.png" />
+    <Resource Include="Images\calculator_16.png" />
+    <Resource Include="Images\calculator_32.png" />
+    <Resource Include="Images\calendar_16.png" />
+    <Resource Include="Images\calendar_32.png" />
+    <Resource Include="Images\camera_16.png" />
+    <Resource Include="Images\camera_32.png" />
+    <Resource Include="Images\chat_16.png" />
+    <Resource Include="Images\chat_32.png" />
+    <Resource Include="Images\check_mark_16.png" />
+    <Resource Include="Images\check_mark_32.png" />
+    <Resource Include="Images\clients_16.png" />
+    <Resource Include="Images\clients_32.png" />
+    <Resource Include="Images\clipboard_16.png" />
+    <Resource Include="Images\clipboard_32.png" />
+    <Resource Include="Images\clip_16.png" />
+    <Resource Include="Images\clip_32.png" />
+    <Resource Include="Images\clock_16.png" />
+    <Resource Include="Images\clock_32.png" />
+    <Resource Include="Images\close_16.png" />
+    <Resource Include="Images\close_32.png" />
+    <Resource Include="Images\copy_16.png" />
+    <Resource Include="Images\copy_32.png" />
+    <Resource Include="Images\cross_16.png" />
+    <Resource Include="Images\cross_32.png" />
+    <Resource Include="Images\delete_16.png" />
+    <Resource Include="Images\delete_32.png" />
+    <Resource Include="Images\diskette_16.png" />
+    <Resource Include="Images\diskette_32.png" />
+    <Resource Include="Images\document_16.png" />
+    <Resource Include="Images\document_32.png" />
+    <Resource Include="Images\door_16.png" />
+    <Resource Include="Images\door_32.png" />
+    <Resource Include="Images\down_16.png" />
+    <Resource Include="Images\down_32.png" />
+    <Resource Include="Images\edit_16.png" />
+    <Resource Include="Images\edit_32.png" />
+    <Resource Include="Images\fast_forward_16.png" />
+    <Resource Include="Images\fast_forward_32.png" />
+    <Resource Include="Images\file_16.png" />
+    <Resource Include="Images\file_32.png" />
+    <Resource Include="Images\first_16.png" />
+    <Resource Include="Images\first_32.png" />
+    <Resource Include="Images\folder_16.png" />
+    <Resource Include="Images\folder_32.png" />
+    <Resource Include="Images\games_16.png" />
+    <Resource Include="Images\games_32.png" />
+    <Resource Include="Images\gear_16.png" />
+    <Resource Include="Images\gear_32.png" />
+    <Resource Include="Images\group_16.png" />
+    <Resource Include="Images\group_32.png" />
+    <Resource Include="Images\hand_16.png" />
+    <Resource Include="Images\hand_32.png" />
+    <Resource Include="Images\help_16.png" />
+    <Resource Include="Images\help_32.png" />
+    <Resource Include="Images\home_16.png" />
+    <Resource Include="Images\home_32.png" />
+    <Resource Include="Images\hourglass_16.png" />
+    <Resource Include="Images\hourglass_32.png" />
+    <Resource Include="Images\info_16.png" />
+    <Resource Include="Images\info_32.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>

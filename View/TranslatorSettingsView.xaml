@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="View.TranslatorSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+ <Grid Margin="10">
+  <Grid.ColumnDefinitions>
+   <ColumnDefinition Width="Auto" />
+   <ColumnDefinition Width="6" />
+   <ColumnDefinition Width="*" />
+  </Grid.ColumnDefinitions>
+
+  <Grid.RowDefinitions>
+   <RowDefinition Height="Auto" />
+   <RowDefinition Height="30" />
+   <RowDefinition Height="Auto" />
+   <RowDefinition Height="30" />
+   <RowDefinition Height="Auto" />
+   <RowDefinition Height="30" />
+   <RowDefinition Height="Auto" />
+   <RowDefinition Height="30" />
+   <RowDefinition Height="Auto" />
+  </Grid.RowDefinitions>
+
+  <Label 
+      Grid.Row="0" Grid.Column="0" 
+      Content="Bing Client ID:" 
+      HorizontalAlignment="Right"
+      Target="{Binding ElementName=txtBingClientId}" 
+      />
+  <TextBox 
+      x:Name="txtBingClientId"
+      Grid.Row="0" Grid.Column="2" 
+      Text="{Binding Path=BingClientID}" 
+      />
+
+  <Label 
+      Grid.Row="2" Grid.Column="0" 
+      Content="Bing Client Secret:" 
+      HorizontalAlignment="Right"
+      Target="{Binding ElementName=txtBingClientSecret}" 
+      />
+  <TextBox 
+      x:Name="txtBingClientSecret"
+      Grid.Row="2" Grid.Column="2" 
+      Text="{Binding Path=BingClientSecret}" 
+      />
+
+  <Label 
+      Grid.Row="4" Grid.Column="0" 
+      Content="Default Target Locale:" 
+      HorizontalAlignment="Right"
+      Target="{Binding ElementName=cmbDefaultLocale}" 
+      />
+  <ComboBox
+    Grid.Row="4" Grid.Column="2"
+    ItemsSource="{Binding AvailableLocales}"
+    DisplayMemberPath="EnglishName"
+    SelectedItem="{Binding DefaultTargetLocale}"
+    x:Name="cmbDefaultLocale" />
+
+ </Grid>
+</UserControl>

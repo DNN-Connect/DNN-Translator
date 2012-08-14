@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Translator", "Translator.vbproj", "{DC7B7B19-07A7-44C9-A624-67895E092C52}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC7B7B19-07A7-44C9-A624-67895E092C52}.Debug|x86.ActiveCfg = Debug|x86
+		{DC7B7B19-07A7-44C9-A624-67895E092C52}.Debug|x86.Build.0 = Debug|x86
+		{DC7B7B19-07A7-44C9-A624-67895E092C52}.Release|x86.ActiveCfg = Release|x86
+		{DC7B7B19-07A7-44C9-A624-67895E092C52}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

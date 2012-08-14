@@ -1,0 +1,163 @@
+﻿<!-- 
+This resource dictionary is used by the MainWindow. 
+-->
+<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:com="clr-namespace:DotNetNuke.Translator.Common"
+  xmlns:vm="clr-namespace:DotNetNuke.Translator.ViewModel"
+  xmlns:vw="clr-namespace:DotNetNuke.Translator.View"
+  xmlns:proj="clr-namespace:DotNetNuke.Translator"
+  >
+
+ <com:BoolToVisibilityConverter x:Key="boolConverter" />
+
+ <DataTemplate DataType="{x:Type vm:ResourceFileViewModel}">
+  <vw:ResourceFileView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+ </DataTemplate>
+ <DataTemplate DataType="{x:Type vm:ResourceCollectionViewModel}">
+  <vw:ResourceFileView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+ </DataTemplate>
+ <DataTemplate DataType="{x:Type vm:SearchViewModel}">
+  <vw:ResourceFileView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+ </DataTemplate>
+ <DataTemplate DataType="{x:Type vm:LEMergeViewModel}">
+  <vw:LEMergeView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+ </DataTemplate>
+ <DataTemplate DataType="{x:Type vm:HtmlKeyViewModel}">
+  <vw:HtmlKeyView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+ </DataTemplate>
+ <DataTemplate DataType="{x:Type vm:SnapshotComparisonViewModel}">
+  <vw:SnapshotComparisonView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+ </DataTemplate>
+
+ <ControlTemplate x:Key="ComponentListing" TargetType="ComboBoxItem">
+  <StackPanel Orientation="Horizontal">
+   <TextBlock Text="{Binding FriendlyName}" TextAlignment="Left" TextWrapping="Wrap" Width="100" />
+  </StackPanel>
+ </ControlTemplate>
+
+ <!-- 
+  This style configures both of the main content areas in the main window.
+  -->
+ <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
+  <Setter Property="Background" Value="Azure" />
+  <Setter Property="HeaderTemplate">
+   <Setter.Value>
+    <DataTemplate>
+     <Border 
+            Background="{StaticResource Brush_HeaderBackground}" 
+            BorderBrush="LightGray" 
+            BorderThickness="1" 
+            CornerRadius="5" 
+            Margin="4" 
+            Padding="4" 
+            SnapsToDevicePixels="True" 
+            >
+      <TextBlock 
+              FontSize="14"
+              FontWeight="Bold"
+              Foreground="White" 
+              HorizontalAlignment="Center"  
+              Text="{TemplateBinding Content}" 
+              />
+     </Border>
+    </DataTemplate>
+   </Setter.Value>
+  </Setter>
+  <Setter Property="IsTabStop" Value="False" />
+  <Setter Property="Template">
+   <Setter.Value>
+    <!-- 
+        This template ensures that content of a HeaderedContentControl 
+        fills the available vertical space. 
+        -->
+    <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
+     <DockPanel>
+      <ContentPresenter 
+              DockPanel.Dock="Top"
+              ContentSource="Header" 
+              ContentTemplate="{TemplateBinding HeaderTemplate}" 
+              />
+      <ContentPresenter 
+              ContentSource="Content" 
+              ContentTemplate="{TemplateBinding ContentTemplate}" 
+              />
+     </DockPanel>
+    </ControlTemplate>
+   </Setter.Value>
+  </Setter>
+ </Style>
+
+ <!--
+  This style ensures that the borders in the main window are consistent.
+  -->
+ <Style x:Key="MainBorderStyle" TargetType="{x:Type Border}">
+  <Setter Property="Background" Value="WhiteSmoke" />
+  <Setter Property="BorderBrush" Value="LightGray" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="CornerRadius" Value="5" />
+  <Setter Property="SnapsToDevicePixels" Value="True" />
+ </Style>
+
+ <Style TargetType="TextBlock" x:Key="StatusBarTextBlock">
+  <Setter Property="TextWrapping" Value="NoWrap" />
+  <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+ </Style>
+ 
+ <!-- 
+  This template explains how to render 
+  a tab item with a close button.
+  -->
+ <DataTemplate x:Key="ClosableTabItemTemplate">
+   <DockPanel Width="120" DockPanel.Dock="Top">
+    <Button 
+        Command="{Binding Path=CloseCommand}"
+        Content="X"
+        Cursor="Hand"
+        DockPanel.Dock="Right"
+        Focusable="False"
+        FontFamily="Courier" 
+        FontSize="9"
+        FontWeight="Bold"  
+        Margin="0,1,0,0"
+        Padding="0"
+        VerticalContentAlignment="Bottom"
+        Width="16" Height="16" 
+        />
+    <ContentPresenter 
+        Content="{Binding Path=DisplayName}" 
+        VerticalAlignment="Center" 
+        />
+   </DockPanel>
+ </DataTemplate>
+
+ <!--
+  This template explains how to render the 'Workspace' content area in the main window.
+  -->
+ <DataTemplate x:Key="WorkspacesTemplate">
+  <TabControl 
+      IsSynchronizedWithCurrentItem="True" 
+      ItemsSource="{Binding}" 
+      ItemTemplate="{StaticResource ClosableTabItemTemplate}"
+   ContentTemplate="{DynamicResource ContentTemplate}"
+    SelectedIndex="{Binding DataContext.SelectedTabIndex, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+      Margin="4"
+      >
+  </TabControl>
+ </DataTemplate>
+
+ <Style x:Key="TreenodeButtonStyle" TargetType="Button">
+  <Setter Property="Template">
+   <Setter.Value>
+    <ControlTemplate TargetType="{x:Type Button}">
+     <StackPanel Orientation="Horizontal">
+      <Image Name="img" Width="20" Height="20" Stretch="None" Source="{Binding Image}"/>
+      <TextBlock Text="{Binding Name}" Margin="5,0" />
+     </StackPanel>
+    </ControlTemplate>
+   </Setter.Value>
+  </Setter>
+ </Style>
+</ResourceDictionary>
+ 

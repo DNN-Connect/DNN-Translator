@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TranslatorData" targetNamespace="http://tempuri.org/TranslatorData.xsd" xmlns:mstns="http://tempuri.org/TranslatorData.xsd" xmlns="http://tempuri.org/TranslatorData.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TranslatorData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="TranslatorData" msprop:Generator_UserDSName="TranslatorData">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Settings" msprop:Generator_TableClassName="SettingsDataTable" msprop:Generator_TableVarName="tableSettings" msprop:Generator_TablePropName="Settings" msprop:Generator_RowDeletingName="SettingsRowDeleting" msprop:Generator_UserTableName="Settings" msprop:Generator_RowChangingName="SettingsRowChanging" msprop:Generator_RowEvHandlerName="SettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="SettingsRowDeleted" msprop:Generator_RowEvArgName="SettingsRowChangeEvent" msprop:Generator_RowChangedName="SettingsRowChanged" msprop:Generator_RowClassName="SettingsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SettingKey" msprop:Generator_ColumnVarNameInTable="columnSettingKey" msprop:Generator_ColumnPropNameInRow="SettingKey" msprop:Generator_ColumnPropNameInTable="SettingKeyColumn" msprop:Generator_UserColumnName="SettingKey" type="xs:string" />
+              <xs:element name="SettingValue" msprop:Generator_ColumnVarNameInTable="columnSettingValue" msprop:Generator_ColumnPropNameInRow="SettingValue" msprop:Generator_ColumnPropNameInTable="SettingValueColumn" msprop:Generator_UserColumnName="SettingValue" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="BingLanguages" msprop:Generator_TableClassName="BingLanguagesDataTable" msprop:Generator_TableVarName="tableBingLanguages" msprop:Generator_TablePropName="BingLanguages" msprop:Generator_RowDeletingName="BingLanguagesRowDeleting" msprop:Generator_UserTableName="BingLanguages" msprop:Generator_RowChangingName="BingLanguagesRowChanging" msprop:Generator_RowEvHandlerName="BingLanguagesRowChangeEventHandler" msprop:Generator_RowDeletedName="BingLanguagesRowDeleted" msprop:Generator_RowEvArgName="BingLanguagesRowChangeEvent" msprop:Generator_RowChangedName="BingLanguagesRowChanged" msprop:Generator_RowClassName="BingLanguagesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Locale" msprop:Generator_ColumnVarNameInTable="columnLocale" msprop:Generator_ColumnPropNameInRow="Locale" msprop:Generator_ColumnPropNameInTable="LocaleColumn" msprop:Generator_UserColumnName="Locale" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1">
+      <xs:selector xpath=".//mstns:Settings" />
+      <xs:field xpath="mstns:SettingKey" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

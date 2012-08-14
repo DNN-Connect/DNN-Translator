@@ -1,0 +1,133 @@
+﻿Imports System.Data.SqlClient
+Imports DotNetNuke.Translator.ViewModel
+
+Namespace Common
+ Public Class ProjectSettings
+  Inherits TranslatorData
+
+  Public Property DotNetNukeVersion As String = ""
+  Public Property DotNetNukeType As String = "Community Edition"
+  Public Property WebConfig As New Xml.XmlDocument
+  Public Property ConnectionString As String = ""
+  Public Property InstalledPackages As New List(Of InstalledPackageViewModel)
+  Public Property InstalledLanguages As New List(Of String)
+  Public Property TargetLocale As String = ""
+  Public Property MappedLocale As String = ""
+  Public Property AvailableLocales As New List(Of CultureInfo)
+  Public Property ConnectionUrl As String = ""
+  Public Property Username As String = ""
+  Public Property Password As Security.SecureString
+  Public Property LocalUrl As String = ""
+  Public Property CurrentSnapShot As Snapshot
+  Private Property DatabaseOwner As String = ""
+  Private Property ObjectQualifier As String = ""
+
+  Public Sub New(projectSettingsFileOrDnnDirectory As String)
+   MyBase.New()
+
+   If IO.File.Exists(projectSettingsFileOrDnnDirectory) Then ' it's a settings file
+    SettingsFileName = projectSettingsFileOrDnnDirectory
+    Try
+     Me.ReadXml(SettingsFileName, System.Data.XmlReadMode.IgnoreSchema)
+    Catch ex As Exception
+    End Try
+    ReadSettingValue("Location", Location)
+    ReadSettingValue("TargetLocale", TargetLocale)
+    ReadSettingValue("MappedLocale", MappedLocale)
+    If Setting("AvailableLocales") IsNot Nothing Then
+     For Each l As String In Setting("AvailableLocales").Split(";"c)
+      AvailableLocales.Add(New CultureInfo(l))
+     Next
+    End If
+    ReadSettingValue("ConnectionUrl", ConnectionUrl)
+    ReadSettingValue("Username", Username)
+    If Setting("Password") IsNot Nothing Then
+     Try
+      Password = Common.Globals.DecryptString(Setting("Password"))
+     Catch ex As Exception
+     End Try
+    End If
+    ReadSettingValue("LocalUrl", LocalUrl)
+   ElseIf IO.Directory.Exists(projectSettingsFileOrDnnDirectory) Then ' it's a DNN directory
+    If Not projectSettingsFileOrDnnDirectory.EndsWith("\") Then projectSettingsFileOrDnnDirectory &= "\"
+    Me.Location = projectSettingsFileOrDnnDirectory
+   End If
+
+   CurrentSnapShot = New Snapshot(Location, Location)
+
+   Try
+    ' Load various DNN and reflect
+    Dim ass As System.Reflection.Assembly = System.Reflection.Assembly.LoadFile(Location & "bin\dotnetnuke.dll")
+    DotNetNukeVersion = ass.GetName.Version.ToString
+    If IO.File.Exists(Location & "bin\DotNetNuke.Professional.dll") Then
+     DotNetNukeType = "Professional Edition"
+    End If
+    If IO.File.Exists(Location & "bin\DotNetNuke.Enterprise.dll") Then
+     DotNetNukeType = "Enterprise Edition"
+    End If
+
+    Dim core As New InstalledPackageViewModel("Core", DotNetNukeType, DotNetNukeVersion, "")
+    InstalledPackages.Add(core)
+
+    ' Load web.config
+    WebConfig.Load(Location & "web.config")
+    ConnectionString = WebConfig.SelectSingleNode("/configuration/connectionStrings/add[@name='SiteSqlServer']/@connectionString").InnerText
+    DatabaseOwner = WebConfig.SelectSingleNode("/configuration/dotnetnuke/data/providers/add[@name='SqlDataProvider']/@databaseOwner").InnerText
+    If DatabaseOwner <> "" AndAlso Not DatabaseOwner.EndsWith(".") Then DatabaseOwner &= "."
+    ObjectQualifier = WebConfig.SelectSingleNode("/configuration/dotnetnuke/data/providers/add[@name='SqlDataProvider']/@objectQualifier").InnerText
+    If ObjectQualifier <> "" AndAlso Not ObjectQualifier.EndsWith("_") Then ObjectQualifier &= "_"
+
+    ' Try to get a list of installed packages
+    Using c As New SqlConnection(ConnectionString)
+     c.Open()
+     Dim q As SqlCommand = c.CreateCommand
+     q.CommandText = String.Format("SELECT *, dm.FolderName ModuleFolderName FROM {0}{1}Packages p INNER JOIN {0}{1}DesktopModules dm ON dm.PackageID=p.PackageID", DatabaseOwner, ObjectQualifier)
+     Using ir As SqlDataReader = q.ExecuteReader
+      Do While ir.Read
+       If Not CStr(ir.Item("ModuleFolderName")).StartsWith("Admin/") Then
+        InstalledPackages.Add(New InstalledPackageViewModel(ir))
+       End If
+      Loop
+     End Using
+     q = c.CreateCommand
+     q.CommandText = String.Format("SELECT * FROM {0}{1}Languages", DatabaseOwner, ObjectQualifier)
+     Using ir As SqlDataReader = q.ExecuteReader
+      Do While ir.Read
+       InstalledLanguages.Add(CStr(ir.Item("CultureCode")))
+      Loop
+     End Using
+    End Using
+
+   Catch ex As Exception
+
+   End Try
+
+  End Sub
+
+  Public Overloads Sub Save(projectSettingsFile As String)
+
+   If projectSettingsFile <> "" Then SettingsFileName = projectSettingsFile
+
+   Setting("TargetLocale", False) = TargetLocale
+   Setting("MappedLocale", False) = MappedLocale
+   Dim al As New List(Of String)
+   For Each ci As CultureInfo In AvailableLocales
+    al.Add(ci.Name)
+   Next
+   Setting("AvailableLocales", False) = String.Join(";", al)
+   Setting("ConnectionUrl", False) = ConnectionUrl
+   Setting("Username", False) = Username
+   Setting("Password", False) = Common.Globals.EncryptString(Password)
+   Setting("LocalUrl", False) = LocalUrl
+   Setting("Location", False) = Location
+
+   MyBase.Save()
+
+  End Sub
+
+  Public Overrides Sub Save()
+   Save("")
+  End Sub
+
+ End Class
+End Namespace

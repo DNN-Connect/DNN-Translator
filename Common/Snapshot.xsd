@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Snapshot" targetNamespace="http://tempuri.org/Snapshot.xsd" xmlns:mstns="http://tempuri.org/Snapshot.xsd" xmlns="http://tempuri.org/Snapshot.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Snapshot" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Snapshot" msprop:Generator_UserDSName="Snapshot">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Resources" msprop:Generator_TableClassName="ResourcesDataTable" msprop:Generator_TableVarName="tableResources" msprop:Generator_TablePropName="Resources" msprop:Generator_RowDeletingName="ResourcesRowDeleting" msprop:Generator_UserTableName="Resources" msprop:Generator_RowChangingName="ResourcesRowChanging" msprop:Generator_RowEvHandlerName="ResourcesRowChangeEventHandler" msprop:Generator_RowDeletedName="ResourcesRowDeleted" msprop:Generator_RowEvArgName="ResourcesRowChangeEvent" msprop:Generator_RowChangedName="ResourcesRowChanged" msprop:Generator_RowClassName="ResourcesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FileKey" msprop:Generator_ColumnVarNameInTable="columnFileKey" msprop:Generator_ColumnPropNameInRow="FileKey" msprop:Generator_ColumnPropNameInTable="FileKeyColumn" msprop:Generator_UserColumnName="FileKey" type="xs:string" default="" />
+              <xs:element name="ResourceKey" msprop:Generator_ColumnVarNameInTable="columnResourceKey" msprop:Generator_ColumnPropNameInRow="ResourceKey" msprop:Generator_ColumnPropNameInTable="ResourceKeyColumn" msprop:Generator_UserColumnName="ResourceKey" type="xs:string" />
+              <xs:element name="ResourceValue" msprop:Generator_ColumnVarNameInTable="columnResourceValue" msprop:Generator_ColumnPropNameInRow="ResourceValue" msprop:Generator_ColumnPropNameInTable="ResourceValueColumn" msprop:Generator_UserColumnName="ResourceValue" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

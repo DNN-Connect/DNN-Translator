@@ -1,0 +1,397 @@
+﻿<ribbon:RibbonWindow x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
+        xmlns:local="clr-namespace:DotNetNuke.Translator"
+        xmlns:com="clr-namespace:DotNetNuke.Translator.Common"
+        xmlns:vm="clr-namespace:DotNetNuke.Translator.ViewModel"
+        xmlns:vw="clr-namespace:DotNetNuke.Translator.View"
+        Title="MainWindow" ResizeMode="CanResizeWithGrip"
+        x:Name="MainWindow"
+        Width="1000" Height="800">
+
+ <Window.Resources>
+  <ResourceDictionary Source="MainWindowResources.xaml" />
+ </Window.Resources>
+
+ <Window.InputBindings>
+  <KeyBinding
+   Key="A"
+   Modifiers="Control"
+   Command="{Binding Path=KeyboardCommand}"
+   CommandParameter="SelectAll"
+   />
+ </Window.InputBindings>
+
+ <Grid>
+  <Grid.RowDefinitions>
+   <RowDefinition Height="Auto"/>
+   <RowDefinition Height="50"/>
+   <RowDefinition Height="*"/>
+   <RowDefinition Height="Auto"/>
+  </Grid.RowDefinitions>
+
+  <ribbon:Ribbon x:Name="Ribbon">
+   <ribbon:Ribbon.ApplicationMenu>
+    <ribbon:RibbonApplicationMenu SmallImageSource="Images\square_16.png" KeyTip="F">
+     <ribbon:RibbonApplicationMenuItem Header="_Open" Command="{Binding Path=OpenCommand}" KeyTip="O" ImageSource="Images\file_32.png" />
+     <ribbon:RibbonApplicationMenuItem Header="_New" Command="{Binding Path=NewCommand}" KeyTip="N" ImageSource="Images\document_32.png" />
+     <ribbon:RibbonApplicationSplitMenuItem Header="Open _Recent" ItemsSource="{Binding Path=RecentLocationsList}" ImageSource="Images\file_32.png">
+      <ribbon:RibbonApplicationSplitMenuItem.ItemContainerStyle>
+       <Style TargetType="{x:Type ribbon:RibbonApplicationMenuItem}">
+        <Setter Property="Template">
+         <Setter.Value>
+          <ControlTemplate>
+           <ribbon:RibbonApplicationMenuItem Header="{Binding Path=LocationShort}" Command="{Binding Path=Command}" CommandParameter="{Binding Path=Location}" KeyTip="{Binding Path=Index}" />
+          </ControlTemplate>
+         </Setter.Value>
+        </Setter>
+       </Style>
+      </ribbon:RibbonApplicationSplitMenuItem.ItemContainerStyle>
+     </ribbon:RibbonApplicationSplitMenuItem>
+     <ribbon:RibbonApplicationMenuItem Header="_Save" Command="{Binding Path=SaveCommand}" KeyTip="S" ImageSource="Images\diskette_32.png" />
+     <ribbon:RibbonApplicationMenuItem Header="Save As" Command="{Binding Path=SaveAsCommand}" ImageSource="Images\diskette_32.png" />
+     <ribbon:RibbonApplicationMenuItem Header="Options" x:Name="cmdOptions" ImageSource="Images\gear_32.png" />
+     <ribbon:RibbonApplicationMenuItem IsEnabled="False" />
+     <ribbon:RibbonApplicationMenuItem IsEnabled="False" />
+     <ribbon:RibbonApplicationMenuItem IsEnabled="False" />
+     <ribbon:RibbonApplicationMenuItem IsEnabled="False" />
+     <ribbon:RibbonApplicationMenu.FooterPaneContent>
+      <DockPanel LastChildFill="False">
+       <ribbon:RibbonButton Command="{Binding Path=CloseCommand}"
+                                     Label="Exit"
+                                     ToolTipTitle="Exit" 
+                                     SmallImageSource="Images\close_16.png"
+                                     KeyTip="X"
+                                     DockPanel.Dock="Right"
+                                     Margin="2"
+                                     BorderBrush="#B8114EAF" />
+      </DockPanel>
+     </ribbon:RibbonApplicationMenu.FooterPaneContent>
+
+    </ribbon:RibbonApplicationMenu>
+   </ribbon:Ribbon.ApplicationMenu>
+   <ribbon:RibbonTab x:Name="HomeTab" Header="Home" KeyTip="H">
+    <ribbon:RibbonGroup x:Name="EditGroup" Header="Edit">
+     <ribbon:RibbonButton
+      Label="Save"
+      LargeImageSource="Images\diskette_32.png"
+      ToolTipTitle="Save changes"
+      ToolTipDescription="Save changes to the resource files"
+      Command="{Binding ActiveResourceCollection.SaveCommand}"
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasChanges, FallbackValue=False}"
+       />
+     <ribbon:RibbonButton
+      Label="Html"
+      LargeImageSource="Images\edit_32.png"
+      ToolTipTitle="Edit As Html"
+      ToolTipDescription="Edit the selected key as HTML"
+      Command="{Binding ActiveResourceCollection.EditHtmlCommand}"
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}"
+       />
+    </ribbon:RibbonGroup>
+    <ribbon:RibbonGroup x:Name="Clipboard" Header="Clipboard">
+     <ribbon:RibbonButton
+      Label="Cut"
+      SmallImageSource="Images\scissors_16.png"
+      ToolTipTitle="Cut (Ctrl+X)"
+      ToolTipDescription="Cut the selection and put it on the Clipboard."
+      Command="Cut"
+      KeyTip="X" />
+     <ribbon:RibbonButton
+      Label="Copy"
+      SmallImageSource="Images\copy_16.png"
+      ToolTipTitle="Copy (Ctrl+C)"
+      ToolTipDescription="Copy selection and put it on the Clipboard."
+      Command="Copy"
+      KeyTip="C" />
+     <ribbon:RibbonButton
+      Label="Paste"
+      SmallImageSource="Images\clipboard_16.png"
+      ToolTipTitle="Paste (Ctrl+V)"
+      ToolTipDescription="Paste the contents of the Clipboard."
+      Command="Paste"
+      KeyTip="V" />
+    </ribbon:RibbonGroup>
+    <ribbon:RibbonGroup x:Name="SearchGroup" Header="Search">
+     <Grid>
+      <Grid.ColumnDefinitions>
+       <ColumnDefinition Width="Auto" />
+       <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+       <RowDefinition Height="Auto" />
+       <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <TextBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" x:Name="txtSearchString" Text="{Binding SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+      <ribbon:RibbonButton
+       Grid.Column="0" Grid.Row="1"
+      Label="All"
+      SmallImageSource="Images\zoom_16.png"
+      ToolTipTitle="Search all of DotNetNuke"
+      ToolTipDescription="Search the complete installation for this text"
+      Command="{Binding Path=SearchCommand}"
+       />
+      <ribbon:RibbonButton
+       Grid.Column="1" Grid.Row="1"
+      Label="Module"
+      SmallImageSource="Images\zoom_16.png"
+      ToolTipTitle="Search module"
+      ToolTipDescription="Search the selected module resources for this text"
+      Command="{Binding Path=SearchCommand}"
+      CommandParameter="Module"
+      IsEnabled="{Binding Path=SaveModuleSnapshotEnabled, FallbackValue=False}"
+       />
+     </Grid>
+    </ribbon:RibbonGroup>
+    <ribbon:RibbonGroup x:Name="BingGroup" Header="Bing"
+      IsEnabled="{Binding Path=ActiveResourceCollection.Exists, FallbackValue=False}">
+     <ribbon:RibbonSplitButton
+      Label="Bing To Target"
+      LargeImageSource="Images\clients_32.png"
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasBingLocale, FallbackValue=False}">
+      <ribbon:RibbonButton
+      Label="All"
+      SmallImageSource="Images\clients_16.png"
+      ToolTipTitle="All To Target"
+      ToolTipDescription="Attempt to translate all keys and overwrite any existing values on target"
+      Command="{Binding ActiveResourceCollection.BingTranslateCommand}"
+      CommandParameter="All,2Target" />
+      <ribbon:RibbonButton
+      Label="Empty"
+      SmallImageSource="Images\clients_16.png"
+      ToolTipTitle="Empty To Target"
+      ToolTipDescription="Attempt to translate all empty keys"
+      Command="{Binding ActiveResourceCollection.BingTranslateCommand}"
+      CommandParameter="Empty,2Target" />
+      <ribbon:RibbonButton
+      Label="Selected"
+      SmallImageSource="Images\clients_16.png"
+      ToolTipTitle="Selected To Target"
+      ToolTipDescription="Attempt to translate all selected keys"
+      Command="{Binding ActiveResourceCollection.BingTranslateCommand}"
+      CommandParameter="Selected,2Target"
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
+     </ribbon:RibbonSplitButton>
+     <ribbon:RibbonSplitButton
+      Label="Bing To Temporary Workspace"
+      LargeImageSource="Images\clients_32.png"
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasBingLocale, FallbackValue=False}">
+      <ribbon:RibbonButton
+      Label="All"
+      SmallImageSource="Images\clients_16.png"
+      ToolTipTitle="All To Temporary Workspace"
+      ToolTipDescription="Attempt to translate all keys to the comparison column"
+      Command="{Binding ActiveResourceCollection.BingTranslateCommand}"
+      CommandParameter="All,2Compare" />
+      <ribbon:RibbonButton
+      Label="Empty"
+      SmallImageSource="Images\clients_16.png"
+      ToolTipTitle="Empty To Temporary Workspace"
+      ToolTipDescription="Attempt to translate all empty keys and put the value in the comparison column"
+      Command="{Binding ActiveResourceCollection.BingTranslateCommand}"
+      CommandParameter="Empty,2Compare" />
+      <ribbon:RibbonButton
+      Label="Selected"
+      SmallImageSource="Images\clients_16.png"
+      ToolTipTitle="Selected To Temporary Workspace"
+      ToolTipDescription="Attempt to translate all selected keys and put the value in the comparison column"
+      Command="{Binding ActiveResourceCollection.BingTranslateCommand}"
+      CommandParameter="Selected,2Compare"
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
+     </ribbon:RibbonSplitButton>
+     <ribbon:RibbonComboBox Width="110">
+      <ribbon:RibbonGallery SelectedItem="{Binding Path=ActiveResourceCollection.BingLocale}">
+       <ribbon:RibbonGalleryCategory ItemsSource="{Binding Path=TranslatorSettings.BingLocales}" DisplayMemberPath="EnglishName">
+       </ribbon:RibbonGalleryCategory>
+      </ribbon:RibbonGallery>
+     </ribbon:RibbonComboBox>
+    </ribbon:RibbonGroup>
+    <ribbon:RibbonGroup x:Name="CopyGroup" Header="Copy"
+      IsEnabled="{Binding Path=ActiveResourceCollection.Exists, FallbackValue=False}">
+     <ribbon:RibbonSplitButton
+      Label="Original To Target"
+      LargeImageSource="Images\next_32.png">
+      <ribbon:RibbonButton
+      Label="All"
+      SmallImageSource="Images\next_16.png"
+      ToolTipTitle="Copy All Original To Target"
+      ToolTipDescription="Copy all resources from original values to target overwriting any previous work"
+      Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
+      CommandParameter="All,Original2Target" />
+      <ribbon:RibbonButton
+      Label="Empty"
+      SmallImageSource="Images\next_16.png"
+      ToolTipTitle="Copy Empty Original To Target"
+      ToolTipDescription="Copy resources from original values to target where there is no target value"
+      Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
+      CommandParameter="Empty,Original2Target" />
+      <ribbon:RibbonButton
+      Label="Selected"
+      SmallImageSource="Images\next_16.png"
+      ToolTipTitle="Copy Selected Original To Target"
+      ToolTipDescription="Copy resources from original values to target for the selected keys"
+      Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
+      CommandParameter="Selected,Original2Target"
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
+     </ribbon:RibbonSplitButton>
+     <ribbon:RibbonSplitButton
+      Label="Temporary Workspace To Target"
+      LargeImageSource="Images\back_32.png"
+      IsEnabled="{Binding Path=ActiveResourceCollection.ShowCompareColumn, FallbackValue=False}">
+      <ribbon:RibbonButton
+      Label="All"
+      SmallImageSource="Images\back_16.png"
+      ToolTipTitle="Copy All From Temporary Workspace To Target"
+      ToolTipDescription="Copy all resources from comparison values to target overwriting any previous work"
+      Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
+      CommandParameter="All,Compare2Target" />
+      <ribbon:RibbonButton
+      Label="Empty"
+      SmallImageSource="Images\back_16.png"
+      ToolTipTitle="Copy Empty From Temporary Workspace To Target"
+      ToolTipDescription="Copy resources from comparison values to target where there is no target value"
+      Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
+      CommandParameter="Empty,Compare2Target" />
+      <ribbon:RibbonButton
+      Label="Selected"
+      SmallImageSource="Images\back_16.png"
+      ToolTipTitle="Copy Selected From Temporary Workspace To Target"
+      ToolTipDescription="Copy resources from comparison values to target for the selected keys"
+      Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
+      CommandParameter="Selected,Compare2Target"
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
+     </ribbon:RibbonSplitButton>
+    </ribbon:RibbonGroup>
+   </ribbon:RibbonTab>
+   <ribbon:RibbonTab x:Name="ComponentTab" Header="Component" KeyTip="I" IsEnabled="{Binding Path=HasSelectedPackage, FallbackValue=False}">
+    <ribbon:RibbonGroup x:Name="SnapshotGroup" Header="Snapshot">
+     <ribbon:RibbonButton
+      Label="Save"
+      LargeImageSource="Images\diskette_32.png"
+      ToolTipTitle="Save Snapshot"
+      ToolTipDescription="Save the current original resources as a snapshot"
+      Command="{Binding Path=SaveSnapshotCommand}"
+       />
+     <ribbon:RibbonButton
+      Label="Compare"
+      LargeImageSource="Images\LargeIcon.png"
+      ToolTipTitle="Compare With Snapshot"
+      ToolTipDescription="Compare the current original resources with a snapshot"
+      Command="{Binding Path=CompareSnapshotCommand}"
+       />
+    </ribbon:RibbonGroup>
+    <ribbon:RibbonGroup x:Name="LEMergeGroup" Header="Merge">
+     <ribbon:RibbonButton
+      Label="Compare"
+      LargeImageSource="Images\LargeIcon.png"
+      ToolTipTitle="Compare With Snapshot"
+      ToolTipDescription="Compare the current original resources with a snapshot"
+      Command="{Binding Path=LECompareCommand}"
+       />
+     <ribbon:RibbonButton
+      Label="Upload"
+      LargeImageSource="Images\LargeIcon.png"
+      ToolTipTitle="Upload All"
+      ToolTipDescription="Upload all keys in this view to the server"
+      Command="{Binding ActiveResourceCollection.UploadCommand}"
+      CommandParameter="All" />
+     <ribbon:RibbonButton
+      Label="Download"
+      LargeImageSource="Images\LargeIcon.png"
+      ToolTipTitle="Download remote resources for this file"
+      ToolTipDescription=""
+      Command="{Binding ActiveResourceCollection.DownloadLatestCommand}"
+      CommandParameter="" />
+    </ribbon:RibbonGroup>
+   </ribbon:RibbonTab>
+  </ribbon:Ribbon>
+
+  <ComboBox Grid.Row="1" Margin="10" Padding="6" ItemsSource="{Binding ProjectSettings.InstalledPackages}" SelectedItem="{Binding SelectedPackage}" MinWidth="500" HorizontalAlignment="Stretch">
+    <ComboBox.ItemTemplate>
+     <DataTemplate>
+      <StackPanel Orientation="Horizontal">
+       <TextBlock Text="{Binding FriendlyName}" TextAlignment="Left" TextWrapping="Wrap" Width="400" />
+       <TextBlock Text="{Binding Version}" TextAlignment="Left" TextWrapping="Wrap" Width="100" />
+       <TextBlock Text="{Binding FolderName}" TextAlignment="Left" TextWrapping="Wrap" Width="300" />
+      </StackPanel>
+     </DataTemplate>
+    </ComboBox.ItemTemplate>
+   </ComboBox>
+
+  <Grid Grid.Row="2">
+   <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="300" />
+    <ColumnDefinition Width="Auto" />
+    <ColumnDefinition Width="*" />
+   </Grid.ColumnDefinitions>
+
+   <TreeView Grid.Column="0" Name="ResourceTree" ItemsSource="{Binding TreeContent}">
+    <TreeView.ItemContainerStyle>
+     <Style TargetType="{x:Type TreeViewItem}">
+      <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+      <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+      <Setter Property="FontWeight" Value="Normal" />
+      <Style.Triggers>
+       <Trigger Property="IsSelected" Value="True">
+        <Setter Property="FontWeight" Value="Bold" />
+       </Trigger>
+      </Style.Triggers>
+     </Style>
+    </TreeView.ItemContainerStyle>
+    <TreeView.Resources>
+     <HierarchicalDataTemplate ItemsSource="{Binding Children}" DataType="{x:Type vm:TreeViewItemViewModel}">
+      <StackPanel Orientation="Horizontal">
+       <TextBlock Text="{Binding Path=Name}">
+          <TextBlock.ContextMenu>
+           <ContextMenu ItemsSource="{Binding Path=CommandList}">
+            <ContextMenu.ItemTemplate>
+             <DataTemplate>
+              <MenuItem Header="{Binding DisplayName}" Command="{Binding Command}" CommandParameter="{Binding CommandParameter}"/>
+             </DataTemplate>
+            </ContextMenu.ItemTemplate>
+           </ContextMenu>
+          </TextBlock.ContextMenu>
+          <TextBlock.InputBindings>
+           <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Command}" CommandParameter="{Binding Key}" />
+          </TextBlock.InputBindings>
+       </TextBlock>
+      </StackPanel>
+     </HierarchicalDataTemplate>
+    </TreeView.Resources>
+   </TreeView>
+   
+   <GridSplitter Grid.Column="1" Name="GridSplitter1" HorizontalAlignment="Center" VerticalAlignment="Stretch" Background="#aaa" Width="3" ShowsPreview="False" />
+   
+   <ContentControl Grid.Column="2" 
+    Content="{Binding Path=Workspaces}"
+    ContentTemplate="{StaticResource WorkspacesTemplate}"
+     />
+   
+  </Grid>
+
+  <StatusBar Grid.Row="3">
+   <TextBlock Text="{Binding MainStatus}" />
+   <Separator />
+   <TextBlock Text="{Binding ProjectSettings.DotNetNukeType}" />
+   <TextBlock Text="{Binding ProjectSettings.DotNetNukeVersion}" />
+   <Separator />
+   <TextBlock Text="Target Locale: " />
+   <TextBlock Text="{Binding SelectedLocale.EnglishName}" />
+  </StatusBar>
+
+  <Border BorderBrush="Black" BorderThickness="1" Background="#80000000" Visibility="{Binding IsBusy, Converter={StaticResource boolConverter}}" Grid.RowSpan="3">
+   <Grid>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+     <TextBlock Margin="0" TextWrapping="Wrap" Text="Please Wait..." FontSize="24" FontWeight="Bold" Foreground="#7EFFFFFF"/>
+     <TextBlock Margin="0" TextWrapping="Wrap" Text="" FontSize="18" FontWeight="Normal" Foreground="#7EFFFFFF"/>
+    </StackPanel>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+     <TextBlock Margin="0" TextWrapping="Wrap" Text="" FontSize="24" FontWeight="Bold" Foreground="#7EFFFFFF"/>
+     <TextBlock Margin="0" TextWrapping="Wrap" Text="{Binding BusyMessage}" FontSize="18" FontWeight="Normal" Foreground="#7EFFFFFF"/>
+    </StackPanel>
+   </Grid>
+  </Border>
+
+ </Grid>
+</ribbon:RibbonWindow>
