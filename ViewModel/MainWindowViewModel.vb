@@ -2,6 +2,8 @@
 Imports System.Collections.Specialized
 Imports System.ComponentModel
 
+Imports DotNetNuke.Translator.Common
+
 Namespace ViewModel
  Public Class MainWindowViewModel
   Inherits WorkspaceViewModel
@@ -145,7 +147,7 @@ Namespace ViewModel
       If SelectedPackage.PackageName = "Core" Then
        rf = New ResourceFolderTreeViewModel(Nothing, "", ProjectSettings.CurrentSnapShot.ResourceFiles, fileCommands, New List(Of CommandViewModel))
       Else
-       rf = New ResourceFolderTreeViewModel(Nothing, "DesktopModules\" & SelectedPackage.FolderName & "\", ProjectSettings.CurrentSnapShot.ResourceFiles, fileCommands, New List(Of CommandViewModel))
+       rf = New ResourceFolderTreeViewModel(Nothing, ProjectSettings.Location, SelectedPackage.Manifest.ResourceFiles.ToTree.FindCommonEntryPoint, ProjectSettings.CurrentSnapShot.ResourceFiles, fileCommands, New List(Of CommandViewModel))
       End If
       _treeContent = rf.Children
      End If
@@ -192,11 +194,16 @@ Namespace ViewModel
      If SelectedPackage IsNot Nothing Then
       Dim fileCommands As New List(Of CommandViewModel)
       fileCommands.Add(New CommandViewModel("Open", OpenResourceFileCommand))
-      Dim f As New FolderViewModel(New IO.DirectoryInfo(_currentLocation & "\DesktopModules\" & SelectedPackage.FolderName), fileCommands, New List(Of CommandViewModel))
-      f.IsExpanded = True
-      For Each fvm As FolderViewModel In f.Children
-       _subTreeContent.Add(fvm)
-      Next
+      If SelectedPackage.PackageName = "Core" Then
+       Dim f As New FolderViewModel(New IO.DirectoryInfo(_currentLocation), fileCommands, New List(Of CommandViewModel))
+       f.IsExpanded = True
+       For Each fvm As FolderViewModel In f.Children
+        _subTreeContent.Add(fvm)
+       Next
+      Else
+       Dim tree As Common.TreeItem = SelectedPackage.Manifest.ResourceFiles.ToTree().FindCommonEntryPoint
+       Dim f As New FolderViewModel(Me.ProjectSettings.Location, tree, fileCommands, New List(Of CommandViewModel))
+      End If
      End If
     End If
     Return _subTreeContent
@@ -519,20 +526,101 @@ Namespace ViewModel
   Public Property Bing As New Common.Bing.Bing(Me.TranslatorSettings)
 #End Region
 
+#Region " Language Packs "
+  Private _savePack As RelayCommand
+  Public ReadOnly Property SavePackCommand As RelayCommand
+   Get
+    If _savePack Is Nothing Then
+     _savePack = New RelayCommand(Sub() Me.SavePackClicked(), Function() HasSelectedPackage)
+    End If
+    Return _savePack
+   End Get
+  End Property
+
+  Protected Sub SavePackClicked()
+
+   Dim start As String = _currentLocation
+   Dim name As String = "DotNetNuke"
+   Dim manifest As String = ""
+   Dim version As String = ProjectSettings.DotNetNukeVersion
+   If SelectedPackage IsNot Nothing AndAlso SelectedPackage.PackageName <> "Core" Then
+    start &= "DesktopModules\" & SelectedPackage.FolderName
+    name = SelectedPackage.FriendlyName
+    version = SelectedPackage.Version
+    manifest = SelectedPackage.ManifestXml
+   End If
+   If name = "Core" Then
+    Dim res As MsgBoxResult = MsgBox("Do you wish to generate a ""Full Core"" pack? If you select No only the core resources will be packed. If you select Yes, then all installed modules will be packed as well.", MsgBoxStyle.YesNoCancel, "Language Pack Generation")
+    Select Case res
+     Case MsgBoxResult.Yes
+      name = "Full"
+     Case MsgBoxResult.Cancel
+      Exit Sub
+    End Select
+   End If
+
+   Dim dlg As New Microsoft.Win32.SaveFileDialog()
+   dlg.FileName = String.Format("ResourcePack.{0}.{1}.{2}.zip", name, version, SelectedLocale.Name)
+   dlg.DefaultExt = ".zip"
+   dlg.Filter = "Language Packs (.zip)|*.zip"
+   Dim result? As Boolean = dlg.ShowDialog()
+   If result = True Then
+    Dim filename As String = dlg.FileName
+    IsBusy = True
+    BusyMessage = "Creating Language Pack"
+    _backgroundWorker = New BackgroundWorker
+    AddHandler _backgroundWorker.DoWork, AddressOf SavePackFile
+    AddHandler _backgroundWorker.RunWorkerCompleted, AddressOf SavePackFileCompleted
+    Dim p As New Common.ParameterObject(Me)
+    p.Params.Add(_currentLocation) '0
+    p.Params.Add(start) '1
+    p.Params.Add(SelectedLocale.Name) '2
+    If ProjectSettings.OverrideOwner Then
+     p.Params.Add(ProjectSettings.OwnerEmail) '3
+     p.Params.Add(ProjectSettings.OwnerName) '4
+     p.Params.Add(ProjectSettings.OwnerOrganization) '5
+     p.Params.Add(ProjectSettings.OwnerUrl) '6
+     p.Params.Add(ProjectSettings.License) '7
+    Else
+     p.Params.Add(TranslatorSettings.OwnerEmail)
+     p.Params.Add(TranslatorSettings.OwnerName)
+     p.Params.Add(TranslatorSettings.OwnerOrganization)
+     p.Params.Add(TranslatorSettings.OwnerUrl)
+     p.Params.Add(TranslatorSettings.License)
+    End If
+    p.Params.Add(name) '8
+    p.Params.Add(manifest) '9
+    p.Params.Add(filename) '10
+    _backgroundWorker.RunWorkerAsync(p)
+   End If
+
+  End Sub
+
+  Private Sub SavePackFile(sender As Object, e As DoWorkEventArgs)
+   Dim p As Common.ParameterObject = CType(e.Argument, Common.ParameterObject)
+   Dim pack As New Services.Packing.LanguagePack(p.Params(0), p.Params(1), p.Params(2), p.Params(3), p.Params(4), p.Params(5), p.Params(6), p.Params(7), p.Params(8), p.Params(9))
+   pack.Save(p.Params(10))
+  End Sub
+
+  Private Sub SavePackFileCompleted(sender As Object, e As RunWorkerCompletedEventArgs)
+   IsBusy = False
+  End Sub
+#End Region
+
 #Region " Snapshots "
   Private _saveSnapshot As RelayCommand
   Public ReadOnly Property SaveSnapshotCommand As RelayCommand
    Get
     If _saveSnapshot Is Nothing Then
-     _saveSnapshot = New RelayCommand(Sub() Me.SaveSnapshotClicked(), Function() Me.SaveSnapshotEnabled)
+     _saveSnapshot = New RelayCommand(Sub() Me.SaveSnapshotClicked(), Function() HasSelectedPackage)
     End If
     Return _saveSnapshot
    End Get
   End Property
 
-  Protected Function SaveSnapshotEnabled() As Boolean
-   Return HasSelectedPackage
-  End Function
+  'Protected Function SaveSnapshotEnabled() As Boolean
+  ' Return HasSelectedPackage
+  'End Function
 
   Protected Sub SaveSnapshotClicked()
 

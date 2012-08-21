@@ -12,6 +12,11 @@ Namespace Common
   Public Property DefaultTargetLocale As String = ""
   Public Property BingLocales As New List(Of CultureInfo)
   Public Property MaximumKeys As Integer = 100
+  Public Property OwnerName As String = ""
+  Public Property OwnerEmail As String = ""
+  Public Property OwnerUrl As String = ""
+  Public Property OwnerOrganization As String = ""
+  Public Property License As String = ""
 
   Public Sub New()
    MyBase.New()
@@ -35,6 +40,11 @@ Namespace Common
    ReadSettingValue("BingClientID", BingClientID)
    ReadSettingValue("BingClientSecret", BingClientSecret)
    ReadSettingValue("DefaultTargetLocale", DefaultTargetLocale)
+   ReadSettingValue("OwnerName", OwnerName)
+   ReadSettingValue("OwnerEmail", OwnerEmail)
+   ReadSettingValue("OwnerUrl", OwnerUrl)
+   ReadSettingValue("OwnerOrganization", OwnerOrganization)
+   ReadSettingValue("License", License)
 
   End Sub
 
@@ -50,6 +60,11 @@ Namespace Common
    Setting("BingClientID", False) = BingClientID
    Setting("BingClientSecret", False) = BingClientSecret
    Setting("DefaultTargetLocale", False) = DefaultTargetLocale
+   Setting("OwnerName", False) = OwnerName
+   Setting("OwnerEmail", False) = OwnerEmail
+   Setting("OwnerUrl", False) = OwnerUrl
+   Setting("OwnerOrganization", False) = OwnerOrganization
+   Setting("License", False) = License
 
    Dim isoStore As IsolatedStorageFile = IsolatedStorageFile.GetStore(IsolatedStorageScope.User Or IsolatedStorageScope.Assembly Or IsolatedStorageScope.Domain, Nothing, Nothing)
    Using strOut As New IO.StreamWriter(New IsolatedStorageFileStream(SettingsFilename, FileMode.OpenOrCreate, isoStore))

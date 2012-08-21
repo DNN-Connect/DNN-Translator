@@ -70,4 +70,9 @@ Partial Class TranslatorData
   If Not String.IsNullOrEmpty(res) Then var = res
  End Sub
 
+ Public Sub ReadSettingValue(name As String, ByRef var As Boolean)
+  Dim res As String = Setting(name)
+  If Not String.IsNullOrEmpty(res) Then var = Boolean.Parse(res)
+ End Sub
+
 End Class

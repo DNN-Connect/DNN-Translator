@@ -34,7 +34,7 @@ Partial Class Snapshot
     Else
      Try
       Dim fileKey As String = path & "\" & IO.Path.GetFileName(f)
-      fileKey = fileKey.TrimStart("\"c)
+      fileKey = fileKey.TrimStart("\"c).ToLower
       Dim resFile As New ResourceFile(fileKey, f)
       ResourceFiles.Add(fileKey, resFile)
       For Each key As String In resFile.Resources.Keys

@@ -9,6 +9,28 @@ Namespace ViewModel
   Private _key As String = ""
   Private _name As String = ""
 
+  Public Sub New(parent As ResourceFolderTreeViewModel, dnnRoot As String, tree As Common.TreeItem, allResources As Dictionary(Of String, Common.ResourceFile), resourceFileCommands As List(Of CommandViewModel), folderCommands As List(Of CommandViewModel))
+   MyBase.New(parent, False)
+
+   _resourceFileCommands = resourceFileCommands
+   _folderCommands = folderCommands
+   _key = dnnRoot & tree.FullName
+   _name = tree.Name
+
+   For Each fc As CommandViewModel In folderCommands
+    Me.AddCommand(New CommandViewModel(fc.DisplayName, fc.Command, Key))
+   Next
+
+   For Each child As Common.TreeItem In tree.Children
+    If IO.Directory.Exists(dnnRoot & child.FullName) Then
+     Me.Children.Add(New ResourceFolderTreeViewModel(Me, dnnRoot, child, allResources, resourceFileCommands, folderCommands))
+    Else
+     Me.Children.Add(New ResourceFileTreeViewModel(Me, allResources(child.FullName), resourceFileCommands))
+    End If
+   Next
+
+  End Sub
+
   Public Sub New(parent As ResourceFolderTreeViewModel, start As String, allResources As Dictionary(Of String, Common.ResourceFile), resourceFileCommands As List(Of CommandViewModel), folderCommands As List(Of CommandViewModel))
    MyBase.New(parent, False)
 

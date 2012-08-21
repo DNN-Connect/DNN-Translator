@@ -10,7 +10,8 @@ Namespace ViewModel
   Public Property FolderName As String = ""
   Public Property IsSystemPackage As Boolean = False
   Public Property Owner As String = ""
-  Public Property Manifest As String = ""
+  Public Property ManifestXml As String = ""
+  Public Property Manifest As Common.ModuleManifest
 
   Private _selected As Boolean = False
   Public Property Selected() As Boolean
@@ -39,9 +40,16 @@ Namespace ViewModel
    FolderName = GetString(ir, "ModuleFolderName")
    IsSystemPackage = GetBoolean(ir, "IsSystemPackage")
    Owner = GetString(ir, "Owner")
-   Manifest = GetString(ir, "Manifest")
+   ManifestXml = GetString(ir, "Manifest")
 
   End Sub
+
+  Public Function LoadManifest(dnnBasePath As String) As Boolean
+   If ManifestXml = "" Then Return False
+   Manifest = New Common.ModuleManifest(ManifestXml, dnnBasePath)
+   If Manifest.ResourceFiles.Count = 0 Then Return False
+   Return True
+  End Function
 
   Private Function GetString(ir As SqlDataReader, columnName As String) As String
    If ir.Item(columnName) Is DBNull.Value Then

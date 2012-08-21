@@ -21,6 +21,12 @@ Namespace Common
   Public Property CurrentSnapShot As Snapshot
   Private Property DatabaseOwner As String = ""
   Private Property ObjectQualifier As String = ""
+  Public Property OverrideOwner As Boolean = False
+  Public Property OwnerName As String = ""
+  Public Property OwnerEmail As String = ""
+  Public Property OwnerUrl As String = ""
+  Public Property OwnerOrganization As String = ""
+  Public Property License As String = ""
 
   Public Sub New(projectSettingsFileOrDnnDirectory As String)
    MyBase.New()
@@ -48,6 +54,12 @@ Namespace Common
      End Try
     End If
     ReadSettingValue("LocalUrl", LocalUrl)
+    ReadSettingValue("OverrideOwner", OverrideOwner)
+    ReadSettingValue("OwnerName", OwnerName)
+    ReadSettingValue("OwnerEmail", OwnerEmail)
+    ReadSettingValue("OwnerUrl", OwnerUrl)
+    ReadSettingValue("OwnerOrganization", OwnerOrganization)
+    ReadSettingValue("License", License)
    ElseIf IO.Directory.Exists(projectSettingsFileOrDnnDirectory) Then ' it's a DNN directory
     If Not projectSettingsFileOrDnnDirectory.EndsWith("\") Then projectSettingsFileOrDnnDirectory &= "\"
     Me.Location = projectSettingsFileOrDnnDirectory
@@ -81,11 +93,12 @@ Namespace Common
     Using c As New SqlConnection(ConnectionString)
      c.Open()
      Dim q As SqlCommand = c.CreateCommand
-     q.CommandText = String.Format("SELECT *, dm.FolderName ModuleFolderName FROM {0}{1}Packages p INNER JOIN {0}{1}DesktopModules dm ON dm.PackageID=p.PackageID", DatabaseOwner, ObjectQualifier)
+     q.CommandText = String.Format("SELECT *, dm.FolderName ModuleFolderName FROM {0}{1}Packages p LEFT JOIN {0}{1}DesktopModules dm ON dm.PackageID=p.PackageID", DatabaseOwner, ObjectQualifier)
      Using ir As SqlDataReader = q.ExecuteReader
       Do While ir.Read
-       If Not CStr(ir.Item("ModuleFolderName")).StartsWith("Admin/") Then
-        InstalledPackages.Add(New InstalledPackageViewModel(ir))
+       Dim package As New InstalledPackageViewModel(ir)
+       If package.LoadManifest(Me.Location) Then
+        InstalledPackages.Add(package)
        End If
       Loop
      End Using
@@ -119,7 +132,12 @@ Namespace Common
    Setting("Username", False) = Username
    Setting("Password", False) = Common.Globals.EncryptString(Password)
    Setting("LocalUrl", False) = LocalUrl
-   Setting("Location", False) = Location
+   Setting("OverrideOwner", False) = OverrideOwner.ToString
+   Setting("OwnerName", False) = OwnerName
+   Setting("OwnerEmail", False) = OwnerEmail
+   Setting("OwnerUrl", False) = OwnerUrl
+   Setting("OwnerOrganization", False) = OwnerOrganization
+   Setting("License", False) = License
 
    MyBase.Save()
 

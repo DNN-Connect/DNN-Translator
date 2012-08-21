@@ -59,6 +59,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>_References\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SharpZipLib">
+      <HintPath>_References\SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -85,6 +88,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\TreeItem.vb" />
     <Compile Include="Common\ApplicationState.vb" />
     <Compile Include="Common\Bing\Bing.vb" />
     <Compile Include="Common\Bing\AdmAccessToken.vb" />
@@ -93,6 +97,9 @@
     <Compile Include="Common\DataGridContextHelper.vb" />
     <Compile Include="Common\Extensions.vb" />
     <Compile Include="Common\Globals.vb" />
+    <Compile Include="Common\ModuleManifest.vb" />
+    <Compile Include="Services\Packing\PackManifest.vb" />
+    <Compile Include="Services\Packing\LanguagePack.vb" />
     <Compile Include="Common\LEService\DTConverter.vb" />
     <Compile Include="Common\LEService\LEService.vb" />
     <Compile Include="Common\LEService\TextInfo.vb" />
