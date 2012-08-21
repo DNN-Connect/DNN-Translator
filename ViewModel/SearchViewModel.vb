@@ -9,7 +9,7 @@ Namespace ViewModel
   Public Property SearchString As String = ""
   Public Property TooManyResults As Boolean = False
 
-  Public Sub New(parameters As Common.ParameterObject)
+  Public Sub New(parameters As Common.ParameterList)
    MyBase.New(CType(parameters.ParentWindow, MainWindowViewModel))
    Me.ShowFileColumn = True
    _basePath = MainWindow.ProjectSettings.Location

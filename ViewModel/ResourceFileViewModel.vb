@@ -15,7 +15,7 @@ Namespace ViewModel
   Public Property IsResourceFile As Boolean = True
   Private _backgroundWorker As BackgroundWorker
 
-  Public Sub New(parameters As Common.ParameterObject)
+  Public Sub New(parameters As Common.ParameterList)
    MyBase.New(CType(parameters.ParentWindow, MainWindowViewModel))
    _originalResourceFile = parameters.Params(0)
    _fileName = _originalResourceFile.Substring(_originalResourceFile.LastIndexOf("\"c) + 1)

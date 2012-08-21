@@ -306,20 +306,20 @@ Namespace ViewModel
    AddHandler _backgroundWorker.RunWorkerCompleted, AddressOf OpenResourceFileCompleted
    Dim resfile As String = CType(param, String)
    If Not resfile.StartsWith(ProjectSettings.Location) Then resfile = ProjectSettings.Location & resfile
-   Dim p As New Common.ParameterObject(Me)
+   Dim p As New Common.ParameterList(Me)
    p.Params.Add(resfile)
    _backgroundWorker.RunWorkerAsync(p)
   End Sub
 
   Private Sub OpenResourceFile(sender As Object, e As DoWorkEventArgs)
-   Dim resource As String = CType(e.Argument, Common.ParameterObject).Params(0)
+   Dim resource As String = CType(e.Argument, Common.ParameterList).Params(0)
    If resource.ToLower.EndsWith(".resx") Then
     Dim resFilename As String = resource.Substring(resource.LastIndexOf("\"c) + 1)
     Dim result As New OpenResourceFileResult
     result.mustAdd = False
     result.workspace = CType(Me.Workspaces.FirstOrDefault(Function(vm) vm.ID = resFilename), ResourceFileViewModel)
     If result.workspace Is Nothing Then
-     result.workspace = New ResourceFileViewModel(CType(e.Argument, Common.ParameterObject))
+     result.workspace = New ResourceFileViewModel(CType(e.Argument, Common.ParameterList))
      result.mustAdd = True
     End If
     e.Result = result
@@ -571,25 +571,25 @@ Namespace ViewModel
     _backgroundWorker = New BackgroundWorker
     AddHandler _backgroundWorker.DoWork, AddressOf SavePackFile
     AddHandler _backgroundWorker.RunWorkerCompleted, AddressOf SavePackFileCompleted
-    Dim p As New Common.ParameterObject(Me)
-    p.Params.Add(_currentLocation) '0
-    p.Params.Add(start) '1
-    p.Params.Add(SelectedLocale.Name) '2
-    If ProjectSettings.OverrideOwner Then
-     p.Params.Add(ProjectSettings.OwnerEmail) '3
-     p.Params.Add(ProjectSettings.OwnerName) '4
-     p.Params.Add(ProjectSettings.OwnerOrganization) '5
-     p.Params.Add(ProjectSettings.OwnerUrl) '6
-     p.Params.Add(ProjectSettings.License) '7
-    Else
-     p.Params.Add(TranslatorSettings.OwnerEmail)
-     p.Params.Add(TranslatorSettings.OwnerName)
-     p.Params.Add(TranslatorSettings.OwnerOrganization)
-     p.Params.Add(TranslatorSettings.OwnerUrl)
-     p.Params.Add(TranslatorSettings.License)
-    End If
+    Dim p As New Common.ParameterList(Me)
+    'p.Params.Add(_currentLocation) '0
+    'p.Params.Add(start) '1
+    'p.Params.Add(SelectedLocale.Name) '2
+    'If ProjectSettings.OverrideOwner Then
+    ' p.Params.Add(ProjectSettings.OwnerEmail) '3
+    ' p.Params.Add(ProjectSettings.OwnerName) '4
+    ' p.Params.Add(ProjectSettings.OwnerOrganization) '5
+    ' p.Params.Add(ProjectSettings.OwnerUrl) '6
+    ' p.Params.Add(ProjectSettings.License) '7
+    'Else
+    ' p.Params.Add(TranslatorSettings.OwnerEmail)
+    ' p.Params.Add(TranslatorSettings.OwnerName)
+    ' p.Params.Add(TranslatorSettings.OwnerOrganization)
+    ' p.Params.Add(TranslatorSettings.OwnerUrl)
+    ' p.Params.Add(TranslatorSettings.License)
+    'End If
     p.Params.Add(name) '8
-    p.Params.Add(manifest) '9
+    'p.Params.Add(manifest) '9
     p.Params.Add(filename) '10
     _backgroundWorker.RunWorkerAsync(p)
    End If
@@ -597,9 +597,12 @@ Namespace ViewModel
   End Sub
 
   Private Sub SavePackFile(sender As Object, e As DoWorkEventArgs)
-   Dim p As Common.ParameterObject = CType(e.Argument, Common.ParameterObject)
-   Dim pack As New Services.Packing.LanguagePack(p.Params(0), p.Params(1), p.Params(2), p.Params(3), p.Params(4), p.Params(5), p.Params(6), p.Params(7), p.Params(8), p.Params(9))
-   pack.Save(p.Params(10))
+   Dim p As Common.ParameterList = CType(e.Argument, Common.ParameterList)
+
+   'Dim pack As New Services.Packing.LanguagePack(p.Params(0), p.Params(1), p.Params(2), p.Params(3), p.Params(4), p.Params(5), p.Params(6), p.Params(7), p.Params(8), p.Params(9))
+   Dim this As MainWindowViewModel = CType(p.ParentWindow, MainWindowViewModel)
+   Dim pack As New Services.Packing.LanguagePack(this.TranslatorSettings, this.ProjectSettings, p.Params(0))
+   pack.Save(p.Params(1))
   End Sub
 
   Private Sub SavePackFileCompleted(sender As Object, e As RunWorkerCompletedEventArgs)
@@ -645,7 +648,7 @@ Namespace ViewModel
     _backgroundWorker = New BackgroundWorker
     AddHandler _backgroundWorker.DoWork, AddressOf SaveSnapshotFile
     AddHandler _backgroundWorker.RunWorkerCompleted, AddressOf SaveSnapshotFileCompleted
-    Dim p As New Common.ParameterObject(Me)
+    Dim p As New Common.ParameterList(Me)
     p.Params.Add(_currentLocation)
     p.Params.Add(start)
     p.Params.Add(filename)
@@ -655,7 +658,7 @@ Namespace ViewModel
   End Sub
 
   Private Sub SaveSnapshotFile(sender As Object, e As DoWorkEventArgs)
-   Dim p As Common.ParameterObject = CType(e.Argument, Common.ParameterObject)
+   Dim p As Common.ParameterList = CType(e.Argument, Common.ParameterList)
    Dim ss As New Snapshot(p.Params(0), p.Params(1))
    ss.WriteXml(p.Params(2), System.Data.XmlWriteMode.IgnoreSchema)
   End Sub
@@ -780,7 +783,7 @@ Namespace ViewModel
    _backgroundWorker = New BackgroundWorker
    AddHandler _backgroundWorker.DoWork, AddressOf SearchFile
    AddHandler _backgroundWorker.RunWorkerCompleted, AddressOf SearchFileCompleted
-   Dim p As New Common.ParameterObject(Me)
+   Dim p As New Common.ParameterList(Me)
    p.Params.Add(start)
    p.Params.Add(SearchString)
    _backgroundWorker.RunWorkerAsync(p)
@@ -788,7 +791,7 @@ Namespace ViewModel
   End Sub
 
   Private Sub SearchFile(sender As Object, e As DoWorkEventArgs)
-   Dim svm As New SearchViewModel(CType(e.Argument, Common.ParameterObject))
+   Dim svm As New SearchViewModel(CType(e.Argument, Common.ParameterList))
    e.Result = svm
   End Sub
 
@@ -854,7 +857,7 @@ Namespace ViewModel
    _backgroundWorker = New BackgroundWorker
    AddHandler _backgroundWorker.DoWork, AddressOf LECompareFile
    AddHandler _backgroundWorker.RunWorkerCompleted, AddressOf LECompareFileCompleted
-   Dim p As New Common.ParameterObject(Me)
+   Dim p As New Common.ParameterList(Me)
    p.Params.Add(name)
    p.Params.Add(Common.Globals.NormalizeVersion(version))
    p.Params.Add(start)
@@ -863,7 +866,7 @@ Namespace ViewModel
   End Sub
 
   Private Sub LECompareFile(sender As Object, e As DoWorkEventArgs)
-   Dim svm As New LEMergeViewModel(CType(e.Argument, Common.ParameterObject))
+   Dim svm As New LEMergeViewModel(CType(e.Argument, Common.ParameterList))
    e.Result = svm
   End Sub
 

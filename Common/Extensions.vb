@@ -36,6 +36,27 @@ Namespace Common
    Return rootItem
   End Function
 
+  <System.Runtime.CompilerServices.Extension()>
+  Public Function CreateAndAppendElement(ByRef node As Xml.XmlNode, name As String) As Xml.XmlNode
+   Dim newElement As Xml.XmlNode = node.OwnerDocument.CreateElement(name)
+   node.AppendChild(newElement)
+   Return newElement
+  End Function
+
+  <System.Runtime.CompilerServices.Extension()>
+  Public Sub CreateAndAppendElement(ByRef node As Xml.XmlNode, name As String, value As String)
+   Dim newElement As Xml.XmlNode = node.OwnerDocument.CreateElement(name)
+   newElement.InnerText = value
+   node.AppendChild(newElement)
+  End Sub
+
+  <System.Runtime.CompilerServices.Extension()>
+  Public Sub AppendAttribute(ByRef node As Xml.XmlNode, name As String, value As String)
+   Dim att As Xml.XmlAttribute = node.OwnerDocument.CreateAttribute(name)
+   att.InnerText = value
+   node.AppendChild(att)
+  End Sub
+
  End Module
 
  Public Class OldWindow

@@ -25,7 +25,7 @@ Namespace ViewModel
 #End Region
 
 #Region " Constructor "
-  Public Sub New(parameters As Common.ParameterObject)
+  Public Sub New(parameters As Common.ParameterList)
    Me.MainWindow = CType(parameters.ParentWindow, MainWindowViewModel)
    Me.ObjectName = parameters.Params(0)
    Me.ObjectVersion = parameters.Params(1)
@@ -146,14 +146,14 @@ Namespace ViewModel
    _backgroundWorker = New BackgroundWorker
    AddHandler _backgroundWorker.DoWork, AddressOf OpenResources
    AddHandler _backgroundWorker.RunWorkerCompleted, AddressOf OpenResourcesCompleted
-   Dim p As New Common.ParameterObject(Me.MainWindow)
+   Dim p As New Common.ParameterList(Me.MainWindow)
    p.Params.Add(CType(param, String))
    _backgroundWorker.RunWorkerAsync(p)
 
   End Sub
 
   Private Sub OpenResources(sender As Object, e As DoWorkEventArgs)
-   Dim p As Common.ParameterObject = CType(e.Argument, Common.ParameterObject)
+   Dim p As Common.ParameterList = CType(e.Argument, Common.ParameterList)
    Dim what As String = p.Params(0).ToLower
    Select Case what
     Case "same"
