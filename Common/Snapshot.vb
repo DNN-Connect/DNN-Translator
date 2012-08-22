@@ -6,6 +6,7 @@ Partial Class Snapshot
  Private _basePath As String = ""
 
  Public Property ResourceFiles As Dictionary(Of String, ResourceFile)
+ Public Property ResFileOriginalCasings As New Dictionary(Of String, String)
 
  Public Sub New(basepath As String, location As String)
   MyBase.New()
@@ -34,7 +35,9 @@ Partial Class Snapshot
     Else
      Try
       Dim fileKey As String = path & "\" & IO.Path.GetFileName(f)
-      fileKey = fileKey.TrimStart("\"c).ToLower
+      fileKey = fileKey.TrimStart("\"c)
+      Dim fileKeyOriginalCasing As String = fileKey
+      fileKey = fileKey.ToLower
       Dim resFile As New ResourceFile(fileKey, f)
       ResourceFiles.Add(fileKey, resFile)
       For Each key As String In resFile.Resources.Keys
@@ -43,6 +46,7 @@ Partial Class Snapshot
        rr.ResourceKey = key
        rr.ResourceValue = System.Web.HttpUtility.HtmlDecode(resFile.Resources(key).Value)
        Me.Resources.AddResourcesRow(rr)
+       Me.ResFileOriginalCasings(fileKey) = fileKeyOriginalCasing
       Next
      Catch ex As Exception
       ' ignore files I can't read

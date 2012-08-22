@@ -81,5 +81,14 @@ Namespace Services.Packing
    languageFile.CreateAndAppendElement("name", IO.Path.GetFileName(filePath))
   End Sub
 
+  Public Sub Clean()
+
+   Dim toRemove As XmlNodeList = Me.SelectNodes("/dotnetnuke/packages/package[count(components/component/languageFiles/languageFile)=0]")
+   For Each p As XmlNode In toRemove
+    Packages.RemoveChild(p)
+   Next
+
+  End Sub
+
  End Class
 End Namespace

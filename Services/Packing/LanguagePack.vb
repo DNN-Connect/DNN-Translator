@@ -30,6 +30,7 @@ Namespace Services.Packing
        AddPackage(package, strmZipStream)
       End If
      Next
+     Manifest.Clean()
      Dim manifestName As String = packageName & "_" & Locale.Name & ".dnn"
      manifestName = manifestName.Replace("/", "_").Replace("\", "_")
      Dim myZipEntry As New ZipEntry(manifestName)
@@ -59,13 +60,14 @@ Namespace Services.Packing
     If IO.File.Exists(Settings.Location & targetFile) Then
      Dim resFile As New ResourceFile(targetFile, Settings.Location & targetFile)
      If resFile.Resources.Count > 0 Then
+      Dim targetFileOriginalCase As String = Settings.CurrentSnapShot.ResFileOriginalCasings(fileKey).Replace(".resx", "." & Locale.Name & ".resx")
       resFile.Copyright = Copyright
       resFile.Regenerate(True)
       Dim resFileData As Byte() = Globals.XmlToFormattedByteArray(resFile)
-      Dim myZipEntry As New ZipEntry(targetFile)
+      Dim myZipEntry As New ZipEntry(targetFileOriginalCase)
       zipStream.PutNextEntry(myZipEntry)
       zipStream.Write(resFileData, 0, resFileData.Length)
-      Manifest.AddResourceFile(packageNode, targetFile)
+      Manifest.AddResourceFile(packageNode, targetFileOriginalCase)
      End If
     End If
    Next
