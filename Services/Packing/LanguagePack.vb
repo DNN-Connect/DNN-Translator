@@ -60,7 +60,7 @@ Namespace Services.Packing
     If IO.File.Exists(Settings.Location & targetFile) Then
      Dim resFile As New ResourceFile(targetFile, Settings.Location & targetFile)
      If resFile.Resources.Count > 0 Then
-      Dim targetFileOriginalCase As String = Settings.CurrentSnapShot.ResFileOriginalCasings(fileKey).Replace(".resx", "." & Locale.Name & ".resx")
+      Dim targetFileOriginalCase As String = Settings.CurrentSnapShot.ResFileOriginalCasings(fileKey).Replace(".resx", "." & Locale.Name & ".resx", StringComparison.InvariantCultureIgnoreCase)
       resFile.Copyright = Copyright
       resFile.Regenerate(True)
       Dim resFileData As Byte() = Globals.XmlToFormattedByteArray(resFile)

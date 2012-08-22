@@ -57,6 +57,21 @@ Namespace Common
    node.Attributes.Append(att)
   End Sub
 
+  <System.Runtime.CompilerServices.Extension()>
+  Public Function Replace(originalString As String, oldValue As String, newValue As String, comparisonType As StringComparison) As String
+   If oldValue = "" Or oldValue = newValue Then Return originalString
+   Dim startIndex As Integer = 0
+   While True
+    startIndex = originalString.IndexOf(oldValue, startIndex, comparisonType)
+    If startIndex = -1 Then
+     Exit While
+    End If
+    originalString = originalString.Substring(0, startIndex) & newValue & originalString.Substring(startIndex + oldValue.Length)
+    startIndex += newValue.Length
+   End While
+   Return originalString
+  End Function
+
  End Module
 
  Public Class OldWindow

@@ -317,22 +317,30 @@ Namespace ViewModel
   Public ReadOnly Property EditHtmlCommand As RelayCommand
    Get
     If _editHtmlCommand Is Nothing Then
-     _editHtmlCommand = New RelayCommand(Sub(param) EditHtmlCommandHandler(param))
+     _editHtmlCommand = New RelayCommand(Sub(param) EditHtmlCommandHandler(param), AddressOf EditHtmlEnabled)
     End If
     Return _editHtmlCommand
    End Get
   End Property
 
+  Protected Function EditHtmlEnabled(param As Object) As Boolean
+
+   For Each rkv As ResourceKeyViewModel In ResourceKeys
+    If rkv.Selected AndAlso rkv.OriginalValue.Contains("&lt;") Then
+     Return True
+    End If
+   Next
+   Return False
+
+  End Function
+
   Protected Sub EditHtmlCommandHandler(param As Object)
    For Each rkv As ResourceKeyViewModel In ResourceKeys
     If rkv.Selected Then
-     Dim k As String = rkv.ID
-     Dim ws As WorkspaceViewModel = CType(MainWindow.Workspaces.FirstOrDefault(Function(vm) vm.ID = k), HtmlKeyViewModel)
-     If ws Is Nothing Then
-      ws = New HtmlKeyViewModel(MainWindow, rkv, TargetLocale)
-      MainWindow.Workspaces.Add(ws)
-     End If
-     MainWindow.SetActiveWorkspace(ws)
+     Dim htmlEdit As New View.HtmlKeyView
+     Dim ws As New HtmlKeyViewModel(MainWindow, rkv, TargetLocale)
+     htmlEdit.DataContext = ws
+     htmlEdit.ShowDialog()
     End If
    Next
   End Sub
