@@ -304,6 +304,15 @@
       Command="{Binding ActiveResourceCollection.DownloadLatestCommand}"
       CommandParameter="" />
     </ribbon:RibbonGroup>
+    <ribbon:RibbonGroup x:Name="PackSave" Header="Save Languagepack">
+     <ribbon:RibbonButton
+      Label="Save"
+      LargeImageSource="Images\LargeIcon.png"
+      ToolTipTitle="Save Current Item's Pack"
+      ToolTipDescription="More info"
+      Command="{Binding Path=SavePackCommand}"
+       />
+    </ribbon:RibbonGroup>
    </ribbon:RibbonTab>
   </ribbon:Ribbon>
 

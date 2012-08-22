@@ -8,6 +8,10 @@ Namespace Common
   Public Property ResourceFiles As New List(Of String)
   Public Property ResourcePaths As New List(Of String)
 
+  Public Sub New()
+   MyBase.New()
+  End Sub
+
   Public Sub New(objectManifest As String, dnnLocation As String)
    MyBase.New()
    MyBase.LoadXml(objectManifest)

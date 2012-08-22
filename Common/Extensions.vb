@@ -54,7 +54,7 @@ Namespace Common
   Public Sub AppendAttribute(ByRef node As Xml.XmlNode, name As String, value As String)
    Dim att As Xml.XmlAttribute = node.OwnerDocument.CreateAttribute(name)
    att.InnerText = value
-   node.AppendChild(att)
+   node.Attributes.Append(att)
   End Sub
 
  End Module

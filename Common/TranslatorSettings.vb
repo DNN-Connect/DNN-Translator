@@ -17,6 +17,7 @@ Namespace Common
   Public Property OwnerUrl As String = ""
   Public Property OwnerOrganization As String = ""
   Public Property License As String = ""
+  Public Property Copyright As String = "Kiekeboe"
 
   Public Sub New()
    MyBase.New()
@@ -45,6 +46,7 @@ Namespace Common
    ReadSettingValue("OwnerUrl", OwnerUrl)
    ReadSettingValue("OwnerOrganization", OwnerOrganization)
    ReadSettingValue("License", License)
+   ReadSettingValue("Copyright", Copyright)
 
   End Sub
 
@@ -65,6 +67,7 @@ Namespace Common
    Setting("OwnerUrl", False) = OwnerUrl
    Setting("OwnerOrganization", False) = OwnerOrganization
    Setting("License", False) = License
+   Setting("Copyright", False) = Copyright
 
    Dim isoStore As IsolatedStorageFile = IsolatedStorageFile.GetStore(IsolatedStorageScope.User Or IsolatedStorageScope.Assembly Or IsolatedStorageScope.Domain, Nothing, Nothing)
    Using strOut As New IO.StreamWriter(New IsolatedStorageFileStream(SettingsFilename, FileMode.OpenOrCreate, isoStore))

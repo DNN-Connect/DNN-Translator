@@ -3,6 +3,16 @@ Imports System.Text.RegularExpressions
 
 Namespace Common
  Public Class Globals
+  Public Shared Function XmlToFormattedByteArray(doc As Xml.XmlDocument) As Byte()
+   Using w As New IO.MemoryStream
+    Using xw As New Xml.XmlTextWriter(w, Text.Encoding.UTF8)
+     xw.Formatting = Xml.Formatting.Indented
+     doc.WriteContentTo(xw)
+    End Using
+    Return w.ToArray()
+   End Using
+  End Function
+
   Public Shared Function Clone(Of T)(source As T) As T
    If Not GetType(T).IsSerializable Then
     Throw New ArgumentException("The type must be serializable.", "source")

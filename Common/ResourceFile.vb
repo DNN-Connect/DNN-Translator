@@ -7,6 +7,7 @@ Namespace Common
   Public Property Resources As New Dictionary(Of String, Resource)
   Public Property FilePath As String = ""
   Public Property fileKey As String = ""
+  Public Property Copyright As String = ""
 
   Public Sub GetResource(key As String, ByRef value As String)
    If Resources.ContainsKey(key) Then
@@ -56,31 +57,40 @@ Namespace Common
 
   End Sub
 
+  Public Sub Regenerate(minimal As Boolean)
+
+   Me.DocumentElement.SelectSingleNode("/root").InnerXml = ""
+   If Copyright <> "" Then
+    Me.DocumentElement.SelectSingleNode("/root").AppendChild(Me.CreateComment(Copyright))
+   End If
+   For Each k As KeyValuePair(Of String, Resource) In Resources
+    If Not String.IsNullOrEmpty(k.Value.Value) Then
+     Dim x As XmlNode = Me.CreateElement("data")
+     Me.DocumentElement.SelectSingleNode("/root").AppendChild(x)
+     Dim a As XmlAttribute = Me.CreateAttribute("name")
+     x.Attributes.Append(a)
+     a.InnerText = k.Key
+     Dim space As XmlAttribute = Me.CreateAttribute("xml:space")
+     x.Attributes.Append(space)
+     space.InnerText = "preserve"
+     If Not minimal AndAlso k.Value.LastModified <> DateTime.MinValue Then
+      Dim lm As XmlAttribute = Me.CreateAttribute("lastModified")
+      x.Attributes.Append(lm)
+      lm.InnerText = k.Value.LastModified.ToUniversalTime.ToString("u").Substring(0, 19)
+     End If
+     Dim v As XmlNode = Me.CreateElement("value")
+     x.AppendChild(v)
+     v.InnerXml = k.Value.Value
+    End If
+   Next
+
+  End Sub
+
   Public Overloads Sub Save()
    If Not String.IsNullOrEmpty(_filePath) Then
 
-    Me.DocumentElement.SelectSingleNode("/root").InnerXml = ""
-    For Each k As KeyValuePair(Of String, Resource) In Resources
-     If Not String.IsNullOrEmpty(k.Value.Value) Then
-      Dim x As XmlNode = Me.CreateElement("data")
-      Me.DocumentElement.SelectSingleNode("/root").AppendChild(x)
-      Dim a As XmlAttribute = Me.CreateAttribute("name")
-      x.Attributes.Append(a)
-      a.InnerText = k.Key
-      Dim space As XmlAttribute = Me.CreateAttribute("xml:space")
-      x.Attributes.Append(space)
-      space.InnerText = "preserve"
-      If k.Value.LastModified <> DateTime.MinValue Then
-       Dim lm As XmlAttribute = Me.CreateAttribute("lastModified")
-       x.Attributes.Append(lm)
-       lm.InnerText = k.Value.LastModified.ToUniversalTime.ToString("u").Substring(0, 19)
-      End If
-      Dim v As XmlNode = Me.CreateElement("value")
-      x.AppendChild(v)
-      v.InnerXml = k.Value.Value
-     End If
-    Next
-    Save(_filePath)
+    Regenerate(False)
+    Save(_FilePath)
 
    End If
   End Sub

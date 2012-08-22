@@ -13,10 +13,10 @@ Namespace Services.Packing
   Private Property OwnerOrganization As String = ""
   Private Property License As String = ""
 
-  Public Sub New(appSettings As TranslatorSettings, projectSettings As ProjectSettings)
+  Public Sub New(appSettings As TranslatorSettings, projectSettings As ProjectSettings, targetLocale As CultureInfo)
    MyBase.New()
 
-   Me.Locale = projectSettings.Locale
+   Me.Locale = targetLocale
    If projectSettings.OverrideOwner Then
     OwnerEmail = projectSettings.OwnerEmail
     OwnerName = projectSettings.OwnerName
@@ -31,9 +31,12 @@ Namespace Services.Packing
     License = appSettings.License
    End If
 
-   Dim dotnetnuke As XmlNode = Me.DocumentElement.CreateAndAppendElement("dotnetnuke")
+   Me.CreateXmlDeclaration("1.0", Nothing, Nothing)
+   Dim dotnetnuke As XmlNode = Me.CreateElement("dotnetnuke")
+   Me.AppendChild(dotnetnuke)
    dotnetnuke.AppendAttribute("type", "Package")
    dotnetnuke.AppendAttribute("version", "5.0")
+
    Packages = dotnetnuke.CreateAndAppendElement("packages")
 
   End Sub

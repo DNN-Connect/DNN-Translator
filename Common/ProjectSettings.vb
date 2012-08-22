@@ -27,6 +27,7 @@ Namespace Common
   Public Property OwnerUrl As String = ""
   Public Property OwnerOrganization As String = ""
   Public Property License As String = ""
+  Public Property Copyright As String = ""
 
   Public Sub New(projectSettingsFileOrDnnDirectory As String)
    MyBase.New()
@@ -60,6 +61,7 @@ Namespace Common
     ReadSettingValue("OwnerUrl", OwnerUrl)
     ReadSettingValue("OwnerOrganization", OwnerOrganization)
     ReadSettingValue("License", License)
+    ReadSettingValue("Copyright", Copyright)
    ElseIf IO.Directory.Exists(projectSettingsFileOrDnnDirectory) Then ' it's a DNN directory
     If Not projectSettingsFileOrDnnDirectory.EndsWith("\") Then projectSettingsFileOrDnnDirectory &= "\"
     Me.Location = projectSettingsFileOrDnnDirectory
@@ -89,7 +91,7 @@ Namespace Common
     ObjectQualifier = WebConfig.SelectSingleNode("/configuration/dotnetnuke/data/providers/add[@name='SqlDataProvider']/@objectQualifier").InnerText
     If ObjectQualifier <> "" AndAlso Not ObjectQualifier.EndsWith("_") Then ObjectQualifier &= "_"
 
-    ' Try to get a list of installed packages
+    ' Try to get a list of installed packages and attempt to build the resource file list of each object
     Using c As New SqlConnection(ConnectionString)
      c.Open()
      Dim q As SqlCommand = c.CreateCommand
@@ -110,6 +112,20 @@ Namespace Common
       Loop
      End Using
     End Using
+
+    ' Now adjust the list for the core
+    Dim allNonCoreResourceFiles As New List(Of String)
+    For Each p As InstalledPackageViewModel In InstalledPackages
+     If p.Manifest IsNot Nothing Then
+      allNonCoreResourceFiles.AddRange(p.Manifest.ResourceFiles)
+     End If
+    Next
+    core.Manifest = New ModuleManifest
+    For Each resFile As String In CurrentSnapShot.ResourceFiles.Keys
+     If Not allNonCoreResourceFiles.Contains(resFile) Then
+      core.Manifest.ResourceFiles.Add(resFile)
+     End If
+    Next
 
    Catch ex As Exception
 
@@ -138,6 +154,7 @@ Namespace Common
    Setting("OwnerUrl", False) = OwnerUrl
    Setting("OwnerOrganization", False) = OwnerOrganization
    Setting("License", False) = License
+   Setting("Copyright", False) = Copyright
 
    MyBase.Save()
 
