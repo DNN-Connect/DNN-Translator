@@ -17,7 +17,7 @@ Namespace Common
   Public Property OwnerUrl As String = ""
   Public Property OwnerOrganization As String = ""
   Public Property License As String = ""
-  Public Property Copyright As String = "Kiekeboe"
+  Public Property Copyright As String = ""
 
   Public Sub New()
    MyBase.New()

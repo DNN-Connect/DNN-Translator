@@ -51,7 +51,7 @@
      </ribbon:RibbonApplicationSplitMenuItem>
      <ribbon:RibbonApplicationMenuItem Header="_Save" Command="{Binding Path=SaveCommand}" KeyTip="S" ImageSource="Images\diskette_32.png" />
      <ribbon:RibbonApplicationMenuItem Header="Save As" Command="{Binding Path=SaveAsCommand}" ImageSource="Images\diskette_32.png" />
-     <ribbon:RibbonApplicationMenuItem Header="Options" x:Name="cmdOptions" ImageSource="Images\gear_32.png" />
+     <ribbon:RibbonApplicationMenuItem Header="Options" Command="{Binding Path=OptionsCommand}" ImageSource="Images\gear_32.png" />
      <ribbon:RibbonApplicationMenuItem IsEnabled="False" />
      <ribbon:RibbonApplicationMenuItem IsEnabled="False" />
      <ribbon:RibbonApplicationMenuItem IsEnabled="False" />

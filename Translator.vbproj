@@ -181,8 +181,8 @@
     <Compile Include="View\DNNDetails.xaml.vb">
       <DependentUpon>DNNDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\HtmlKeyView.xaml.vb">
-      <DependentUpon>HtmlKeyView.xaml</DependentUpon>
+    <Compile Include="HtmlKeyEdit.xaml.vb">
+      <DependentUpon>HtmlKeyEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LEMergeView.xaml.vb">
       <DependentUpon>LEMergeView.xaml</DependentUpon>
@@ -219,7 +219,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\HtmlKeyView.xaml">
+    <Page Include="HtmlKeyEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

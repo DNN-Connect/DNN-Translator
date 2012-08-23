@@ -5,22 +5,14 @@ Namespace Common
  Public Class ProjectSettings
   Inherits TranslatorData
 
-  Public Property DotNetNukeVersion As String = ""
-  Public Property DotNetNukeType As String = "Community Edition"
-  Public Property WebConfig As New Xml.XmlDocument
-  Public Property ConnectionString As String = ""
-  Public Property InstalledPackages As New List(Of InstalledPackageViewModel)
-  Public Property InstalledLanguages As New List(Of String)
+  ' User configurable
+  Public Property Location As String = ""
   Public Property TargetLocale As String = ""
   Public Property MappedLocale As String = ""
-  Public Property AvailableLocales As New List(Of CultureInfo)
   Public Property ConnectionUrl As String = ""
   Public Property Username As String = ""
   Public Property Password As Security.SecureString
   Public Property LocalUrl As String = ""
-  Public Property CurrentSnapShot As Snapshot
-  Private Property DatabaseOwner As String = ""
-  Private Property ObjectQualifier As String = ""
   Public Property OverrideOwner As Boolean = False
   Public Property OwnerName As String = ""
   Public Property OwnerEmail As String = ""
@@ -28,6 +20,18 @@ Namespace Common
   Public Property OwnerOrganization As String = ""
   Public Property License As String = ""
   Public Property Copyright As String = ""
+
+  ' Parsed on load
+  Public Property DotNetNukeVersion As String = ""
+  Public Property DotNetNukeType As String = "Community Edition"
+  Public Property WebConfig As New Xml.XmlDocument
+  Public Property ConnectionString As String = ""
+  Public Property InstalledPackages As New List(Of InstalledPackageViewModel)
+  Public Property InstalledLanguages As New List(Of String)
+  Public Property AvailableLocales As New List(Of CultureInfo)
+  Public Property CurrentSnapShot As Snapshot
+  Private Property DatabaseOwner As String = ""
+  Private Property ObjectQualifier As String = ""
 
   Public Sub New(projectSettingsFileOrDnnDirectory As String)
    MyBase.New()

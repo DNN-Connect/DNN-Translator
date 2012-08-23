@@ -110,6 +110,16 @@ Namespace ViewModel
 #End Region
 
 #Region " Settings "
+  Private _optionsCommand As RelayCommand
+  Public ReadOnly Property OptionsCommand As RelayCommand
+   Get
+    If _optionsCommand Is Nothing Then
+     _optionsCommand = New RelayCommand(Sub(param) Me.ShowSettingsScreen(Nothing))
+    End If
+    Return _optionsCommand
+   End Get
+  End Property
+
   Private _ProjectSettings As Common.ProjectSettings
   Public Property ProjectSettings() As Common.ProjectSettings
    Get
@@ -125,13 +135,49 @@ Namespace ViewModel
    End Set
   End Property
 
-  Public Property TranslatorSettings As New Common.TranslatorSettings
-  Private _settings As ViewModel.SettingsViewModel
-  Public ReadOnly Property Settings As ViewModel.SettingsViewModel
+  Private _TranslatorSettings As Common.TranslatorSettings
+  Public Property TranslatorSettings() As Common.TranslatorSettings
    Get
-    Return New ViewModel.SettingsViewModel(Me)
+    If _TranslatorSettings Is Nothing Then _TranslatorSettings = New Common.TranslatorSettings
+    Return _TranslatorSettings
    End Get
+   Set(ByVal value As Common.TranslatorSettings)
+    _TranslatorSettings = value
+    Me.OnPropertyChanged("TranslatorSettings")
+   End Set
   End Property
+
+  Public Sub ShowSettingsScreen(temporaryProjectSettings As Common.ProjectSettings)
+
+   Dim tempSettings As SettingsViewModel
+   If temporaryProjectSettings Is Nothing Then
+    tempSettings = New SettingsViewModel(TranslatorSettings, ProjectSettings)
+   Else
+    tempSettings = New SettingsViewModel(TranslatorSettings, temporaryProjectSettings)
+   End If
+   Dim SettingsWindow As New SettingsWindow
+   SettingsWindow.DataContext = tempSettings
+   SettingsWindow.ShowDialog()
+   If CType(SettingsWindow.DataContext, SettingsViewModel).OkClicked Then
+    TranslatorSettings = tempSettings.TranslatorSettings
+    TranslatorSettings.Save()
+    ProjectSettings = tempSettings.ProjectSettings
+    If ProjectSettings IsNot Nothing Then
+     If ProjectSettings.TargetLocale <> "" Then
+      SetLocale(ProjectSettings.TargetLocale)
+     End If
+     _currentLocation = ProjectSettings.Location
+     MainStatus = "Location: " & ProjectSettings.Location
+     For Each ipvm As InstalledPackageViewModel In ProjectSettings.InstalledPackages
+      AddHandler ipvm.PropertyChanged, AddressOf PackageSelected
+     Next
+    End If
+    _treeContent = Nothing
+    MyBase.OnPropertyChanged("RecentLocationsList")
+    MyBase.OnPropertyChanged("TreeContent")
+   End If
+
+  End Sub
 #End Region
 
 #Region " Folder/File Tree "
@@ -502,7 +548,12 @@ Namespace ViewModel
     If IO.Directory.Exists(fbd.SelectedPath) Then
      MainStatus = "Creating New Project at " & fbd.SelectedPath
      If IO.File.Exists(fbd.SelectedPath & "\web.config") AndAlso IO.File.Exists(fbd.SelectedPath & "\bin\dotnetnuke.dll") Then
-      Open(fbd.SelectedPath)
+      IsBusy = True
+      BusyMessage = "Opening Location"
+      _backgroundWorker = New BackgroundWorker
+      AddHandler _backgroundWorker.DoWork, AddressOf OpenLocation
+      AddHandler _backgroundWorker.RunWorkerCompleted, AddressOf OpenNewCompleted
+      _backgroundWorker.RunWorkerAsync(fbd.SelectedPath)
      Else
       MessageBox.Show("You must select the root of a DotNetNuke installation", "Selection Error", MessageBoxButton.OK)
      End If
@@ -510,6 +561,15 @@ Namespace ViewModel
    End If
 
   End Sub
+
+  Private Sub OpenNewCompleted(sender As Object, e As RunWorkerCompletedEventArgs)
+
+   Dim result As Common.ProjectSettings = CType(e.Result, Common.ProjectSettings)
+   ShowSettingsScreen(result)
+   IsBusy = False
+
+  End Sub
+
 #End Region
 
 #Region " Exiting "

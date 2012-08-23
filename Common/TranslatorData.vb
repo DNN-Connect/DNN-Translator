@@ -2,7 +2,6 @@
 
 Partial Class TranslatorData
 
- Public Property Location As String = ""
  Public Property SettingsFileName As String = ""
 
  Public Overridable Sub Save()

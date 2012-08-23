@@ -337,7 +337,7 @@ Namespace ViewModel
   Protected Sub EditHtmlCommandHandler(param As Object)
    For Each rkv As ResourceKeyViewModel In ResourceKeys
     If rkv.Selected Then
-     Dim htmlEdit As New View.HtmlKeyView
+     Dim htmlEdit As New HtmlKeyEdit
      Dim ws As New HtmlKeyViewModel(MainWindow, rkv, TargetLocale)
      htmlEdit.DataContext = ws
      htmlEdit.ShowDialog()

@@ -2,20 +2,32 @@
  Public Class ProjectSettingsViewModel
   Inherits ViewModelBase
 
-  Private _settingsViewModel As SettingsViewModel
+  Private _projectSettings As Common.ProjectSettings
 
-  Public Sub New(settingsViewModel As SettingsViewModel)
-   _settingsViewModel = settingsViewModel
-   Me.DisplayName = "Project"
+#Region " Constructor "
+  Public Sub New(projectSettings As Common.ProjectSettings)
+   _projectSettings = projectSettings
+   Me.DisplayName = "Project Settings"
    Me.ID = "Project"
   End Sub
+#End Region
+
+#Region " Setting Properties "
+  Public Property Location() As String
+   Get
+    Return _projectSettings.Location
+   End Get
+   Set(ByVal value As String)
+    _projectSettings.Location = value
+   End Set
+  End Property
 
   Public Property TargetLocale() As CultureInfo
    Get
-    Return AllLocales.FirstOrDefault(Function(x) x.Name = _settingsViewModel.ProjectSettings.TargetLocale)
+    Return AllLocales.FirstOrDefault(Function(x) x.Name = _projectSettings.TargetLocale)
    End Get
    Set(ByVal value As CultureInfo)
-    _settingsViewModel.ProjectSettings.TargetLocale = value.Name
+    _projectSettings.TargetLocale = value.Name
     Me.OnPropertyChanged("TargetLocale")
     If value.Name.Length > 2 Then
      MappedLocale = value
@@ -25,14 +37,131 @@
 
   Public Property MappedLocale() As CultureInfo
    Get
-    Return AvailableLocales.FirstOrDefault(Function(x) x.Name = _settingsViewModel.ProjectSettings.MappedLocale)
+    Return AvailableLocales.FirstOrDefault(Function(x) x.Name = _projectSettings.MappedLocale)
    End Get
    Set(ByVal value As CultureInfo)
-    _settingsViewModel.ProjectSettings.MappedLocale = value.Name
+    _projectSettings.MappedLocale = value.Name
     Me.OnPropertyChanged("MappedLocale")
    End Set
   End Property
 
+  Public Property ConnectionUrl() As String
+   Get
+    Return _projectSettings.ConnectionUrl
+   End Get
+   Set(ByVal value As String)
+    _projectSettings.ConnectionUrl = value
+    Me.OnPropertyChanged("ConnectionUrl")
+    If value.Trim = "" Then
+     HasRemote = False
+    Else
+     HasRemote = True
+    End If
+   End Set
+  End Property
+
+  Public Property Username() As String
+   Get
+    Return _projectSettings.Username
+   End Get
+   Set(ByVal value As String)
+    _projectSettings.Username = value
+    Me.OnPropertyChanged("Username")
+   End Set
+  End Property
+
+  Public Property Password() As String
+   Get
+    Return Common.Globals.ToInsecureString(_projectSettings.Password)
+   End Get
+   Set(ByVal value As String)
+    _projectSettings.Password = Common.Globals.ToSecureString(value)
+    Me.OnPropertyChanged("Password")
+   End Set
+  End Property
+
+  Public Property LocalUrl() As String
+   Get
+    Return _projectSettings.LocalUrl
+   End Get
+   Set(ByVal value As String)
+    _projectSettings.LocalUrl = value
+    Me.OnPropertyChanged("LocalUrl")
+   End Set
+  End Property
+
+  Public Property OverrideOwner() As Boolean
+   Get
+    Return _projectSettings.OverrideOwner
+   End Get
+   Set(ByVal value As Boolean)
+    _projectSettings.OverrideOwner = value
+    Me.OnPropertyChanged("OverrideOwner")
+   End Set
+  End Property
+
+  Public Property OwnerName() As String
+   Get
+    Return _projectSettings.OwnerName
+   End Get
+   Set(ByVal value As String)
+    _projectSettings.OwnerName = value
+    Me.OnPropertyChanged("OwnerName")
+   End Set
+  End Property
+
+  Public Property OwnerEmail() As String
+   Get
+    Return _projectSettings.OwnerEmail
+   End Get
+   Set(ByVal value As String)
+    _projectSettings.OwnerEmail = value
+    Me.OnPropertyChanged("OwnerEmail")
+   End Set
+  End Property
+
+  Public Property OwnerUrl() As String
+   Get
+    Return _projectSettings.OwnerUrl
+   End Get
+   Set(ByVal value As String)
+    _projectSettings.OwnerUrl = value
+    Me.OnPropertyChanged("OwnerUrl")
+   End Set
+  End Property
+
+  Public Property OwnerOrganization() As String
+   Get
+    Return _projectSettings.OwnerOrganization
+   End Get
+   Set(ByVal value As String)
+    _projectSettings.OwnerOrganization = value
+    Me.OnPropertyChanged("OwnerOrganization")
+   End Set
+  End Property
+
+  Public Property License() As String
+   Get
+    Return _projectSettings.License
+   End Get
+   Set(ByVal value As String)
+    _projectSettings.License = value
+    Me.OnPropertyChanged("License")
+   End Set
+  End Property
+
+  Public Property Copyright() As String
+   Get
+    Return _projectSettings.Copyright
+   End Get
+   Set(ByVal value As String)
+    _projectSettings.Copyright = value
+    Me.OnPropertyChanged("Copyright")
+   End Set
+  End Property
+#End Region
+
+#Region " Other Properties "
   Private _allLocales As List(Of CultureInfo)
   Public ReadOnly Property AllLocales() As List(Of CultureInfo)
    Get
@@ -45,50 +174,27 @@
 
   Public Property AvailableLocales() As List(Of CultureInfo)
    Get
-    Return _settingsViewModel.ProjectSettings.AvailableLocales
+    Return _projectSettings.AvailableLocales
    End Get
    Set(value As List(Of CultureInfo))
-    _settingsViewModel.ProjectSettings.AvailableLocales = value
+    _projectSettings.AvailableLocales = value
    End Set
   End Property
 
-  Public Property ConnectionUrl() As String
+  Private _hasRemote As Boolean
+  Public Property HasRemote() As Boolean
    Get
-    Return _settingsViewModel.ProjectSettings.ConnectionUrl
+    Return _hasRemote
    End Get
-   Set(ByVal value As String)
-    _settingsViewModel.ProjectSettings.ConnectionUrl = value
+   Set(ByVal value As Boolean)
+    _hasRemote = value
+    Me.OnPropertyChanged("HasRemote")
    End Set
   End Property
 
-  Public Property Username() As String
-   Get
-    Return _settingsViewModel.ProjectSettings.Username
-   End Get
-   Set(ByVal value As String)
-    _settingsViewModel.ProjectSettings.Username = value
-   End Set
-  End Property
+#End Region
 
-  Public Property Password() As String
-   Get
-    Return Common.Globals.ToInsecureString(_settingsViewModel.ProjectSettings.Password)
-   End Get
-   Set(ByVal value As String)
-    _settingsViewModel.ProjectSettings.Password = Common.Globals.ToSecureString(value)
-   End Set
-  End Property
-
-  Public Property LocalUrl() As String
-   Get
-    Return _settingsViewModel.ProjectSettings.LocalUrl
-   End Get
-   Set(ByVal value As String)
-    _settingsViewModel.ProjectSettings.LocalUrl = value
-   End Set
-  End Property
-
-#Region " Testing "
+#Region " Test Remote Connection "
   Private _TestConnection As RelayCommand
   Public ReadOnly Property TestConnectionCommand As RelayCommand
    Get
@@ -105,7 +211,7 @@
 
   Protected Sub TestConnectionClicked(param As Object)
 
-   Dim service As New Common.LEService.LEService(ConnectionUrl, Username, _settingsViewModel.ProjectSettings.Password)
+   Dim service As New Common.LEService.LEService(ConnectionUrl, Username, _projectSettings.Password)
    Try
     Dim locs As List(Of CultureInfo) = service.GetEditLanguages
     AvailableLocales = locs
@@ -116,5 +222,6 @@
 
   End Sub
 #End Region
+
  End Class
 End Namespace
