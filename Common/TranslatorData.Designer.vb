@@ -27,7 +27,7 @@ Partial Public Class TranslatorData
     
     Private tableSettings As SettingsDataTable
     
-    Private tableBingLanguages As BingLanguagesDataTable
+    Private tableTranslationServiceLanguages As TranslationServiceLanguagesDataTable
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -61,8 +61,8 @@ Partial Public Class TranslatorData
             If (Not (ds.Tables("Settings")) Is Nothing) Then
                 MyBase.Tables.Add(New SettingsDataTable(ds.Tables("Settings")))
             End If
-            If (Not (ds.Tables("BingLanguages")) Is Nothing) Then
-                MyBase.Tables.Add(New BingLanguagesDataTable(ds.Tables("BingLanguages")))
+            If (Not (ds.Tables("TranslationServiceLanguages")) Is Nothing) Then
+                MyBase.Tables.Add(New TranslationServiceLanguagesDataTable(ds.Tables("TranslationServiceLanguages")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -95,9 +95,9 @@ Partial Public Class TranslatorData
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
      Global.System.ComponentModel.Browsable(false),  _
      Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
-    Public ReadOnly Property BingLanguages() As BingLanguagesDataTable
+    Public ReadOnly Property TranslationServiceLanguages() As TranslationServiceLanguagesDataTable
         Get
-            Return Me.tableBingLanguages
+            Return Me.tableTranslationServiceLanguages
         End Get
     End Property
     
@@ -171,8 +171,8 @@ Partial Public Class TranslatorData
             If (Not (ds.Tables("Settings")) Is Nothing) Then
                 MyBase.Tables.Add(New SettingsDataTable(ds.Tables("Settings")))
             End If
-            If (Not (ds.Tables("BingLanguages")) Is Nothing) Then
-                MyBase.Tables.Add(New BingLanguagesDataTable(ds.Tables("BingLanguages")))
+            If (Not (ds.Tables("TranslationServiceLanguages")) Is Nothing) Then
+                MyBase.Tables.Add(New TranslationServiceLanguagesDataTable(ds.Tables("TranslationServiceLanguages")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -212,10 +212,10 @@ Partial Public Class TranslatorData
                 Me.tableSettings.InitVars
             End If
         End If
-        Me.tableBingLanguages = CType(MyBase.Tables("BingLanguages"),BingLanguagesDataTable)
+        Me.tableTranslationServiceLanguages = CType(MyBase.Tables("TranslationServiceLanguages"),TranslationServiceLanguagesDataTable)
         If (initTable = true) Then
-            If (Not (Me.tableBingLanguages) Is Nothing) Then
-                Me.tableBingLanguages.InitVars
+            If (Not (Me.tableTranslationServiceLanguages) Is Nothing) Then
+                Me.tableTranslationServiceLanguages.InitVars
             End If
         End If
     End Sub
@@ -230,8 +230,8 @@ Partial Public Class TranslatorData
         Me.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
         Me.tableSettings = New SettingsDataTable()
         MyBase.Tables.Add(Me.tableSettings)
-        Me.tableBingLanguages = New BingLanguagesDataTable()
-        MyBase.Tables.Add(Me.tableBingLanguages)
+        Me.tableTranslationServiceLanguages = New TranslationServiceLanguagesDataTable()
+        MyBase.Tables.Add(Me.tableTranslationServiceLanguages)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -242,7 +242,7 @@ Partial Public Class TranslatorData
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-    Private Function ShouldSerializeBingLanguages() As Boolean
+    Private Function ShouldSerializeTranslationServiceLanguages() As Boolean
         Return false
     End Function
     
@@ -308,7 +308,7 @@ Partial Public Class TranslatorData
     Public Delegate Sub SettingsRowChangeEventHandler(ByVal sender As Object, ByVal e As SettingsRowChangeEvent)
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-    Public Delegate Sub BingLanguagesRowChangeEventHandler(ByVal sender As Object, ByVal e As BingLanguagesRowChangeEvent)
+    Public Delegate Sub TranslationServiceLanguagesRowChangeEventHandler(ByVal sender As Object, ByVal e As TranslationServiceLanguagesRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -583,8 +583,8 @@ Partial Public Class TranslatorData
     '''</summary>
     <Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class BingLanguagesDataTable
-        Inherits Global.System.Data.TypedTableBase(Of BingLanguagesRow)
+    Partial Public Class TranslationServiceLanguagesDataTable
+        Inherits Global.System.Data.TypedTableBase(Of TranslationServiceLanguagesRow)
         
         Private columnLocale As Global.System.Data.DataColumn
         
@@ -592,7 +592,7 @@ Partial Public Class TranslatorData
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
             MyBase.New
-            Me.TableName = "BingLanguages"
+            Me.TableName = "TranslationServiceLanguages"
             Me.BeginInit
             Me.InitClass
             Me.EndInit
@@ -642,44 +642,44 @@ Partial Public Class TranslatorData
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As BingLanguagesRow
+        Public Default ReadOnly Property Item(ByVal index As Integer) As TranslationServiceLanguagesRow
             Get
-                Return CType(Me.Rows(index),BingLanguagesRow)
+                Return CType(Me.Rows(index),TranslationServiceLanguagesRow)
             End Get
         End Property
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Event BingLanguagesRowChanging As BingLanguagesRowChangeEventHandler
+        Public Event TranslationServiceLanguagesRowChanging As TranslationServiceLanguagesRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Event BingLanguagesRowChanged As BingLanguagesRowChangeEventHandler
+        Public Event TranslationServiceLanguagesRowChanged As TranslationServiceLanguagesRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Event BingLanguagesRowDeleting As BingLanguagesRowChangeEventHandler
+        Public Event TranslationServiceLanguagesRowDeleting As TranslationServiceLanguagesRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Event BingLanguagesRowDeleted As BingLanguagesRowChangeEventHandler
+        Public Event TranslationServiceLanguagesRowDeleted As TranslationServiceLanguagesRowChangeEventHandler
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Sub AddBingLanguagesRow(ByVal row As BingLanguagesRow)
+        Public Overloads Sub AddTranslationServiceLanguagesRow(ByVal row As TranslationServiceLanguagesRow)
             Me.Rows.Add(row)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddBingLanguagesRow(ByVal Locale As String) As BingLanguagesRow
-            Dim rowBingLanguagesRow As BingLanguagesRow = CType(Me.NewRow,BingLanguagesRow)
+        Public Overloads Function AddTranslationServiceLanguagesRow(ByVal Locale As String) As TranslationServiceLanguagesRow
+            Dim rowTranslationServiceLanguagesRow As TranslationServiceLanguagesRow = CType(Me.NewRow,TranslationServiceLanguagesRow)
             Dim columnValuesArray() As Object = New Object() {Locale}
-            rowBingLanguagesRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowBingLanguagesRow)
-            Return rowBingLanguagesRow
+            rowTranslationServiceLanguagesRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowTranslationServiceLanguagesRow)
+            Return rowTranslationServiceLanguagesRow
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As BingLanguagesDataTable = CType(MyBase.Clone,BingLanguagesDataTable)
+            Dim cln As TranslationServiceLanguagesDataTable = CType(MyBase.Clone,TranslationServiceLanguagesDataTable)
             cln.InitVars
             Return cln
         End Function
@@ -687,7 +687,7 @@ Partial Public Class TranslatorData
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New BingLanguagesDataTable()
+            Return New TranslationServiceLanguagesDataTable()
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -705,28 +705,28 @@ Partial Public Class TranslatorData
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function NewBingLanguagesRow() As BingLanguagesRow
-            Return CType(Me.NewRow,BingLanguagesRow)
+        Public Function NewTranslationServiceLanguagesRow() As TranslationServiceLanguagesRow
+            Return CType(Me.NewRow,TranslationServiceLanguagesRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New BingLanguagesRow(builder)
+            Return New TranslationServiceLanguagesRow(builder)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(BingLanguagesRow)
+            Return GetType(TranslationServiceLanguagesRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowChanged(e)
-            If (Not (Me.BingLanguagesRowChangedEvent) Is Nothing) Then
-                RaiseEvent BingLanguagesRowChanged(Me, New BingLanguagesRowChangeEvent(CType(e.Row,BingLanguagesRow), e.Action))
+            If (Not (Me.TranslationServiceLanguagesRowChangedEvent) Is Nothing) Then
+                RaiseEvent TranslationServiceLanguagesRowChanged(Me, New TranslationServiceLanguagesRowChangeEvent(CType(e.Row,TranslationServiceLanguagesRow), e.Action))
             End If
         End Sub
         
@@ -734,8 +734,8 @@ Partial Public Class TranslatorData
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowChanging(e)
-            If (Not (Me.BingLanguagesRowChangingEvent) Is Nothing) Then
-                RaiseEvent BingLanguagesRowChanging(Me, New BingLanguagesRowChangeEvent(CType(e.Row,BingLanguagesRow), e.Action))
+            If (Not (Me.TranslationServiceLanguagesRowChangingEvent) Is Nothing) Then
+                RaiseEvent TranslationServiceLanguagesRowChanging(Me, New TranslationServiceLanguagesRowChangeEvent(CType(e.Row,TranslationServiceLanguagesRow), e.Action))
             End If
         End Sub
         
@@ -743,8 +743,8 @@ Partial Public Class TranslatorData
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowDeleted(e)
-            If (Not (Me.BingLanguagesRowDeletedEvent) Is Nothing) Then
-                RaiseEvent BingLanguagesRowDeleted(Me, New BingLanguagesRowChangeEvent(CType(e.Row,BingLanguagesRow), e.Action))
+            If (Not (Me.TranslationServiceLanguagesRowDeletedEvent) Is Nothing) Then
+                RaiseEvent TranslationServiceLanguagesRowDeleted(Me, New TranslationServiceLanguagesRowChangeEvent(CType(e.Row,TranslationServiceLanguagesRow), e.Action))
             End If
         End Sub
         
@@ -752,14 +752,14 @@ Partial Public Class TranslatorData
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowDeleting(e)
-            If (Not (Me.BingLanguagesRowDeletingEvent) Is Nothing) Then
-                RaiseEvent BingLanguagesRowDeleting(Me, New BingLanguagesRowChangeEvent(CType(e.Row,BingLanguagesRow), e.Action))
+            If (Not (Me.TranslationServiceLanguagesRowDeletingEvent) Is Nothing) Then
+                RaiseEvent TranslationServiceLanguagesRowDeleting(Me, New TranslationServiceLanguagesRowChangeEvent(CType(e.Row,TranslationServiceLanguagesRow), e.Action))
             End If
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub RemoveBingLanguagesRow(ByVal row As BingLanguagesRow)
+        Public Sub RemoveTranslationServiceLanguagesRow(ByVal row As TranslationServiceLanguagesRow)
             Me.Rows.Remove(row)
         End Sub
         
@@ -786,7 +786,7 @@ Partial Public Class TranslatorData
             type.Attributes.Add(attribute1)
             Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
             attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "BingLanguagesDataTable"
+            attribute2.FixedValue = "TranslationServiceLanguagesDataTable"
             type.Attributes.Add(attribute2)
             type.Particle = sequence
             Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
@@ -887,16 +887,16 @@ Partial Public Class TranslatorData
     '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
-    Partial Public Class BingLanguagesRow
+    Partial Public Class TranslationServiceLanguagesRow
         Inherits Global.System.Data.DataRow
         
-        Private tableBingLanguages As BingLanguagesDataTable
+        Private tableTranslationServiceLanguages As TranslationServiceLanguagesDataTable
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
             MyBase.New(rb)
-            Me.tableBingLanguages = CType(Me.Table,BingLanguagesDataTable)
+            Me.tableTranslationServiceLanguages = CType(Me.Table,TranslationServiceLanguagesDataTable)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -904,26 +904,26 @@ Partial Public Class TranslatorData
         Public Property Locale() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableBingLanguages.LocaleColumn),String)
+                    Return CType(Me(Me.tableTranslationServiceLanguages.LocaleColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Locale' in table 'BingLanguages' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Locale' in table 'TranslationServiceLanguages' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableBingLanguages.LocaleColumn) = value
+                Me(Me.tableTranslationServiceLanguages.LocaleColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsLocaleNull() As Boolean
-            Return Me.IsNull(Me.tableBingLanguages.LocaleColumn)
+            Return Me.IsNull(Me.tableTranslationServiceLanguages.LocaleColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetLocaleNull()
-            Me(Me.tableBingLanguages.LocaleColumn) = Global.System.Convert.DBNull
+            Me(Me.tableTranslationServiceLanguages.LocaleColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -967,16 +967,16 @@ Partial Public Class TranslatorData
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-    Public Class BingLanguagesRowChangeEvent
+    Public Class TranslationServiceLanguagesRowChangeEvent
         Inherits Global.System.EventArgs
         
-        Private eventRow As BingLanguagesRow
+        Private eventRow As TranslationServiceLanguagesRow
         
         Private eventAction As Global.System.Data.DataRowAction
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub New(ByVal row As BingLanguagesRow, ByVal action As Global.System.Data.DataRowAction)
+        Public Sub New(ByVal row As TranslationServiceLanguagesRow, ByVal action As Global.System.Data.DataRowAction)
             MyBase.New
             Me.eventRow = row
             Me.eventAction = action
@@ -984,7 +984,7 @@ Partial Public Class TranslatorData
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property Row() As BingLanguagesRow
+        Public ReadOnly Property Row() As TranslationServiceLanguagesRow
             Get
                 Return Me.eventRow
             End Get

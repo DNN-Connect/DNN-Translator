@@ -13,6 +13,32 @@
 #End Region
 
 #Region " Setting Properties "
+  Private _TranslationProviders As Dictionary(Of String, String)
+  Public ReadOnly Property TranslationProviders As Dictionary(Of String, String)
+   Get
+    If _TranslationProviders Is Nothing Then
+     _TranslationProviders = New Dictionary(Of String, String)
+     _TranslationProviders.Add("none", "None")
+     _TranslationProviders.Add("bing", "Bing (Microsoft)")
+     _TranslationProviders.Add("google", "Google")
+    End If
+    Return _TranslationProviders
+   End Get
+  End Property
+
+  Public Property TranslationProvider() As KeyValuePair(Of String, String)
+   Get
+    For Each kvp As KeyValuePair(Of String, String) In TranslationProviders
+     If kvp.Key = _appSettings.TranslationProvider Then Return kvp
+    Next
+    Return Nothing
+   End Get
+   Set(ByVal value As KeyValuePair(Of String, String))
+    _appSettings.TranslationProvider = value.Key
+    Me.OnPropertyChanged("TranslationProvider")
+   End Set
+  End Property
+
   Public Property BingClientID() As String
    Get
     Return _appSettings.BingClientID
@@ -30,6 +56,16 @@
    Set(ByVal value As String)
     _appSettings.BingClientSecret = value
     Me.OnPropertyChanged("BingClientSecret")
+   End Set
+  End Property
+
+  Public Property GoogleApiKey() As String
+   Get
+    Return _appSettings.GoogleApiKey
+   End Get
+   Set(ByVal value As String)
+    _appSettings.GoogleApiKey = value
+    Me.OnPropertyChanged("GoogleApiKey")
    End Set
   End Property
 

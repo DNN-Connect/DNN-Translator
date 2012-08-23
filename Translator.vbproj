@@ -90,9 +90,8 @@
     </ApplicationDefinition>
     <Compile Include="Common\TreeItem.vb" />
     <Compile Include="Common\ApplicationState.vb" />
-    <Compile Include="Common\Bing\Bing.vb" />
-    <Compile Include="Common\Bing\AdmAccessToken.vb" />
-    <Compile Include="Common\Bing\AdmAuthentication.vb" />
+    <Compile Include="Services\Translation\Bing\AdmAccessToken.vb" />
+    <Compile Include="Services\Translation\Bing\AdmAuthentication.vb" />
     <Compile Include="Common\BoolToVisibilityConverter.vb" />
     <Compile Include="Common\DataGridContextHelper.vb" />
     <Compile Include="Common\Extensions.vb" />
@@ -113,6 +112,10 @@
     <Compile Include="Common\Snapshot.vb">
       <DependentUpon>Snapshot.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Services\Translation\Bing\BingTranslationService.vb" />
+    <Compile Include="Services\Translation\Google\GoogleTranslationService.vb" />
+    <Compile Include="Services\Translation\ITranslationService.vb" />
+    <Compile Include="Services\Translation\TranslationController.vb" />
     <Compile Include="ViewModel\ActionableViewModel.vb" />
     <Compile Include="ViewModel\BrowserViewModel.vb" />
     <Compile Include="ViewModel\ResourceFolderTreeViewModel.vb" />

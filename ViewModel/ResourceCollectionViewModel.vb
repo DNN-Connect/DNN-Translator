@@ -15,7 +15,7 @@ Namespace ViewModel
 #Region " Properties "
   Public Property Exists As Boolean = True
   Public Property HasSelection As Boolean = False
-  Public Property HasBingLocale As Boolean = False
+  Public Property HasTranslationServiceLocale As Boolean = False
   Public Property MainWindow As MainWindowViewModel = Nothing
 
   Private _HasChanges As Boolean = False
@@ -96,16 +96,16 @@ Namespace ViewModel
   End Property
   Public Property IsRemoteResourceCollection As Boolean = False
 
-  Private _bingLocale As CultureInfo
-  Public Property BingLocale() As CultureInfo
+  Private _TranslationServiceLocale As CultureInfo
+  Public Property TranslationServiceLocale() As CultureInfo
    Get
-    Return _bingLocale
+    Return _TranslationServiceLocale
    End Get
    Set(ByVal value As CultureInfo)
-    _bingLocale = value
-    Me.OnPropertyChanged("BingLocale")
-    HasBingLocale = CBool(value IsNot Nothing)
-    Me.OnPropertyChanged("HasBingLocale")
+    _TranslationServiceLocale = value
+    Me.OnPropertyChanged("TranslationServiceLocale")
+    HasTranslationServiceLocale = CBool(value IsNot Nothing)
+    Me.OnPropertyChanged("HasTranslationServiceLocale")
    End Set
   End Property
 
@@ -118,9 +118,9 @@ Namespace ViewModel
     _targetLocale = value
     Me.OnPropertyChanged("TargetLocale")
     Dim ts As New Common.TranslatorSettings
-    BingLocale = ts.BingLocales.FirstOrDefault(Function(x) x.Name = _targetLocale.Name)
-    If BingLocale Is Nothing Then
-     BingLocale = ts.BingLocales.FirstOrDefault(Function(x) x.Name = _targetLocale.Parent.Name)
+    TranslationServiceLocale = MainWindow.TranslationServiceLocales.FirstOrDefault(Function(x) x.Name = _targetLocale.Name)
+    If TranslationServiceLocale Is Nothing Then
+     TranslationServiceLocale = MainWindow.TranslationServiceLocales.FirstOrDefault(Function(x) x.Name = _targetLocale.Parent.Name)
     End If
    End Set
   End Property
@@ -249,19 +249,19 @@ Namespace ViewModel
   End Sub
 #End Region
 
-#Region " Bing "
-  Private _bingTranslateCommand As RelayCommand
-  Public ReadOnly Property BingTranslateCommand As RelayCommand
+#Region " TranslationService "
+  Private _TranslationServiceTranslateCommand As RelayCommand
+  Public ReadOnly Property TranslationServiceTranslateCommand As RelayCommand
    Get
-    If _bingTranslateCommand Is Nothing Then
-     _bingTranslateCommand = New RelayCommand(Sub(param) BingTranslateCommandHandler(param))
+    If _TranslationServiceTranslateCommand Is Nothing Then
+     _TranslationServiceTranslateCommand = New RelayCommand(Sub(param) TranslationServiceTranslateCommandHandler(param))
     End If
-    Return _bingTranslateCommand
+    Return _TranslationServiceTranslateCommand
    End Get
   End Property
 
-  Public Sub BingTranslateCommandHandler(param As Object)
-   If BingLocale Is Nothing Then Exit Sub
+  Public Sub TranslationServiceTranslateCommandHandler(param As Object)
+   If TranslationServiceLocale Is Nothing Then Exit Sub
    Dim translateParams As String = CType(param, String)
    Dim toTranslate As New Dictionary(Of String, String)
    If translateParams.StartsWith("All") Then
@@ -281,7 +281,7 @@ Namespace ViewModel
      End If
     Next
    End If
-   Dim translated As Dictionary(Of String, String) = MainWindow.Bing.Translate(toTranslate, BingLocale)
+   Dim translated As Dictionary(Of String, String) = MainWindow.TranslationService.Translate(toTranslate, TranslationServiceLocale)
    If translateParams.EndsWith("2Target") Then
     For Each rkv As ResourceKeyViewModel In ResourceKeys
      If translated.ContainsKey(rkv.Key) Then

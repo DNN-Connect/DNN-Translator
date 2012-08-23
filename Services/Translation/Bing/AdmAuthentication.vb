@@ -14,7 +14,7 @@ Imports System.Runtime.Serialization.Json
 Imports System.Text
 Imports System.Web
 
-Namespace Common.Bing
+Namespace Services.Translation.Bing
 
  ''' <summary>
  ''' Authentication helper for the Microsoft Translator on Azure

@@ -11,7 +11,7 @@
 
 Imports System.Runtime.Serialization
 
-Namespace Common.Bing
+Namespace Services.Translation.Bing
 
  ''' <summary>
  ''' Data cclass capturing an access token

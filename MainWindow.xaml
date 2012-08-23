@@ -144,65 +144,65 @@
        />
      </Grid>
     </ribbon:RibbonGroup>
-    <ribbon:RibbonGroup x:Name="BingGroup" Header="Bing"
+    <ribbon:RibbonGroup x:Name="TranslationServiceGroup" Header="Translation Service"
       IsEnabled="{Binding Path=ActiveResourceCollection.Exists, FallbackValue=False}">
      <ribbon:RibbonSplitButton
-      Label="Bing To Target"
+      Label="Translate To Target"
       LargeImageSource="Images\clients_32.png"
-      IsEnabled="{Binding Path=ActiveResourceCollection.HasBingLocale, FallbackValue=False}">
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasTranslationServiceLocale, FallbackValue=False}">
       <ribbon:RibbonButton
       Label="All"
       SmallImageSource="Images\clients_16.png"
       ToolTipTitle="All To Target"
       ToolTipDescription="Attempt to translate all keys and overwrite any existing values on target"
-      Command="{Binding ActiveResourceCollection.BingTranslateCommand}"
+      Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
       CommandParameter="All,2Target" />
       <ribbon:RibbonButton
       Label="Empty"
       SmallImageSource="Images\clients_16.png"
       ToolTipTitle="Empty To Target"
       ToolTipDescription="Attempt to translate all empty keys"
-      Command="{Binding ActiveResourceCollection.BingTranslateCommand}"
+      Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
       CommandParameter="Empty,2Target" />
       <ribbon:RibbonButton
       Label="Selected"
       SmallImageSource="Images\clients_16.png"
       ToolTipTitle="Selected To Target"
       ToolTipDescription="Attempt to translate all selected keys"
-      Command="{Binding ActiveResourceCollection.BingTranslateCommand}"
+      Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
       CommandParameter="Selected,2Target"
       IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
      </ribbon:RibbonSplitButton>
      <ribbon:RibbonSplitButton
-      Label="Bing To Temporary Workspace"
+      Label="Translate To Temporary Workspace"
       LargeImageSource="Images\clients_32.png"
-      IsEnabled="{Binding Path=ActiveResourceCollection.HasBingLocale, FallbackValue=False}">
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasTranslationServiceLocale, FallbackValue=False}">
       <ribbon:RibbonButton
       Label="All"
       SmallImageSource="Images\clients_16.png"
       ToolTipTitle="All To Temporary Workspace"
       ToolTipDescription="Attempt to translate all keys to the comparison column"
-      Command="{Binding ActiveResourceCollection.BingTranslateCommand}"
+      Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
       CommandParameter="All,2Compare" />
       <ribbon:RibbonButton
       Label="Empty"
       SmallImageSource="Images\clients_16.png"
       ToolTipTitle="Empty To Temporary Workspace"
       ToolTipDescription="Attempt to translate all empty keys and put the value in the comparison column"
-      Command="{Binding ActiveResourceCollection.BingTranslateCommand}"
+      Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
       CommandParameter="Empty,2Compare" />
       <ribbon:RibbonButton
       Label="Selected"
       SmallImageSource="Images\clients_16.png"
       ToolTipTitle="Selected To Temporary Workspace"
       ToolTipDescription="Attempt to translate all selected keys and put the value in the comparison column"
-      Command="{Binding ActiveResourceCollection.BingTranslateCommand}"
+      Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
       CommandParameter="Selected,2Compare"
       IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
      </ribbon:RibbonSplitButton>
      <ribbon:RibbonComboBox Width="110">
-      <ribbon:RibbonGallery SelectedItem="{Binding Path=ActiveResourceCollection.BingLocale}">
-       <ribbon:RibbonGalleryCategory ItemsSource="{Binding Path=TranslatorSettings.BingLocales}" DisplayMemberPath="EnglishName">
+      <ribbon:RibbonGallery SelectedItem="{Binding Path=ActiveResourceCollection.TranslationServiceLocale}">
+       <ribbon:RibbonGalleryCategory ItemsSource="{Binding Path=TranslationServiceLocales}" DisplayMemberPath="EnglishName">
        </ribbon:RibbonGalleryCategory>
       </ribbon:RibbonGallery>
      </ribbon:RibbonComboBox>

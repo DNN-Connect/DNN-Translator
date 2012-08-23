@@ -161,6 +161,8 @@ Namespace ViewModel
    If CType(SettingsWindow.DataContext, SettingsViewModel).OkClicked Then
     TranslatorSettings = tempSettings.TranslatorSettings
     TranslatorSettings.Save()
+    _translationServiceTested = False
+    _TranslationService = Nothing
     ProjectSettings = tempSettings.ProjectSettings
     If ProjectSettings IsNot Nothing Then
      If ProjectSettings.TargetLocale <> "" Then
@@ -582,8 +584,47 @@ Namespace ViewModel
   End Sub
 #End Region
 
-#Region " Bing "
-  Public Property Bing As New Common.Bing.Bing(Me.TranslatorSettings)
+#Region " TranslationService "
+  Private _translationServiceTested As Boolean = False
+  Private _TranslationService As Services.Translation.ITranslationService
+  Public ReadOnly Property TranslationService As Services.Translation.ITranslationService
+   Get
+    If Not _translationServiceTested And _TranslationService Is Nothing Then
+     _TranslationService = Services.Translation.TranslationController.TranslationService(TranslatorSettings)
+     TranslationServiceActive = CBool(_TranslationService IsNot Nothing)
+     _translationServiceTested = True
+    End If
+    Return _TranslationService
+   End Get
+  End Property
+
+  Private _TranslationServiceActive As Boolean = False
+  Public Property TranslationServiceActive() As Boolean
+   Get
+    If Not _translationServiceTested Then
+     Dim x As Object = TranslationService
+    End If
+    Return _TranslationServiceActive
+   End Get
+   Set(ByVal value As Boolean)
+    _TranslationServiceActive = value
+    Me.OnPropertyChanged("TranslationServiceActive")
+   End Set
+  End Property
+
+  Private _TranslationServiceLocales As List(Of CultureInfo)
+  Public ReadOnly Property TranslationServiceLocales() As List(Of CultureInfo)
+   Get
+    If TranslationServiceActive Then
+     If _TranslationServiceLocales Is Nothing Then
+      _TranslationServiceLocales = TranslationService.SupportedLanguages
+     End If
+     Return _TranslationServiceLocales
+    Else
+     Return New List(Of CultureInfo)
+    End If
+   End Get
+  End Property
 #End Region
 
 #Region " Language Packs "
