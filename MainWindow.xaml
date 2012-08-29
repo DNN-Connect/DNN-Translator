@@ -11,8 +11,7 @@
         Width="1000" Height="800">
 
  <Window.Resources>
-  <ResourceDictionary Source="MainWindowResources.xaml" />
- </Window.Resources>
+  <ResourceDictionary Source="MainWindowResources.xaml" /> </Window.Resources>
 
  <Window.InputBindings>
   <KeyBinding
@@ -33,10 +32,10 @@
 
   <ribbon:Ribbon x:Name="Ribbon">
    <ribbon:Ribbon.ApplicationMenu>
-    <ribbon:RibbonApplicationMenu SmallImageSource="Images\square_16.png" KeyTip="F">
-     <ribbon:RibbonApplicationMenuItem Header="_Open" Command="{Binding Path=OpenCommand}" KeyTip="O" ImageSource="Images\file_32.png" />
-     <ribbon:RibbonApplicationMenuItem Header="_New" Command="{Binding Path=NewCommand}" KeyTip="N" ImageSource="Images\document_32.png" />
-     <ribbon:RibbonApplicationSplitMenuItem Header="Open _Recent" ItemsSource="{Binding Path=RecentLocationsList}" ImageSource="Images\file_32.png">
+    <ribbon:RibbonApplicationMenu SmallImageSource="Images\16\format-justify-fill-4.png" KeyTip="F">
+     <ribbon:RibbonApplicationMenuItem Header="_Open" Command="{Binding Path=OpenCommand}" KeyTip="O" ImageSource="Images\32\document-open-5.png" />
+     <ribbon:RibbonApplicationMenuItem Header="_New" Command="{Binding Path=NewCommand}" KeyTip="N" ImageSource="Images\32\document-new-4.png" />
+     <ribbon:RibbonApplicationSplitMenuItem Header="Open _Recent" ItemsSource="{Binding Path=RecentLocationsList}" ImageSource="Images\32\document-open-5.png">
       <ribbon:RibbonApplicationSplitMenuItem.ItemContainerStyle>
        <Style TargetType="{x:Type ribbon:RibbonApplicationMenuItem}">
         <Setter Property="Template">
@@ -49,9 +48,9 @@
        </Style>
       </ribbon:RibbonApplicationSplitMenuItem.ItemContainerStyle>
      </ribbon:RibbonApplicationSplitMenuItem>
-     <ribbon:RibbonApplicationMenuItem Header="_Save" Command="{Binding Path=SaveCommand}" KeyTip="S" ImageSource="Images\diskette_32.png" />
-     <ribbon:RibbonApplicationMenuItem Header="Save As" Command="{Binding Path=SaveAsCommand}" ImageSource="Images\diskette_32.png" />
-     <ribbon:RibbonApplicationMenuItem Header="Options" Command="{Binding Path=OptionsCommand}" ImageSource="Images\gear_32.png" />
+     <ribbon:RibbonApplicationMenuItem Header="_Save" Command="{Binding Path=SaveCommand}" KeyTip="S" ImageSource="Images\32\media-floppy-3.png" />
+     <ribbon:RibbonApplicationMenuItem Header="Save As" Command="{Binding Path=SaveAsCommand}" ImageSource="Images\32\media-floppy-3.png" />
+     <ribbon:RibbonApplicationMenuItem Header="Options" Command="{Binding Path=OptionsCommand}" ImageSource="Images\32\preferences-system-3.png" />
      <ribbon:RibbonApplicationMenuItem IsEnabled="False" />
      <ribbon:RibbonApplicationMenuItem IsEnabled="False" />
      <ribbon:RibbonApplicationMenuItem IsEnabled="False" />
@@ -61,7 +60,7 @@
        <ribbon:RibbonButton Command="{Binding Path=CloseCommand}"
                                      Label="Exit"
                                      ToolTipTitle="Exit" 
-                                     SmallImageSource="Images\close_16.png"
+                                     SmallImageSource="Images\16\emblem-unreadable-2.png"
                                      KeyTip="X"
                                      DockPanel.Dock="Right"
                                      Margin="2"
@@ -75,7 +74,7 @@
     <ribbon:RibbonGroup x:Name="EditGroup" Header="Edit">
      <ribbon:RibbonButton
       Label="Save"
-      LargeImageSource="Images\diskette_32.png"
+      LargeImageSource="Images\32\media-floppy-3.png"
       ToolTipTitle="Save changes"
       ToolTipDescription="Save changes to the resource files"
       Command="{Binding ActiveResourceCollection.SaveCommand}"
@@ -83,7 +82,7 @@
        />
      <ribbon:RibbonButton
       Label="Html"
-      LargeImageSource="Images\edit_32.png"
+      LargeImageSource="Images\32\text-html.png"
       ToolTipTitle="Edit As Html"
       ToolTipDescription="Edit the selected key as HTML"
       Command="{Binding ActiveResourceCollection.EditHtmlCommand}"
@@ -93,21 +92,21 @@
     <ribbon:RibbonGroup x:Name="Clipboard" Header="Clipboard">
      <ribbon:RibbonButton
       Label="Cut"
-      SmallImageSource="Images\scissors_16.png"
+      SmallImageSource="Images\16\edit-cut-4.png"
       ToolTipTitle="Cut (Ctrl+X)"
       ToolTipDescription="Cut the selection and put it on the Clipboard."
       Command="Cut"
       KeyTip="X" />
      <ribbon:RibbonButton
       Label="Copy"
-      SmallImageSource="Images\copy_16.png"
+      SmallImageSource="Images\16\edit-copy-4.png"
       ToolTipTitle="Copy (Ctrl+C)"
       ToolTipDescription="Copy selection and put it on the Clipboard."
       Command="Copy"
       KeyTip="C" />
      <ribbon:RibbonButton
       Label="Paste"
-      SmallImageSource="Images\clipboard_16.png"
+      SmallImageSource="Images\16\edit-paste-4.png"
       ToolTipTitle="Paste (Ctrl+V)"
       ToolTipDescription="Paste the contents of the Clipboard."
       Command="Paste"
@@ -127,7 +126,7 @@
       <ribbon:RibbonButton
        Grid.Column="0" Grid.Row="1"
       Label="All"
-      SmallImageSource="Images\zoom_16.png"
+      SmallImageSource="Images\16\system-search-3.png"
       ToolTipTitle="Search all of DotNetNuke"
       ToolTipDescription="Search the complete installation for this text"
       Command="{Binding Path=SearchCommand}"
@@ -135,7 +134,7 @@
       <ribbon:RibbonButton
        Grid.Column="1" Grid.Row="1"
       Label="Module"
-      SmallImageSource="Images\zoom_16.png"
+      SmallImageSource="Images\16\system-search-3.png"
       ToolTipTitle="Search module"
       ToolTipDescription="Search the selected module resources for this text"
       Command="{Binding Path=SearchCommand}"
@@ -148,25 +147,25 @@
       IsEnabled="{Binding Path=ActiveResourceCollection.Exists, FallbackValue=False}">
      <ribbon:RibbonSplitButton
       Label="Translate To Target"
-      LargeImageSource="Images\clients_32.png"
+      LargeImageSource="Images\32\preferences-desktop-locale-3.png"
       IsEnabled="{Binding Path=ActiveResourceCollection.HasTranslationServiceLocale, FallbackValue=False}">
       <ribbon:RibbonButton
       Label="All"
-      SmallImageSource="Images\clients_16.png"
+      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
       ToolTipTitle="All To Target"
       ToolTipDescription="Attempt to translate all keys and overwrite any existing values on target"
       Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
       CommandParameter="All,2Target" />
       <ribbon:RibbonButton
       Label="Empty"
-      SmallImageSource="Images\clients_16.png"
+      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
       ToolTipTitle="Empty To Target"
       ToolTipDescription="Attempt to translate all empty keys"
       Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
       CommandParameter="Empty,2Target" />
       <ribbon:RibbonButton
       Label="Selected"
-      SmallImageSource="Images\clients_16.png"
+      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
       ToolTipTitle="Selected To Target"
       ToolTipDescription="Attempt to translate all selected keys"
       Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
@@ -175,25 +174,25 @@
      </ribbon:RibbonSplitButton>
      <ribbon:RibbonSplitButton
       Label="Translate To Temporary Workspace"
-      LargeImageSource="Images\clients_32.png"
+      LargeImageSource="Images\32\preferences-desktop-locale-3.png"
       IsEnabled="{Binding Path=ActiveResourceCollection.HasTranslationServiceLocale, FallbackValue=False}">
       <ribbon:RibbonButton
       Label="All"
-      SmallImageSource="Images\clients_16.png"
+      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
       ToolTipTitle="All To Temporary Workspace"
       ToolTipDescription="Attempt to translate all keys to the comparison column"
       Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
       CommandParameter="All,2Compare" />
       <ribbon:RibbonButton
       Label="Empty"
-      SmallImageSource="Images\clients_16.png"
+      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
       ToolTipTitle="Empty To Temporary Workspace"
       ToolTipDescription="Attempt to translate all empty keys and put the value in the comparison column"
       Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
       CommandParameter="Empty,2Compare" />
       <ribbon:RibbonButton
       Label="Selected"
-      SmallImageSource="Images\clients_16.png"
+      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
       ToolTipTitle="Selected To Temporary Workspace"
       ToolTipDescription="Attempt to translate all selected keys and put the value in the comparison column"
       Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
@@ -211,24 +210,24 @@
       IsEnabled="{Binding Path=ActiveResourceCollection.Exists, FallbackValue=False}">
      <ribbon:RibbonSplitButton
       Label="Original To Target"
-      LargeImageSource="Images\next_32.png">
+      LargeImageSource="Images\32\go-next-5.png">
       <ribbon:RibbonButton
       Label="All"
-      SmallImageSource="Images\next_16.png"
+      SmallImageSource="Images\16\go-next-5.png"
       ToolTipTitle="Copy All Original To Target"
       ToolTipDescription="Copy all resources from original values to target overwriting any previous work"
       Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
       CommandParameter="All,Original2Target" />
       <ribbon:RibbonButton
       Label="Empty"
-      SmallImageSource="Images\next_16.png"
+      SmallImageSource="Images\16\go-next-5.png"
       ToolTipTitle="Copy Empty Original To Target"
       ToolTipDescription="Copy resources from original values to target where there is no target value"
       Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
       CommandParameter="Empty,Original2Target" />
       <ribbon:RibbonButton
       Label="Selected"
-      SmallImageSource="Images\next_16.png"
+      SmallImageSource="Images\16\go-next-5.png"
       ToolTipTitle="Copy Selected Original To Target"
       ToolTipDescription="Copy resources from original values to target for the selected keys"
       Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
@@ -237,25 +236,25 @@
      </ribbon:RibbonSplitButton>
      <ribbon:RibbonSplitButton
       Label="Temporary Workspace To Target"
-      LargeImageSource="Images\back_32.png"
+      LargeImageSource="Images\32\go-previous-5.png"
       IsEnabled="{Binding Path=ActiveResourceCollection.ShowCompareColumn, FallbackValue=False}">
       <ribbon:RibbonButton
       Label="All"
-      SmallImageSource="Images\back_16.png"
+      SmallImageSource="Images\16\go-previous-5.png"
       ToolTipTitle="Copy All From Temporary Workspace To Target"
       ToolTipDescription="Copy all resources from comparison values to target overwriting any previous work"
       Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
       CommandParameter="All,Compare2Target" />
       <ribbon:RibbonButton
       Label="Empty"
-      SmallImageSource="Images\back_16.png"
+      SmallImageSource="Images\16\go-previous-5.png"
       ToolTipTitle="Copy Empty From Temporary Workspace To Target"
       ToolTipDescription="Copy resources from comparison values to target where there is no target value"
       Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
       CommandParameter="Empty,Compare2Target" />
       <ribbon:RibbonButton
       Label="Selected"
-      SmallImageSource="Images\back_16.png"
+      SmallImageSource="Images\16\go-previous-5.png"
       ToolTipTitle="Copy Selected From Temporary Workspace To Target"
       ToolTipDescription="Copy resources from comparison values to target for the selected keys"
       Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
@@ -268,14 +267,14 @@
     <ribbon:RibbonGroup x:Name="SnapshotGroup" Header="Snapshot">
      <ribbon:RibbonButton
       Label="Save"
-      LargeImageSource="Images\diskette_32.png"
+      LargeImageSource="Images\32\camera-photo-5.png"
       ToolTipTitle="Save Snapshot"
       ToolTipDescription="Save the current original resources as a snapshot"
       Command="{Binding Path=SaveSnapshotCommand}"
        />
      <ribbon:RibbonButton
       Label="Compare"
-      LargeImageSource="Images\LargeIcon.png"
+      LargeImageSource="Images\32\edit-find-4.png"
       ToolTipTitle="Compare With Snapshot"
       ToolTipDescription="Compare the current original resources with a snapshot"
       Command="{Binding Path=CompareSnapshotCommand}"
@@ -284,21 +283,21 @@
     <ribbon:RibbonGroup x:Name="LEMergeGroup" Header="Merge">
      <ribbon:RibbonButton
       Label="Compare"
-      LargeImageSource="Images\LargeIcon.png"
+      LargeImageSource="Images\32\edit-find-4.png"
       ToolTipTitle="Compare With Snapshot"
       ToolTipDescription="Compare the current original resources with a snapshot"
       Command="{Binding Path=LECompareCommand}"
        />
      <ribbon:RibbonButton
       Label="Upload"
-      LargeImageSource="Images\LargeIcon.png"
+      LargeImageSource="Images\32\system-software-update-2.png"
       ToolTipTitle="Upload All"
       ToolTipDescription="Upload all keys in this view to the server"
       Command="{Binding ActiveResourceCollection.UploadCommand}"
       CommandParameter="All" />
      <ribbon:RibbonButton
       Label="Download"
-      LargeImageSource="Images\LargeIcon.png"
+      LargeImageSource="Images\32\go-down-5.png"
       ToolTipTitle="Download remote resources for this file"
       ToolTipDescription=""
       Command="{Binding ActiveResourceCollection.DownloadLatestCommand}"
@@ -307,7 +306,7 @@
     <ribbon:RibbonGroup x:Name="PackSave" Header="Save Languagepack">
      <ribbon:RibbonButton
       Label="Save"
-      LargeImageSource="Images\LargeIcon.png"
+      LargeImageSource="Images\32\document-save-3.png"
       ToolTipTitle="Save Current Item's Pack"
       ToolTipDescription="More info"
       Command="{Binding Path=SavePackCommand}"

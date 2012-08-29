@@ -345,8 +345,14 @@
     <None Include="Service References\MicrosoftTranslatorService\SoapService.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\LargeIcon.png" />
-    <Resource Include="Images\SmallIcon.png" />
+    <Resource Include="Images\32\document-new-4.png" />
+    <Resource Include="Images\32\document-open-5.png" />
+    <Resource Include="Images\32\document-save-3.png" />
+    <Resource Include="Images\32\document-save-as-3.png" />
+    <Resource Include="Images\32\media-floppy-3.png" />
+    <Resource Include="Images\32\preferences-desktop-locale-3.png" />
+    <Resource Include="Images\32\preferences-system-3.png" />
+    <Resource Include="Images\32\text-html.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
@@ -373,174 +379,37 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\speech_balloon_16.png" />
-    <Resource Include="Images\speech_balloon_32.png" />
-    <Resource Include="Images\sphere_16.png" />
-    <Resource Include="Images\sphere_32.png" />
-    <Resource Include="Images\square_16.png" />
-    <Resource Include="Images\square_32.png" />
-    <Resource Include="Images\star_16.png" />
-    <Resource Include="Images\star_32.png" />
-    <Resource Include="Images\stats_16.png" />
-    <Resource Include="Images\stats_32.png" />
-    <Resource Include="Images\stop_16.png" />
-    <Resource Include="Images\stop_32.png" />
-    <Resource Include="Images\system_16.png" />
-    <Resource Include="Images\system_32.png" />
-    <Resource Include="Images\traffic_lights_16.png" />
-    <Resource Include="Images\traffic_lights_32.png" />
-    <Resource Include="Images\unlock_16.png" />
-    <Resource Include="Images\unlock_32.png" />
-    <Resource Include="Images\up_16.png" />
-    <Resource Include="Images\up_32.png" />
-    <Resource Include="Images\user_16.png" />
-    <Resource Include="Images\user_32.png" />
-    <Resource Include="Images\webcam_16.png" />
-    <Resource Include="Images\webcam_32.png" />
-    <Resource Include="Images\windows_16.png" />
-    <Resource Include="Images\windows_32.png" />
-    <Resource Include="Images\windows_restore_16.png" />
-    <Resource Include="Images\windows_restore_32.png" />
-    <Resource Include="Images\window_16.png" />
-    <Resource Include="Images\window_32.png" />
-    <Resource Include="Images\wizard_16.png" />
-    <Resource Include="Images\wizard_32.png" />
-    <Resource Include="Images\world_16.png" />
-    <Resource Include="Images\world_32.png" />
-    <Resource Include="Images\world_upload_16.png" />
-    <Resource Include="Images\world_upload_32.png" />
-    <Resource Include="Images\zoom_16.png" />
-    <Resource Include="Images\zoom_32.png" />
+    <Resource Include="Images\16\format-justify-fill-4.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\last_16.png" />
-    <Resource Include="Images\last_32.png" />
-    <Resource Include="Images\lock_16.png" />
-    <Resource Include="Images\lock_32.png" />
-    <Resource Include="Images\mailbox_16.png" />
-    <Resource Include="Images\mailbox_32.png" />
-    <Resource Include="Images\mail_16.png" />
-    <Resource Include="Images\mail_32.png" />
-    <Resource Include="Images\microphone_16.png" />
-    <Resource Include="Images\microphone_32.png" />
-    <Resource Include="Images\monitor_16.png" />
-    <Resource Include="Images\monitor_32.png" />
-    <Resource Include="Images\music_16.png" />
-    <Resource Include="Images\music_32.png" />
-    <Resource Include="Images\network_16.png" />
-    <Resource Include="Images\network_32.png" />
-    <Resource Include="Images\next_16.png" />
-    <Resource Include="Images\next_32.png" />
-    <Resource Include="Images\paint_16.png" />
-    <Resource Include="Images\paint_32.png" />
-    <Resource Include="Images\paste_16.png" />
-    <Resource Include="Images\paste_32.png" />
-    <Resource Include="Images\pause_16.png" />
-    <Resource Include="Images\pause_32.png" />
-    <Resource Include="Images\pen_16.png" />
-    <Resource Include="Images\pen_32.png" />
-    <Resource Include="Images\phone_16.png" />
-    <Resource Include="Images\phone_32.png" />
-    <Resource Include="Images\play_16.png" />
-    <Resource Include="Images\play_32.png" />
-    <Resource Include="Images\preview_16.png" />
-    <Resource Include="Images\preview_32.png" />
-    <Resource Include="Images\printer_16.png" />
-    <Resource Include="Images\printer_32.png" />
-    <Resource Include="Images\pyramid_16.png" />
-    <Resource Include="Images\pyramid_32.png" />
-    <Resource Include="Images\recycle_bin_16.png" />
-    <Resource Include="Images\recycle_bin_32.png" />
-    <Resource Include="Images\refresh_16.png" />
-    <Resource Include="Images\refresh_32.png" />
-    <Resource Include="Images\reload_16.png" />
-    <Resource Include="Images\reload_32.png" />
-    <Resource Include="Images\rewinding_16.png" />
-    <Resource Include="Images\rewinding_32.png" />
-    <Resource Include="Images\scissors_16.png" />
-    <Resource Include="Images\scissors_32.png" />
-    <Resource Include="Images\shopping_cart_16.png" />
-    <Resource Include="Images\shopping_cart_32.png" />
+    <Resource Include="Images\16\emblem-unreadable-2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\add_16.png" />
-    <Resource Include="Images\add_32.png" />
-    <Resource Include="Images\administrator_16.png" />
-    <Resource Include="Images\administrator_32.png" />
-    <Resource Include="Images\attachment_16.png" />
-    <Resource Include="Images\attachment_32.png" />
-    <Resource Include="Images\back_16.png" />
-    <Resource Include="Images\back_32.png" />
-    <Resource Include="Images\binoculars_16.png" />
-    <Resource Include="Images\binoculars_32.png" />
-    <Resource Include="Images\book_16.png" />
-    <Resource Include="Images\book_32.png" />
-    <Resource Include="Images\briefcase_16.png" />
-    <Resource Include="Images\briefcase_32.png" />
-    <Resource Include="Images\bulb_16.png" />
-    <Resource Include="Images\bulb_32.png" />
-    <Resource Include="Images\button_cancel_16.png" />
-    <Resource Include="Images\button_cancel_32.png" />
-    <Resource Include="Images\calculator_16.png" />
-    <Resource Include="Images\calculator_32.png" />
-    <Resource Include="Images\calendar_16.png" />
-    <Resource Include="Images\calendar_32.png" />
-    <Resource Include="Images\camera_16.png" />
-    <Resource Include="Images\camera_32.png" />
-    <Resource Include="Images\chat_16.png" />
-    <Resource Include="Images\chat_32.png" />
-    <Resource Include="Images\check_mark_16.png" />
-    <Resource Include="Images\check_mark_32.png" />
-    <Resource Include="Images\clients_16.png" />
-    <Resource Include="Images\clients_32.png" />
-    <Resource Include="Images\clipboard_16.png" />
-    <Resource Include="Images\clipboard_32.png" />
-    <Resource Include="Images\clip_16.png" />
-    <Resource Include="Images\clip_32.png" />
-    <Resource Include="Images\clock_16.png" />
-    <Resource Include="Images\clock_32.png" />
-    <Resource Include="Images\close_16.png" />
-    <Resource Include="Images\close_32.png" />
-    <Resource Include="Images\copy_16.png" />
-    <Resource Include="Images\copy_32.png" />
-    <Resource Include="Images\cross_16.png" />
-    <Resource Include="Images\cross_32.png" />
-    <Resource Include="Images\delete_16.png" />
-    <Resource Include="Images\delete_32.png" />
-    <Resource Include="Images\diskette_16.png" />
-    <Resource Include="Images\diskette_32.png" />
-    <Resource Include="Images\document_16.png" />
-    <Resource Include="Images\document_32.png" />
-    <Resource Include="Images\door_16.png" />
-    <Resource Include="Images\door_32.png" />
-    <Resource Include="Images\down_16.png" />
-    <Resource Include="Images\down_32.png" />
-    <Resource Include="Images\edit_16.png" />
-    <Resource Include="Images\edit_32.png" />
-    <Resource Include="Images\fast_forward_16.png" />
-    <Resource Include="Images\fast_forward_32.png" />
-    <Resource Include="Images\file_16.png" />
-    <Resource Include="Images\file_32.png" />
-    <Resource Include="Images\first_16.png" />
-    <Resource Include="Images\first_32.png" />
-    <Resource Include="Images\folder_16.png" />
-    <Resource Include="Images\folder_32.png" />
-    <Resource Include="Images\games_16.png" />
-    <Resource Include="Images\games_32.png" />
-    <Resource Include="Images\gear_16.png" />
-    <Resource Include="Images\gear_32.png" />
-    <Resource Include="Images\group_16.png" />
-    <Resource Include="Images\group_32.png" />
-    <Resource Include="Images\hand_16.png" />
-    <Resource Include="Images\hand_32.png" />
-    <Resource Include="Images\help_16.png" />
-    <Resource Include="Images\help_32.png" />
-    <Resource Include="Images\home_16.png" />
-    <Resource Include="Images\home_32.png" />
-    <Resource Include="Images\hourglass_16.png" />
-    <Resource Include="Images\hourglass_32.png" />
-    <Resource Include="Images\info_16.png" />
-    <Resource Include="Images\info_32.png" />
+    <Resource Include="Images\16\edit-copy-4.png" />
+    <Resource Include="Images\16\edit-cut-4.png" />
+    <Resource Include="Images\16\edit-paste-4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16\system-search-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16\preferences-desktop-locale-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\32\go-next-5.png" />
+    <Resource Include="Images\32\go-previous-5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16\go-next-5.png" />
+    <Resource Include="Images\16\go-previous-5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\32\camera-photo-5.png" />
+    <Resource Include="Images\32\edit-find-4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\32\go-down-5.png" />
+    <Resource Include="Images\32\system-software-update-2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
