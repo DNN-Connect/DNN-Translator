@@ -8,7 +8,7 @@
         xmlns:vw="clr-namespace:DotNetNuke.Translator.View"
         Title="MainWindow" ResizeMode="CanResizeWithGrip"
         x:Name="MainWindow"
-        Width="1000" Height="800">
+        Width="1000" Height="800" Icon="/Translator;component/applications-internet-3.ico">
 
  <Window.Resources>
   <ResourceDictionary Source="MainWindowResources.xaml" /> </Window.Resources>
@@ -31,11 +31,23 @@
   </Grid.RowDefinitions>
 
   <ribbon:Ribbon x:Name="Ribbon">
+   <ribbon:Ribbon.HelpPaneContent>
+    <ribbon:RibbonButton SmallImageSource="Images\16\help-browser-2.png" />
+   </ribbon:Ribbon.HelpPaneContent>
+   <ribbon:Ribbon.QuickAccessToolBar>
+    <ribbon:RibbonQuickAccessToolBar >
+     <ribbon:RibbonButton 
+      ToolTipTitle="Save changes"
+      ToolTipDescription="Save changes to the resource files"
+      Command="{Binding ActiveResourceCollection.SaveCommand}"
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasChanges, FallbackValue=False}"
+      SmallImageSource="Images\16\media-floppy-3.png" />
+    </ribbon:RibbonQuickAccessToolBar>
+   </ribbon:Ribbon.QuickAccessToolBar>
    <ribbon:Ribbon.ApplicationMenu>
     <ribbon:RibbonApplicationMenu SmallImageSource="Images\16\format-justify-fill-4.png" KeyTip="F">
-     <ribbon:RibbonApplicationMenuItem Header="_Open" Command="{Binding Path=OpenCommand}" KeyTip="O" ImageSource="Images\32\document-open-5.png" />
      <ribbon:RibbonApplicationMenuItem Header="_New" Command="{Binding Path=NewCommand}" KeyTip="N" ImageSource="Images\32\document-new-4.png" />
-     <ribbon:RibbonApplicationSplitMenuItem Header="Open _Recent" ItemsSource="{Binding Path=RecentLocationsList}" ImageSource="Images\32\document-open-5.png">
+     <ribbon:RibbonApplicationSplitMenuItem Header="_Open" ItemsSource="{Binding Path=RecentLocationsList}" Command="{Binding Path=OpenCommand}" KeyTip="O" ImageSource="Images\32\document-open-5.png">
       <ribbon:RibbonApplicationSplitMenuItem.ItemContainerStyle>
        <Style TargetType="{x:Type ribbon:RibbonApplicationMenuItem}">
         <Setter Property="Template">
@@ -51,6 +63,7 @@
      <ribbon:RibbonApplicationMenuItem Header="_Save" Command="{Binding Path=SaveCommand}" KeyTip="S" ImageSource="Images\32\media-floppy-3.png" />
      <ribbon:RibbonApplicationMenuItem Header="Save As" Command="{Binding Path=SaveAsCommand}" ImageSource="Images\32\media-floppy-3.png" />
      <ribbon:RibbonApplicationMenuItem Header="Options" Command="{Binding Path=OptionsCommand}" ImageSource="Images\32\preferences-system-3.png" />
+     <ribbon:RibbonApplicationMenuItem Header="Exit" Command="{Binding Path=CloseCommand}" ImageSource="Images\32\emblem-unreadable-2.png" />
      <ribbon:RibbonApplicationMenuItem IsEnabled="False" />
      <ribbon:RibbonApplicationMenuItem IsEnabled="False" />
      <ribbon:RibbonApplicationMenuItem IsEnabled="False" />
@@ -62,6 +75,13 @@
                                      ToolTipTitle="Exit" 
                                      SmallImageSource="Images\16\emblem-unreadable-2.png"
                                      KeyTip="X"
+                                     DockPanel.Dock="Right"
+                                     Margin="2"
+                                     BorderBrush="#B8114EAF" />
+       <ribbon:RibbonButton Command="{Binding Path=OptionsCommand}"
+                                     Label="Options"
+                                     ToolTipTitle="Options" 
+                                     SmallImageSource="Images\16\preferences-system-3.png"
                                      DockPanel.Dock="Right"
                                      Margin="2"
                                      BorderBrush="#B8114EAF" />
@@ -284,8 +304,8 @@
      <ribbon:RibbonButton
       Label="Compare"
       LargeImageSource="Images\32\edit-find-4.png"
-      ToolTipTitle="Compare With Snapshot"
-      ToolTipDescription="Compare the current original resources with a snapshot"
+      ToolTipTitle="Compare With Server"
+      ToolTipDescription="Compare the current original resources with what is on the server"
       Command="{Binding Path=LECompareCommand}"
        />
      <ribbon:RibbonButton
@@ -349,8 +369,10 @@
     </TreeView.ItemContainerStyle>
     <TreeView.Resources>
      <HierarchicalDataTemplate ItemsSource="{Binding Children}" DataType="{x:Type vm:TreeViewItemViewModel}">
-      <StackPanel Orientation="Horizontal">
-       <TextBlock Text="{Binding Path=Name}">
+      <StackPanel Orientation="Horizontal" Height="20">
+       <Image Width="16" Height="16" 
+           Margin="4,0" Source="{Binding Path=Image}" />
+       <TextBlock Text="{Binding Path=Name}" Margin="6,0,0,0">
           <TextBlock.ContextMenu>
            <ContextMenu ItemsSource="{Binding Path=CommandList}">
             <ContextMenu.ItemTemplate>

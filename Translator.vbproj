@@ -51,6 +51,9 @@
   <PropertyGroup>
     <StartupObject>DotNetNuke.Translator.Application</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>applications-internet-3.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.AvalonEdit">
       <HintPath>_References\ICSharpCode.AvalonEdit.dll</HintPath>
@@ -410,6 +413,33 @@
   <ItemGroup>
     <Resource Include="Images\32\go-down-5.png" />
     <Resource Include="Images\32\system-software-update-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16\help-browser-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16\preferences-system-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\32\emblem-unreadable-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16\media-floppy-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="applications-internet-3.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\32\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16\format-justify-left-4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\32\format-justify-left-4.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

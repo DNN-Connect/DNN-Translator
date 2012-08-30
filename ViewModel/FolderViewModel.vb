@@ -68,7 +68,7 @@ Namespace ViewModel
 
   Public Overrides ReadOnly Property Image As System.Windows.Media.Imaging.BitmapImage
    Get
-    Return New BitmapImage(New Uri("pack://application:,,,/Images/SmallIcon.png"))
+    Return New BitmapImage(New Uri("pack://application:,,,/Images/16/folder.png"))
    End Get
   End Property
 
