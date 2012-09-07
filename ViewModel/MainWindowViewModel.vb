@@ -453,6 +453,7 @@ Namespace ViewModel
 
    If IO.File.Exists(location) Then ' it's a settings file
     _RecentLocations.Push(location)
+    _RecentLocations.Save()
     _recentLocationsList = Nothing ' reset
    ElseIf IO.Directory.Exists(location) Then ' it's a DNN directory
    End If
@@ -526,7 +527,9 @@ Namespace ViewModel
    If result = Forms.DialogResult.OK Or result = Forms.DialogResult.Yes Then
     Me.ProjectSettings.Save(fbd.FileName)
     _RecentLocations.Push(fbd.FileName)
+    _RecentLocations.Save()
     _recentLocationsList = Nothing ' reset
+    MyBase.OnPropertyChanged("RecentLocationsList")
    End If
 
   End Sub
@@ -567,6 +570,7 @@ Namespace ViewModel
   Private Sub OpenNewCompleted(sender As Object, e As RunWorkerCompletedEventArgs)
 
    Dim result As Common.ProjectSettings = CType(e.Result, Common.ProjectSettings)
+   result.TargetLocale = TranslatorSettings.DefaultTargetLocale
    ShowSettingsScreen(result)
    IsBusy = False
 

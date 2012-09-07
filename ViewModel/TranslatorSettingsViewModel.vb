@@ -145,7 +145,7 @@
   Public ReadOnly Property AvailableLocales() As List(Of CultureInfo)
    Get
     If _availableLocales Is Nothing Then
-     _availableLocales = Common.Globals.AllLocales
+     _availableLocales = Common.Globals.AllLocales(CultureTypes.SpecificCultures)
     End If
     Return _availableLocales
    End Get
