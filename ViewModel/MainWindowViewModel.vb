@@ -428,10 +428,17 @@ Namespace ViewModel
   Protected Sub OpenClicked()
 
    Dim fbd As New System.Windows.Forms.OpenFileDialog With {.CheckFileExists = True, .DefaultExt = ".trproj", .Filter = "translation project files (*.trproj)|*.trproj"}
+   If TranslatorSettings.LastUsedDir = "" Then
+    fbd.InitialDirectory = Common.Globals.TranslatorDocFolder
+   Else
+    fbd.InitialDirectory = TranslatorSettings.LastUsedDir
+   End If
    Dim result As System.Windows.Forms.DialogResult = fbd.ShowDialog()
    If result = Forms.DialogResult.OK Or result = Forms.DialogResult.Yes Then
     If IO.File.Exists(fbd.FileName) Then
      MainStatus = "Opening " & fbd.FileName
+     TranslatorSettings.LastUsedDir = IO.Path.GetDirectoryName(fbd.FileName)
+     TranslatorSettings.Save()
      Open(fbd.FileName)
     End If
    End If
@@ -446,6 +453,8 @@ Namespace ViewModel
     MyBase.OnPropertyChanged("RecentLocationsList")
     Exit Sub
    End If
+   TranslatorSettings.LastUsedDir = IO.Path.GetDirectoryName(projectSettingsFile)
+   TranslatorSettings.Save()
    Open(projectSettingsFile)
   End Sub
 
@@ -523,6 +532,11 @@ Namespace ViewModel
   Protected Sub SaveAsClicked()
 
    Dim fbd As New System.Windows.Forms.SaveFileDialog With {.Filter = "translation project files (*.trproj)|*.trproj", .OverwritePrompt = True, .AddExtension = True, .CheckPathExists = True, .DefaultExt = ".trproj"}
+   If TranslatorSettings.LastUsedDir = "" Then
+    fbd.InitialDirectory = Common.Globals.TranslatorDocFolder
+   Else
+    fbd.InitialDirectory = TranslatorSettings.LastUsedDir
+   End If
    Dim result As System.Windows.Forms.DialogResult = fbd.ShowDialog()
    If result = Forms.DialogResult.OK Or result = Forms.DialogResult.Yes Then
     Me.ProjectSettings.Save(fbd.FileName)
@@ -530,6 +544,8 @@ Namespace ViewModel
     _RecentLocations.Save()
     _recentLocationsList = Nothing ' reset
     MyBase.OnPropertyChanged("RecentLocationsList")
+    TranslatorSettings.LastUsedDir = IO.Path.GetDirectoryName(fbd.FileName)
+    TranslatorSettings.Save()
    End If
 
   End Sub
@@ -571,6 +587,7 @@ Namespace ViewModel
 
    Dim result As Common.ProjectSettings = CType(e.Result, Common.ProjectSettings)
    result.TargetLocale = TranslatorSettings.DefaultTargetLocale
+   'result.Dictionary = TranslatorSettings.DefaultDictionary
    ShowSettingsScreen(result)
    IsBusy = False
 

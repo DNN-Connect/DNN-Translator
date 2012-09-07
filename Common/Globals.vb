@@ -70,6 +70,12 @@ Namespace Common
    End If
   End Function
 
+  Public Shared Function TranslatorDocFolder() As String
+   Dim res As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DNNTranslator")
+   If Not IO.Directory.Exists(res) Then IO.Directory.CreateDirectory(res)
+   Return res
+  End Function
+
 #Region " Encryption "
   Shared entropy As Byte() = System.Text.Encoding.Unicode.GetBytes("Not A Password")
 

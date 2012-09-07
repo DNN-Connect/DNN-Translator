@@ -159,6 +159,16 @@
     Me.OnPropertyChanged("Copyright")
    End Set
   End Property
+
+  Public Property Dictionary() As String
+   Get
+    Return _projectSettings.Dictionary
+   End Get
+   Set(ByVal value As String)
+    _projectSettings.Dictionary = value
+    Me.OnPropertyChanged("Dictionary")
+   End Set
+  End Property
 #End Region
 
 #Region " Other Properties "

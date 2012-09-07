@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="615" d:DesignWidth="575">
  <Grid Margin="10">
   <Grid.ColumnDefinitions>
    <ColumnDefinition Width="Auto" />
@@ -175,6 +175,34 @@
       x:Name="txtCopyright"
     IsEnabled="{Binding OverrideOwner}"
       Text="{Binding Copyright, UpdateSourceTrigger=PropertyChanged}" />
+
+  <Label 
+      Grid.Row="22" Grid.Column="0" 
+      Content="Default Dictionary:" 
+   ToolTip="The dictionary is a set of translations you keep for later use"
+      HorizontalAlignment="Right"
+      Target="{Binding ElementName=txtDefaultDictionary}" 
+      />
+  <Grid
+      Grid.Row="22" Grid.Column="2" HorizontalAlignment="Stretch">
+   <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="*" />
+    <ColumnDefinition Width="6" />
+    <ColumnDefinition Width="Auto" />
+    <ColumnDefinition Width="6" />
+    <ColumnDefinition Width="Auto" />
+   </Grid.ColumnDefinitions>
+   <TextBox x:Name="txtDefaultDictionary"
+      Text="{Binding DefaultDictionary, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" />
+   <Button Grid.Row="0" Grid.Column="2" Content="Browse ..." HorizontalAlignment="Stretch"
+           Command="{Binding BrowseCommand}"
+           />
+   <Button Grid.Row="0" Grid.Column="4" Content="New ..." HorizontalAlignment="Stretch"
+           Command="{Binding NewCommand}"
+           />
+
+  </Grid>
+   
 
  </Grid>
 </UserControl>

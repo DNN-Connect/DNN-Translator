@@ -20,6 +20,7 @@ Namespace Common
   Public Property OwnerOrganization As String = ""
   Public Property License As String = ""
   Public Property Copyright As String = ""
+  Public Property Dictionary As String = ""
 
   ' Parsed on load
   Public Property DotNetNukeVersion As String = ""
@@ -66,6 +67,7 @@ Namespace Common
     ReadSettingValue("OwnerOrganization", OwnerOrganization)
     ReadSettingValue("License", License)
     ReadSettingValue("Copyright", Copyright)
+    ReadSettingValue("Dictionary", Dictionary)
    ElseIf IO.Directory.Exists(projectSettingsFileOrDnnDirectory) Then ' it's a DNN directory
     If Not projectSettingsFileOrDnnDirectory.EndsWith("\") Then projectSettingsFileOrDnnDirectory &= "\"
     Me.Location = projectSettingsFileOrDnnDirectory
@@ -159,6 +161,7 @@ Namespace Common
    Setting("OwnerOrganization", False) = OwnerOrganization
    Setting("License", False) = License
    Setting("Copyright", False) = Copyright
+   Setting("Dictionary", False) = Dictionary
 
    MyBase.Save()
 

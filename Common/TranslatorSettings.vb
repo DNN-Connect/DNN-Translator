@@ -21,6 +21,8 @@ Namespace Common
   Public Property OwnerOrganization As String = ""
   Public Property License As String = ""
   Public Property Copyright As String = ""
+  Public Property DefaultDictionary As String = ""
+  Public Property LastUsedDir As String = ""
 
   Public Sub New()
    MyBase.New()
@@ -50,6 +52,12 @@ Namespace Common
    ReadSettingValue("OwnerOrganization", OwnerOrganization)
    ReadSettingValue("License", License)
    ReadSettingValue("Copyright", Copyright)
+   ReadSettingValue("DefaultDictionary", DefaultDictionary)
+   ReadSettingValue("LastUsedDir", LastUsedDir)
+
+   If DefaultDictionary = "" Then
+    DefaultDictionary = Common.Globals.TranslatorDocFolder & "\MyDictionary.dic"
+   End If
 
   End Sub
 
@@ -68,6 +76,8 @@ Namespace Common
    Setting("OwnerOrganization", False) = OwnerOrganization
    Setting("License", False) = License
    Setting("Copyright", False) = Copyright
+   Setting("DefaultDictionary", False) = DefaultDictionary
+   Setting("LastUsedDir", False) = LastUsedDir
 
    Dim isoStore As IsolatedStorageFile = IsolatedStorageFile.GetStore(IsolatedStorageScope.User Or IsolatedStorageScope.Assembly Or IsolatedStorageScope.Domain, Nothing, Nothing)
    Using strOut As New IO.StreamWriter(New IsolatedStorageFileStream(SettingsFilename, FileMode.OpenOrCreate, isoStore))

@@ -93,6 +93,7 @@
     </ApplicationDefinition>
     <Compile Include="Common\TreeItem.vb" />
     <Compile Include="Common\ApplicationState.vb" />
+    <Compile Include="Data\TranslationDictionary.vb" />
     <Compile Include="Services\Translation\Bing\AdmAccessToken.vb" />
     <Compile Include="Services\Translation\Bing\AdmAuthentication.vb" />
     <Compile Include="Common\BoolToVisibilityConverter.vb" />
