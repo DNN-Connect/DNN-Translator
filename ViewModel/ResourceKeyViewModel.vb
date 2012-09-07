@@ -100,8 +100,30 @@ Namespace ViewModel
   Public Property LEText As Common.LEService.TextInfo
   Public Property OriginalResource() As Resource
 
-  Public Property HighlightTargetValue As Boolean = False
-  Public Property HighlightCompareValue As Boolean = False
+  Private _targetColor As SolidColorBrush
+  Public Property TargetColor() As SolidColorBrush
+   Get
+    If _targetColor Is Nothing Then _targetColor = CType((New BrushConverter).ConvertFrom("#D9EDF7"), SolidColorBrush)
+    Return _targetColor
+   End Get
+   Set(ByVal value As SolidColorBrush)
+    _targetColor = value
+    Me.OnPropertyChanged("TargetColor")
+   End Set
+  End Property
+
+  Private _compareColor As SolidColorBrush
+  Public Property CompareColor() As SolidColorBrush
+   Get
+    If _compareColor Is Nothing Then _compareColor = Brushes.White
+    Return _compareColor
+   End Get
+   Set(ByVal value As SolidColorBrush)
+    _compareColor = value
+    Me.OnPropertyChanged("CompareColor")
+   End Set
+  End Property
+
   Public Property LastModified As DateTime = DateTime.MinValue
 #End Region
 
@@ -189,9 +211,30 @@ Namespace ViewModel
 #End Region
 
 #Region " Public Methods "
+  Public Sub HighlightTarget()
+   HighlightTarget("#F2DEDE")
+  End Sub
+  Public Sub HighlightTarget(color As String)
+   HighlightTarget(CType((New BrushConverter).ConvertFrom(color), SolidColorBrush))
+  End Sub
+  Public Sub HighlightTarget(color As SolidColorBrush)
+   TargetColor = color
+  End Sub
+
+  Public Sub HighlightCompare()
+   HighlightCompare("#F2DEDE")
+  End Sub
+  Public Sub HighlightCompare(color As String)
+   HighlightCompare(CType((New BrushConverter).ConvertFrom(color), SolidColorBrush))
+  End Sub
+  Public Sub HighlightCompare(color As SolidColorBrush)
+   CompareColor = color
+  End Sub
+
   Public Function Clone() As ResourceKeyViewModel
    Return New ResourceKeyViewModel(OriginalResource, TranslatedResource, CompareValue, LEText)
   End Function
 #End Region
+
  End Class
 End Namespace

@@ -282,6 +282,89 @@
       IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
      </ribbon:RibbonSplitButton>
     </ribbon:RibbonGroup>
+    <ribbon:RibbonGroup x:Name="DictionaryGroup" Header="Dictionary">
+     <ribbon:RibbonButton
+      Label="Compare"
+      LargeImageSource="Images\32\edit-find-4.png"
+      ToolTipTitle="Compare With Dictionary"
+      ToolTipDescription="Compare the current values with what is in the dictionary"
+      Command="{Binding Path=ActiveResourceCollection.ShowDicEntriesCommand}"
+      IsEnabled="{Binding Path=HasActiveResourceCollection, FallbackValue=False}" />
+     <ribbon:RibbonSplitButton
+      Label="Add To Dictionary"
+      LargeImageSource="Images\32\preferences-desktop-locale-3.png"
+      IsEnabled="{Binding Path=HasActiveResourceCollection, FallbackValue=False}">
+      <ribbon:RibbonButton
+      Label="All"
+      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
+      ToolTipTitle="All To Target"
+      ToolTipDescription="Attempt to translate all keys and overwrite any existing values on target"
+      Command="{Binding ActiveResourceCollection.AddToDictionaryCommand}"
+      CommandParameter="All" />
+      <ribbon:RibbonButton
+      Label="Selected"
+      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
+      ToolTipTitle="Selected To Target"
+      ToolTipDescription="Attempt to translate all selected keys"
+      Command="{Binding ActiveResourceCollection.AddToDictionaryCommand}"
+      CommandParameter="Selected"
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
+     </ribbon:RibbonSplitButton>
+     <ribbon:RibbonSplitButton
+      Label="Translate To Target"
+      LargeImageSource="Images\32\preferences-desktop-locale-3.png"
+      IsEnabled="{Binding Path=HasActiveResourceCollection, FallbackValue=False}">
+      <ribbon:RibbonButton
+      Label="All"
+      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
+      ToolTipTitle="All To Target"
+      ToolTipDescription="Attempt to translate all keys and overwrite any existing values on target"
+      Command="{Binding ActiveResourceCollection.GetFromDictionaryCommand}"
+      CommandParameter="All,2Target" />
+      <ribbon:RibbonButton
+      Label="Empty"
+      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
+      ToolTipTitle="Empty To Target"
+      ToolTipDescription="Attempt to translate all empty keys"
+      Command="{Binding ActiveResourceCollection.GetFromDictionaryCommand}"
+      CommandParameter="Empty,2Target" />
+      <ribbon:RibbonButton
+      Label="Selected"
+      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
+      ToolTipTitle="Selected To Target"
+      ToolTipDescription="Attempt to translate all selected keys"
+      Command="{Binding ActiveResourceCollection.GetFromDictionaryCommand}"
+      CommandParameter="Selected,2Target"
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
+     </ribbon:RibbonSplitButton>
+     <ribbon:RibbonSplitButton
+      Label="Translate To Temporary Workspace"
+      LargeImageSource="Images\32\preferences-desktop-locale-3.png"
+      IsEnabled="{Binding Path=HasActiveResourceCollection, FallbackValue=False}">
+      <ribbon:RibbonButton
+      Label="All"
+      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
+      ToolTipTitle="All To Temporary Workspace"
+      ToolTipDescription="Attempt to translate all keys to the comparison column"
+      Command="{Binding ActiveResourceCollection.GetFromDictionaryCommand}"
+      CommandParameter="All,2Compare" />
+      <ribbon:RibbonButton
+      Label="Empty"
+      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
+      ToolTipTitle="Empty To Temporary Workspace"
+      ToolTipDescription="Attempt to translate all empty keys and put the value in the comparison column"
+      Command="{Binding ActiveResourceCollection.GetFromDictionaryCommand}"
+      CommandParameter="Empty,2Compare" />
+      <ribbon:RibbonButton
+      Label="Selected"
+      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
+      ToolTipTitle="Selected To Temporary Workspace"
+      ToolTipDescription="Attempt to translate all selected keys and put the value in the comparison column"
+      Command="{Binding ActiveResourceCollection.GetFromDictionaryCommand}"
+      CommandParameter="Selected,2Compare"
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
+     </ribbon:RibbonSplitButton>
+    </ribbon:RibbonGroup>
    </ribbon:RibbonTab>
    <ribbon:RibbonTab x:Name="ComponentTab" Header="Component" KeyTip="I" IsEnabled="{Binding Path=HasSelectedPackage, FallbackValue=False}">
     <ribbon:RibbonGroup x:Name="SnapshotGroup" Header="Snapshot">
@@ -336,16 +419,16 @@
   </ribbon:Ribbon>
 
   <ComboBox Grid.Row="1" Margin="10" Padding="6" ItemsSource="{Binding ProjectSettings.InstalledPackages}" SelectedItem="{Binding SelectedPackage}" MinWidth="500" HorizontalAlignment="Stretch">
-    <ComboBox.ItemTemplate>
-     <DataTemplate>
-      <StackPanel Orientation="Horizontal">
-       <TextBlock Text="{Binding FriendlyName}" TextAlignment="Left" TextWrapping="Wrap" Width="400" />
-       <TextBlock Text="{Binding Version}" TextAlignment="Left" TextWrapping="Wrap" Width="100" />
-       <TextBlock Text="{Binding FolderName}" TextAlignment="Left" TextWrapping="Wrap" Width="300" />
-      </StackPanel>
-     </DataTemplate>
-    </ComboBox.ItemTemplate>
-   </ComboBox>
+   <ComboBox.ItemTemplate>
+    <DataTemplate>
+     <StackPanel Orientation="Horizontal">
+      <TextBlock Text="{Binding FriendlyName}" TextAlignment="Left" TextWrapping="Wrap" Width="400" />
+      <TextBlock Text="{Binding Version}" TextAlignment="Left" TextWrapping="Wrap" Width="100" />
+      <TextBlock Text="{Binding FolderName}" TextAlignment="Left" TextWrapping="Wrap" Width="300" />
+     </StackPanel>
+    </DataTemplate>
+   </ComboBox.ItemTemplate>
+  </ComboBox>
 
   <Grid Grid.Row="2">
    <Grid.ColumnDefinitions>
@@ -390,14 +473,14 @@
      </HierarchicalDataTemplate>
     </TreeView.Resources>
    </TreeView>
-   
+
    <GridSplitter Grid.Column="1" Name="GridSplitter1" HorizontalAlignment="Center" VerticalAlignment="Stretch" Background="#aaa" Width="3" ShowsPreview="False" />
-   
+
    <ContentControl Grid.Column="2" 
     Content="{Binding Path=Workspaces}"
     ContentTemplate="{StaticResource WorkspacesTemplate}"
      />
-   
+
   </Grid>
 
   <StatusBar Grid.Row="3">

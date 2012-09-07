@@ -233,5 +233,51 @@
   End Sub
 #End Region
 
+#Region " Dictionary "
+  Private _browseCommand As RelayCommand
+  Public ReadOnly Property BrowseCommand As RelayCommand
+   Get
+    If _browseCommand Is Nothing Then
+     _browseCommand = New RelayCommand(Sub(param) Me.BrowseClicked())
+    End If
+    Return _browseCommand
+   End Get
+  End Property
+
+  Protected Sub BrowseClicked()
+
+   Dim fbd As New System.Windows.Forms.OpenFileDialog With {.CheckFileExists = True, .DefaultExt = ".dic", .Filter = "dictionary files (*.dic)|*.dic"}
+   fbd.InitialDirectory = IO.Path.GetDirectoryName(Location)
+   Dim result As System.Windows.Forms.DialogResult = fbd.ShowDialog()
+   If result = Forms.DialogResult.OK Or result = Forms.DialogResult.Yes Then
+    If IO.File.Exists(fbd.FileName) Then
+     Me.Dictionary = fbd.FileName
+    End If
+   End If
+
+  End Sub
+
+  Private _newCommand As RelayCommand
+  Public ReadOnly Property NewCommand As RelayCommand
+   Get
+    If _newCommand Is Nothing Then
+     _newCommand = New RelayCommand(Sub(param) Me.NewClicked())
+    End If
+    Return _newCommand
+   End Get
+  End Property
+
+  Protected Sub NewClicked()
+
+   Dim fbd As New System.Windows.Forms.SaveFileDialog With {.DefaultExt = ".dic", .Filter = "dictionary files (*.dic)|*.dic", .OverwritePrompt = True, .AddExtension = True, .CheckPathExists = True}
+   fbd.InitialDirectory = IO.Path.GetDirectoryName(Location)
+   Dim result As System.Windows.Forms.DialogResult = fbd.ShowDialog()
+   If result = Forms.DialogResult.OK Or result = Forms.DialogResult.Yes Then
+    Me.Dictionary = fbd.FileName
+   End If
+
+  End Sub
+#End Region
+
  End Class
 End Namespace

@@ -61,18 +61,7 @@
      Visibility="{Binding (FrameworkElement.DataContext).ShowTargetColumn, RelativeSource={x:Static RelativeSource.Self}, Converter={StaticResource BoolToVisConverter}}">
      <DataGridTemplateColumn.CellTemplate>
       <DataTemplate>
-       <TextBox Text="{Binding TargetValue, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap">
-        <TextBox.Style>
-         <Style TargetType="TextBox">
-          <Setter Property="Background" Value="Beige" />
-          <Style.Triggers>
-           <DataTrigger Binding="{Binding HighlightTargetValue}" Value="True">
-            <Setter Property="Background" Value="#ffbbbb" />
-           </DataTrigger>
-          </Style.Triggers>
-         </Style>
-        </TextBox.Style>
-       </TextBox>
+       <TextBox Text="{Binding TargetValue, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Background="{Binding TargetColor, UpdateSourceTrigger=PropertyChanged}" />
       </DataTemplate>
      </DataGridTemplateColumn.CellTemplate>
     </DataGridTemplateColumn>
@@ -82,17 +71,7 @@
      Visibility="{Binding (FrameworkElement.DataContext).ShowCompareColumn, RelativeSource={x:Static RelativeSource.Self}, Converter={StaticResource BoolToVisConverter}}">
      <DataGridTemplateColumn.CellTemplate>
       <DataTemplate>
-       <TextBox Text="{Binding CompareValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap">
-        <TextBox.Style>
-         <Style TargetType="TextBox">
-          <Style.Triggers>
-           <DataTrigger Binding="{Binding HighlightCompareValue}" Value="True">
-            <Setter Property="Background" Value="#ffbbbb" />
-           </DataTrigger>
-          </Style.Triggers>
-         </Style>
-        </TextBox.Style>
-       </TextBox>
+       <TextBox Text="{Binding CompareValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Background="{Binding CompareColor, UpdateSourceTrigger=PropertyChanged}" />
       </DataTemplate>
      </DataGridTemplateColumn.CellTemplate>
     </DataGridTemplateColumn>

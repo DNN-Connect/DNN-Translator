@@ -99,9 +99,9 @@ Namespace ViewModel
      Else ' different local value
       Dim dk As New ResourceKeyViewModel(localValue, ti)
       If ti.LastModified > LocalData(ti.FilePath).Resources(ti.TextKey).LastModified Then
-       dk.HighlightCompareValue = True
+       dk.HighlightCompare()
       Else
-       dk.HighlightTargetValue = True
+       dk.HighlightTarget()
       End If
       DifferentKeys.Add(dk)
      End If

@@ -128,6 +128,11 @@ Namespace ViewModel
    Set(ByVal value As Common.ProjectSettings)
     _ProjectSettings = value
     Me.OnPropertyChanged("ProjectSettings")
+    If _ProjectSettings.Dictionary <> "" Then
+     Dictionary = New Data.TranslationDictionary(_ProjectSettings.Dictionary)
+    Else
+     Dictionary = New Data.TranslationDictionary(_TranslatorSettings.DefaultDictionary)
+    End If
     Try
      SelectedPackage = (From x In ProjectSettings.InstalledPackages Where x.PackageName = "Core" Select x)(0)
     Catch ex As Exception
@@ -144,6 +149,9 @@ Namespace ViewModel
    Set(ByVal value As Common.TranslatorSettings)
     _TranslatorSettings = value
     Me.OnPropertyChanged("TranslatorSettings")
+    If _ProjectSettings.Dictionary = "" Then
+     Dictionary = New Data.TranslationDictionary(_TranslatorSettings.DefaultDictionary)
+    End If
    End Set
   End Property
 
@@ -304,6 +312,8 @@ Namespace ViewModel
     collectionView.MoveCurrentTo(workspace)
    End If
 
+   MyBase.OnPropertyChanged("ActiveResourceCollection")
+   MyBase.OnPropertyChanged("HasActiveResourceCollection")
   End Sub
 
   Public ReadOnly Property ActiveWorkspace As WorkspaceViewModel
@@ -333,6 +343,12 @@ Namespace ViewModel
      Return CType(ActiveWorkspace, ResourceCollectionViewModel)
     End If
     Return Nothing
+   End Get
+  End Property
+
+  Public ReadOnly Property HasActiveResourceCollection() As Boolean
+   Get
+    Return CBool(ActiveResourceCollection IsNot Nothing)
    End Get
   End Property
 
@@ -993,6 +1009,19 @@ Namespace ViewModel
   Public Sub SetMessage(msg As String)
    BusyMessage = msg
   End Sub
+#End Region
+
+#Region " Dictionary "
+  Private _dictionary As Data.TranslationDictionary
+  Public Property Dictionary() As Data.TranslationDictionary
+   Get
+    Return _dictionary
+   End Get
+   Set(ByVal value As Data.TranslationDictionary)
+    _dictionary = value
+    MyBase.OnPropertyChanged("Dictionary")
+   End Set
+  End Property
 #End Region
 
  End Class

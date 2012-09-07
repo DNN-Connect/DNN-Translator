@@ -446,5 +446,110 @@ Namespace ViewModel
   End Sub
 #End Region
 
+#Region " Dictionary "
+  Private _addToDictionaryCommand As RelayCommand
+  Public ReadOnly Property AddToDictionaryCommand As RelayCommand
+   Get
+    If _addToDictionaryCommand Is Nothing Then
+     _addToDictionaryCommand = New RelayCommand(Sub(param) Me.AddToDictionaryClicked(param))
+    End If
+    Return _addToDictionaryCommand
+   End Get
+  End Property
+
+  Protected Sub AddToDictionaryClicked(param As Object)
+
+   Dim dictParam As String = CType(param, String).ToLower
+   If dictParam.Equals("all") Then
+    For Each rkv As ResourceKeyViewModel In ResourceKeys
+     If String.IsNullOrEmpty(rkv.TargetValue) Then
+      MainWindow.Dictionary(rkv.OriginalValue) = rkv.TargetValue
+     End If
+    Next
+   ElseIf dictParam.Equals("selected") Then
+    For Each rkv As ResourceKeyViewModel In ResourceKeys
+     If rkv.Selected Then
+      MainWindow.Dictionary(rkv.OriginalValue) = rkv.TargetValue
+     End If
+    Next
+   End If
+   MainWindow.Dictionary.Save()
+
+  End Sub
+
+  Private _showDicEntriesCommand As RelayCommand
+  Public ReadOnly Property ShowDicEntriesCommand As RelayCommand
+   Get
+    If _showDicEntriesCommand Is Nothing Then
+     _showDicEntriesCommand = New RelayCommand(Sub(param) Me.ShowDicEntriesClicked())
+    End If
+    Return _showDicEntriesCommand
+   End Get
+  End Property
+
+  Protected Sub ShowDicEntriesClicked()
+   For Each rkv As ResourceKeyViewModel In ResourceKeys
+    If MainWindow.Dictionary.ContainsKey(rkv.OriginalValue) Then
+     If MainWindow.Dictionary(rkv.OriginalValue) = rkv.TargetValue Then
+      rkv.HighlightTarget("#DFF0D8")
+     Else
+      rkv.HighlightTarget()
+     End If
+    End If
+   Next
+  End Sub
+
+  Private _GetFromDictionaryCommand As RelayCommand
+  Public ReadOnly Property GetFromDictionaryCommand As RelayCommand
+   Get
+    If _GetFromDictionaryCommand Is Nothing Then
+     _GetFromDictionaryCommand = New RelayCommand(Sub(param) Me.GetFromDictionaryClicked(param))
+    End If
+    Return _GetFromDictionaryCommand
+   End Get
+  End Property
+
+  Protected Sub GetFromDictionaryClicked(param As Object)
+
+   Dim dictParam As String = CType(param, String)
+   Dim toTranslate As New Dictionary(Of String, String)
+   If dictParam.StartsWith("All") Then
+    For Each rkv As ResourceKeyViewModel In ResourceKeys
+     If MainWindow.Dictionary.ContainsKey(rkv.OriginalValue) Then
+      toTranslate.Add(rkv.Key, rkv.OriginalValue)
+     End If
+    Next
+   ElseIf dictParam.StartsWith("Empty") Then
+    For Each rkv As ResourceKeyViewModel In ResourceKeys
+     If String.IsNullOrEmpty(rkv.TargetValue) Then
+      toTranslate.Add(rkv.Key, rkv.OriginalValue)
+     End If
+    Next
+   ElseIf dictParam.StartsWith("Selected") Then
+    For Each rkv As ResourceKeyViewModel In ResourceKeys
+     If rkv.Selected Then
+      toTranslate.Add(rkv.Key, rkv.OriginalValue)
+     End If
+    Next
+   End If
+   Dim translated As Dictionary(Of String, String) = MainWindow.Dictionary.TranslateTerms(toTranslate)
+   If dictParam.EndsWith("2Target") Then
+    For Each rkv As ResourceKeyViewModel In ResourceKeys
+     If translated.ContainsKey(rkv.Key) Then
+      rkv.TargetValue = translated(rkv.Key)
+     End If
+    Next
+   ElseIf dictParam.EndsWith("2Compare") Then
+    For Each rkv As ResourceKeyViewModel In ResourceKeys
+     If translated.ContainsKey(rkv.Key) Then
+      rkv.CompareValue = translated(rkv.Key)
+     End If
+    Next
+    ShowCompareColumn = True
+   End If
+
+  End Sub
+#End Region
+
  End Class
 End Namespace

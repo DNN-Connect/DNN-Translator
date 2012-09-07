@@ -200,7 +200,6 @@
    <Button Grid.Row="0" Grid.Column="4" Content="New ..." HorizontalAlignment="Stretch"
            Command="{Binding NewCommand}"
            />
-
   </Grid>
    
 
