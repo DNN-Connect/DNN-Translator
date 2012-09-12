@@ -103,7 +103,8 @@ Namespace ViewModel
   Private _targetColor As SolidColorBrush
   Public Property TargetColor() As SolidColorBrush
    Get
-    If _targetColor Is Nothing Then _targetColor = CType((New BrushConverter).ConvertFrom("#D9EDF7"), SolidColorBrush)
+    'If _targetColor Is Nothing Then _targetColor = CType((New BrushConverter).ConvertFrom("#D9EDF7"), SolidColorBrush)
+    If _targetColor Is Nothing Then _targetColor = CType((New BrushConverter).ConvertFrom(_targetC), SolidColorBrush)
     Return _targetColor
    End Get
    Set(ByVal value As SolidColorBrush)
@@ -115,7 +116,8 @@ Namespace ViewModel
   Private _compareColor As SolidColorBrush
   Public Property CompareColor() As SolidColorBrush
    Get
-    If _compareColor Is Nothing Then _compareColor = Brushes.White
+    'If _compareColor Is Nothing Then _compareColor = Brushes.White
+    If _compareColor Is Nothing Then _compareColor = CType((New BrushConverter).ConvertFrom(_compareC), SolidColorBrush)
     Return _compareColor
    End Get
    Set(ByVal value As SolidColorBrush)
@@ -211,25 +213,29 @@ Namespace ViewModel
 #End Region
 
 #Region " Public Methods "
+  Private _targetC As String = "#D9EDF7"
   Public Sub HighlightTarget()
    HighlightTarget("#F2DEDE")
   End Sub
   Public Sub HighlightTarget(color As String)
-   HighlightTarget(CType((New BrushConverter).ConvertFrom(color), SolidColorBrush))
+   _targetC = color
+   'HighlightTarget(CType((New BrushConverter).ConvertFrom(color), SolidColorBrush))
   End Sub
-  Public Sub HighlightTarget(color As SolidColorBrush)
-   TargetColor = color
-  End Sub
+  'Public Sub HighlightTarget(color As SolidColorBrush)
+  ' TargetColor = color
+  'End Sub
 
+  Private _compareC As String = "#FFFFFF"
   Public Sub HighlightCompare()
    HighlightCompare("#F2DEDE")
   End Sub
   Public Sub HighlightCompare(color As String)
-   HighlightCompare(CType((New BrushConverter).ConvertFrom(color), SolidColorBrush))
+   _compareC = color
+   'HighlightCompare(CType((New BrushConverter).ConvertFrom(color), SolidColorBrush))
   End Sub
-  Public Sub HighlightCompare(color As SolidColorBrush)
-   CompareColor = color
-  End Sub
+  'Public Sub HighlightCompare(color As SolidColorBrush)
+  ' CompareColor = color
+  'End Sub
 
   Public Function Clone() As ResourceKeyViewModel
    Return New ResourceKeyViewModel(OriginalResource, TranslatedResource, CompareValue, LEText)

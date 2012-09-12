@@ -162,6 +162,7 @@ Namespace Common
    Setting("License", False) = License
    Setting("Copyright", False) = Copyright
    Setting("Dictionary", False) = Dictionary
+   Setting("Location", False) = Location
 
    MyBase.Save()
 
