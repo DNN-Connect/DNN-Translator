@@ -128,7 +128,7 @@ Namespace ViewModel
    Set(ByVal value As Common.ProjectSettings)
     _ProjectSettings = value
     Me.OnPropertyChanged("ProjectSettings")
-    If _ProjectSettings.Dictionary <> "" Then
+    If _ProjectSettings IsNot Nothing AndAlso _ProjectSettings.Dictionary <> "" Then
      Dictionary = New Data.TranslationDictionary(_ProjectSettings.Dictionary)
     Else
      Dictionary = New Data.TranslationDictionary(_TranslatorSettings.DefaultDictionary)
@@ -149,7 +149,7 @@ Namespace ViewModel
    Set(ByVal value As Common.TranslatorSettings)
     _TranslatorSettings = value
     Me.OnPropertyChanged("TranslatorSettings")
-    If _ProjectSettings.Dictionary = "" Then
+    If _ProjectSettings IsNot Nothing AndAlso _ProjectSettings.Dictionary = "" Then
      Dictionary = New Data.TranslationDictionary(_TranslatorSettings.DefaultDictionary)
     End If
    End Set
@@ -395,11 +395,15 @@ Namespace ViewModel
   End Structure
 
   Private Sub OpenResourceFileCompleted(sender As Object, e As RunWorkerCompletedEventArgs)
+   Try
    Dim result As OpenResourceFileResult = CType(e.Result, Global.DotNetNuke.Translator.ViewModel.MainWindowViewModel.OpenResourceFileResult)
    If result.mustAdd Then
     Workspaces.Add(result.workspace)
    End If
    SetActiveWorkspace(result.workspace)
+   Catch ex As Exception
+    MsgBox(e.Error.Message, MsgBoxStyle.Critical)
+   End Try
    IsBusy = False
   End Sub
 #End Region

@@ -13,7 +13,10 @@ Namespace Services.Translation.Google
   Public Sub New(appSettings As Common.TranslatorSettings)
    _googleApiKey = appSettings.GoogleApiKey
    For Each l As String In _validGoogleCultureCodes
+    Try
     _SupportedLanguages.Add(New System.Globalization.CultureInfo(l))
+    Catch ex As Exception
+    End Try
    Next
   End Sub
 
