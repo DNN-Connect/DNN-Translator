@@ -82,7 +82,10 @@ Namespace Services.Translation.Bing
     End Using
 
     For Each lang As String In languagesForTranslate
-     res.Add(New CultureInfo(lang))
+     Try
+      res.Add(New CultureInfo(lang))
+     Catch ex As Exception
+     End Try
     Next
    Catch ex As Exception
 
