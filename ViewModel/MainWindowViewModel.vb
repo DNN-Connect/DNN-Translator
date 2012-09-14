@@ -445,7 +445,10 @@ Namespace ViewModel
    End Get
   End Property
 
+  Private _opening As Boolean = False
   Protected Sub OpenClicked()
+   If _opening Then Exit Sub
+   _opening = True
 
    Dim fbd As New System.Windows.Forms.OpenFileDialog With {.CheckFileExists = True, .DefaultExt = ".trproj", .Filter = "translation project files (*.trproj)|*.trproj"}
    If TranslatorSettings.LastUsedDir = "" Then
@@ -521,6 +524,7 @@ Namespace ViewModel
     AddHandler ipvm.PropertyChanged, AddressOf PackageSelected
    Next
    IsBusy = False
+   _opening = False
 
   End Sub
 
