@@ -9,6 +9,7 @@ Namespace Services.Packing
   Private Property LanguagePack As Byte()
   Private Property Locale As CultureInfo
   Private Property Copyright As String = ""
+  Private Property AddedFiles As New List(Of String)
 
   Public Sub New(appSettings As TranslatorSettings, projectSettings As ProjectSettings, packageName As String, targetLocale As CultureInfo)
 
@@ -57,7 +58,8 @@ Namespace Services.Packing
    Dim packageNode As Xml.XmlNode = Manifest.CreatePackage(package)
    For Each fileKey As String In package.Manifest.ResourceFiles
     Dim targetFile As String = fileKey.Replace(".resx", "." & Locale.Name & ".resx")
-    If IO.File.Exists(Settings.Location & targetFile) Then
+    If Not AddedFiles.Contains(targetFile) AndAlso IO.File.Exists(Settings.Location & targetFile) Then
+     AddedFiles.Add(targetFile)
      Dim resFile As New ResourceFile(targetFile, Settings.Location & targetFile)
      If resFile.Resources.Count > 0 Then
       Dim targetFileOriginalCase As String = Settings.CurrentSnapShot.ResFileOriginalCasings(fileKey).Replace(".resx", "." & Locale.Name & ".resx", StringComparison.InvariantCultureIgnoreCase)

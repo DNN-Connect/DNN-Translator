@@ -50,7 +50,7 @@ Namespace Services.Packing
    Else
     package.AppendAttribute("type", "ExtensionLanguagePack")
    End If
-   package.AppendAttribute("version", originalPackage.Version)
+   package.AppendAttribute("version", Common.Globals.NormalizeVersion(originalPackage.Version))
    package.CreateAndAppendElement("friendlyName", String.Format("{0} {1}", originalPackage.PackageName, Locale.NativeName))
    package.CreateAndAppendElement("description", String.Format("{1} language pack for {0}", originalPackage.PackageName, Locale.EnglishName))
    Dim owner As XmlNode = package.CreateAndAppendElement("owner")
@@ -70,6 +70,7 @@ Namespace Services.Packing
    Dim languageFiles As XmlNode = component.CreateAndAppendElement("languageFiles")
    languageFiles.CreateAndAppendElement("code", Locale.Name)
    languageFiles.CreateAndAppendElement("displayName", Locale.NativeName)
+   languageFiles.CreateAndAppendElement("package", originalPackage.PackageName)
    languageFiles.CreateAndAppendElement("basePath", "")
    Return languageFiles
 
