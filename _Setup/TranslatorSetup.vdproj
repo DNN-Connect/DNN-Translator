@@ -535,14 +535,14 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Translator"
         "ProductCode" = "8:{E728BE47-DB2D-46F2-89A2-A197DBA5917F}"
-        "PackageCode" = "8:{87377E67-8C47-45FB-AF47-CFA99DA66B11}"
+        "PackageCode" = "8:{86CA8B3A-2C07-4DC2-8FFC-E7BD0558AE0E}"
         "UpgradeCode" = "8:{DE355882-EFCC-4A40-A728-76AEC4FB94A3}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.2"
         "Manufacturer" = "8:DotNetNuke Corp"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1084,7 +1084,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_52232E53B8DD46E28EDFAA3CE50A6FD8"
             {
-            "SourcePath" = "8:..\\obj\\x86\\Release\\Translator.exe"
+            "SourcePath" = "8:..\\obj\\x86\\Debug\\Translator.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_3D604A79AD064A13BEC71CF98B0766C0"
@@ -1112,7 +1112,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_BF8AAEFFA63547F38847EBA65F5124E5"
             {
-            "SourcePath" = "8:..\\obj\\x86\\Release\\Translator.exe"
+            "SourcePath" = "8:..\\obj\\x86\\Debug\\Translator.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_4981EF20B78F4ABBA71B4B473C8A475A"

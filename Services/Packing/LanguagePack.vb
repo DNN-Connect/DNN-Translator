@@ -11,7 +11,7 @@ Namespace Services.Packing
   Private Property Copyright As String = ""
   Private Property AddedFiles As New List(Of String)
 
-  Public Sub New(appSettings As TranslatorSettings, projectSettings As ProjectSettings, packageName As String, targetLocale As CultureInfo)
+  Public Sub New(appSettings As TranslatorSettings, projectSettings As ProjectSettings, packageFriendlyName As String, targetLocale As CultureInfo)
 
    Settings = projectSettings
    Locale = targetLocale
@@ -27,12 +27,12 @@ Namespace Services.Packing
     Using strmZipStream As New ZipOutputStream(LanguagePackStream)
      strmZipStream.SetLevel(9)
      For Each package As ViewModel.InstalledPackageViewModel In projectSettings.InstalledPackages
-      If package.PackageName = packageName Or packageName = "Full" Then
+      If package.FriendlyName = packageFriendlyName Or packageFriendlyName = "Full" Then
        AddPackage(package, strmZipStream)
       End If
      Next
      Manifest.Clean()
-     Dim manifestName As String = packageName & "_" & Locale.Name & ".dnn"
+     Dim manifestName As String = packageFriendlyName & "_" & Locale.Name & ".dnn"
      manifestName = manifestName.Replace("/", "_").Replace("\", "_")
      Dim myZipEntry As New ZipEntry(manifestName)
      strmZipStream.PutNextEntry(myZipEntry)
