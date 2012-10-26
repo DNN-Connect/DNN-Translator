@@ -24,7 +24,7 @@ Namespace Common
     If f.ParentNode.SelectSingleNode("basePath") IsNot Nothing Then
      fname = f.ParentNode.SelectSingleNode("basePath").InnerText.Replace("/", "\").ToLower & "\" & fname
     End If
-    fname = fname.Trim("\"c)
+    fname = fname.Trim("\"c).Replace("\\", "\")
     If Not ResourceFiles.Contains(fname) Then ResourceFiles.Add(fname)
    Next
 
@@ -60,7 +60,7 @@ Namespace Common
     Else
      Dim fname As String = path
      If fname <> "" Then fname &= "\"
-     fname &= f.Name.ToLower()
+     fname &= f.Name.ToLower().Replace("\\", "\")
      If Not ResourceFiles.Contains(fname) Then ResourceFiles.Add(fname)
     End If
    Next

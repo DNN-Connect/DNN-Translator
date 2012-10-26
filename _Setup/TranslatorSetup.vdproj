@@ -52,13 +52,13 @@
         "Entry"
         {
         "MsmKey" = "8:_CBCB07F171ABBA1610AFD40A541A3D7E"
-        "OwnerKey" = "8:_BF8AAEFFA63547F38847EBA65F5124E5"
+        "OwnerKey" = "8:_F393280FCF4D4A2C014C38DF1D7A71C1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_CBCB07F171ABBA1610AFD40A541A3D7E"
-        "OwnerKey" = "8:_F393280FCF4D4A2C014C38DF1D7A71C1"
+        "OwnerKey" = "8:_BF8AAEFFA63547F38847EBA65F5124E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -112,25 +112,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_52232E53B8DD46E28EDFAA3CE50A6FD8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D8F2ACCF6A65AABD141B85A321EEB101"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B7A755E023EC1A7C038F666019EF288C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F0B5B6D50708B6AD66096FFF1B324966"
+        "OwnerKey" = "8:_CBCB07F171ABBA1610AFD40A541A3D7E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -142,7 +124,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CBCB07F171ABBA1610AFD40A541A3D7E"
+        "OwnerKey" = "8:_F0B5B6D50708B6AD66096FFF1B324966"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B7A755E023EC1A7C038F666019EF288C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D8F2ACCF6A65AABD141B85A321EEB101"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_52232E53B8DD46E28EDFAA3CE50A6FD8"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -277,11 +277,6 @@
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_B7A755E023EC1A7C038F666019EF288C"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
@@ -308,11 +303,6 @@
             "AssemblyAsmDisplayName" = "8:Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_CBCB07F171ABBA1610AFD40A541A3D7E"
-                    {
-                    "Name" = "8:Microsoft.Windows.Shell.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Microsoft.Windows.Shell.dll"
             "TargetName" = "8:"
@@ -339,11 +329,6 @@
             "AssemblyAsmDisplayName" = "8:SharpZipLib, Version=0.81.0.1407, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_D8F2ACCF6A65AABD141B85A321EEB101"
-                    {
-                    "Name" = "8:SharpZipLib.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:SharpZipLib.dll"
             "TargetName" = "8:"
@@ -390,11 +375,6 @@
             "AssemblyAsmDisplayName" = "8:ICSharpCode.AvalonEdit, Version=4.2.0.8783, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_F0B5B6D50708B6AD66096FFF1B324966"
-                    {
-                    "Name" = "8:ICSharpCode.AvalonEdit.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:ICSharpCode.AvalonEdit.dll"
             "TargetName" = "8:"
@@ -421,11 +401,6 @@
             "AssemblyAsmDisplayName" = "8:RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_F393280FCF4D4A2C014C38DF1D7A71C1"
-                    {
-                    "Name" = "8:RibbonControlsLibrary.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:RibbonControlsLibrary.dll"
             "TargetName" = "8:"
@@ -534,15 +509,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Translator"
-        "ProductCode" = "8:{E728BE47-DB2D-46F2-89A2-A197DBA5917F}"
-        "PackageCode" = "8:{86CA8B3A-2C07-4DC2-8FFC-E7BD0558AE0E}"
+        "ProductCode" = "8:{FD299F4A-30B6-4159-A355-173FF885CD36}"
+        "PackageCode" = "8:{C8CB3FB3-F802-440D-8235-E8F3EF6E19D3}"
         "UpgradeCode" = "8:{DE355882-EFCC-4A40-A728-76AEC4FB94A3}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.2"
+        "ProductVersion" = "8:1.0.3"
         "Manufacturer" = "8:DotNetNuke Corp"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
