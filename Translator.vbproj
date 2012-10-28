@@ -91,6 +91,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\FocusExtension.vb" />
     <Compile Include="Common\TreeItem.vb" />
     <Compile Include="Common\ApplicationState.vb" />
     <Compile Include="Data\TranslationDictionary.vb" />

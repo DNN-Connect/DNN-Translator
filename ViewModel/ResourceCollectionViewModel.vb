@@ -14,9 +14,19 @@ Namespace ViewModel
 
 #Region " Properties "
   Public Property Exists As Boolean = True
-  Public Property HasSelection As Boolean = False
   Public Property HasTranslationServiceLocale As Boolean = False
   Public Property MainWindow As MainWindowViewModel = Nothing
+
+  Private _HasSelection As Boolean
+  Public Property HasSelection() As Boolean
+   Get
+    Return _HasSelection
+   End Get
+   Set(ByVal value As Boolean)
+    _HasSelection = value
+    MyBase.OnPropertyChanged("HasSelection")
+   End Set
+  End Property
 
   Private _HasChanges As Boolean = False
   Public Property HasChanges() As Boolean
@@ -305,7 +315,6 @@ Namespace ViewModel
     Case "Selected"
      _selectedList = Nothing ' reset the selection list
      HasSelection = True
-     Me.OnPropertyChanged("HasSelection")
     Case "TargetValue"
      HasChanges = True
    End Select
@@ -326,7 +335,7 @@ Namespace ViewModel
   Protected Function EditHtmlEnabled(param As Object) As Boolean
 
    For Each rkv As ResourceKeyViewModel In ResourceKeys
-    If rkv.Selected AndAlso rkv.OriginalValue.Contains("&lt;") Then
+    If rkv.Selected Then
      Return True
     End If
    Next
@@ -379,7 +388,7 @@ Namespace ViewModel
     Dim fileKey As String = resFile
     Dim targetFile As String = MainWindow.ProjectSettings.Location & "\" & resFile.Replace(".resx", "." & TargetLocale.Name & ".resx")
     Dim targetResx As New Common.ResourceFile(fileKey, targetFile)
-    For Each k As ResourceKeyViewModel In From x In ResourceKeys Where x.Changed And x.ResourceFile = fileKey And Trim(x.TargetValue) <> "" Select x
+    For Each k As ResourceKeyViewModel In From x In ResourceKeys Where x.Changed And x.ResourceFile = fileKey Select x
      targetResx.SetResourceValue(k.Key, k.TargetValue)
      k.Changed = False
     Next
@@ -549,6 +558,39 @@ Namespace ViewModel
    End If
 
   End Sub
+#End Region
+
+#Region " Move To Next "
+  'Private _MoveToNextCommand As RelayCommand
+  'Public ReadOnly Property MoveToNextCommand As RelayCommand
+  ' Get
+  '  If _MoveToNextCommand Is Nothing Then
+  '   _MoveToNextCommand = New RelayCommand(Sub(param)
+  '                                          MoveToNext()
+  '                                         End Sub,
+  '                                   Function()
+  '                                    Return HasSelection
+  '                                   End Function)
+  '  End If
+  '  Return _MoveToNextCommand
+  ' End Get
+  'End Property
+
+  'Public Sub MoveToNext()
+  ' Dim lastSelected As Integer = -1
+  ' For i As Integer = 0 To ResourceKeys.Count - 1
+  '  If ResourceKeys(i).Selected = True Then
+  '   lastSelected = i
+  '  End If
+  ' Next
+  ' For i As Integer = 0 To ResourceKeys.Count - 1
+  '  ResourceKeys(i).Selected = False
+  '  If i = lastSelected + 1 Then
+  '   ResourceKeys(i).Selected = True
+  '   ResourceKeys(i).TargetFocused = True
+  '  End If
+  ' Next
+  'End Sub
 #End Region
 
  End Class

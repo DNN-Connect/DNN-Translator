@@ -14,6 +14,16 @@
    Modifiers="Control"
    Command="{Binding Path=SelectAllCommand}"
    />
+  <KeyBinding
+   Key="S"
+   Modifiers="Control"
+   Command="{Binding Path=SaveCommand}"
+   />
+  <KeyBinding
+   Key="W"
+   Modifiers="Control"
+   Command="{Binding Path=CloseCommand}"
+   />
  </UserControl.InputBindings>
  <UserControl.Resources>
   <cm:BoolToVisibilityConverter x:Key="BoolToVisConverter" />
@@ -61,7 +71,12 @@
      Visibility="{Binding (FrameworkElement.DataContext).ShowTargetColumn, RelativeSource={x:Static RelativeSource.Self}, Converter={StaticResource BoolToVisConverter}}">
      <DataGridTemplateColumn.CellTemplate>
       <DataTemplate>
-       <TextBox Text="{Binding TargetValue, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Background="{Binding TargetColor, UpdateSourceTrigger=PropertyChanged}" />
+       <TextBox Text="{Binding TargetValue, UpdateSourceTrigger=PropertyChanged}" 
+                TextWrapping="Wrap" 
+                Background="{Binding TargetColor, UpdateSourceTrigger=PropertyChanged}"
+                x:Name="txtTarget"
+                >
+       </TextBox>
       </DataTemplate>
      </DataGridTemplateColumn.CellTemplate>
     </DataGridTemplateColumn>

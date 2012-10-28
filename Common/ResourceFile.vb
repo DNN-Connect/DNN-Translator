@@ -20,6 +20,10 @@ Namespace Common
   End Sub
 
   Public Sub SetResourceValue(key As String, value As String, lastModified As DateTime)
+   If value = "" AndAlso Resources.ContainsKey(key) Then
+    Resources.Remove(key)
+    Exit Sub
+   End If
    If Resources.ContainsKey(key) Then
     If Resources(key).Value <> value Then
      Resources(key).Value = value

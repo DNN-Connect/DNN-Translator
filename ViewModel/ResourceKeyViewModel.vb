@@ -36,6 +36,7 @@ Namespace ViewModel
     _changed = True
     Me.OnPropertyChanged("TargetValue")
     Me.OnPropertyChanged("Changed")
+    Me.OnPropertyChanged("TargetColor")
     If _leText IsNot Nothing Then
      _leText.Translation = value
     End If
@@ -61,6 +62,17 @@ Namespace ViewModel
    Set(ByVal value As Boolean)
     _selected = value
     Me.OnPropertyChanged("Selected")
+   End Set
+  End Property
+
+  Private _TargetFocused As Boolean = False
+  Public Property TargetFocused() As Boolean
+   Get
+    Return _TargetFocused
+   End Get
+   Set(ByVal value As Boolean)
+    _TargetFocused = value
+    Me.OnPropertyChanged("TargetFocused")
    End Set
   End Property
 
@@ -104,6 +116,7 @@ Namespace ViewModel
   Public Property TargetColor() As SolidColorBrush
    Get
     'If _targetColor Is Nothing Then _targetColor = CType((New BrushConverter).ConvertFrom("#D9EDF7"), SolidColorBrush)
+    If TargetValue = "" Or TargetValue = OriginalValue Then Return CType((New BrushConverter).ConvertFrom("#F2DEDE"), SolidColorBrush)
     If _targetColor Is Nothing Then _targetColor = CType((New BrushConverter).ConvertFrom(_targetC), SolidColorBrush)
     Return _targetColor
    End Get
@@ -213,7 +226,7 @@ Namespace ViewModel
 #End Region
 
 #Region " Public Methods "
-  Private _targetC As String = "#D9EDF7"
+  Private _targetC As String = "#FFFFFF"
   Public Sub HighlightTarget()
    HighlightTarget("#F2DEDE")
   End Sub

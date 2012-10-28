@@ -312,8 +312,7 @@ Namespace ViewModel
     collectionView.MoveCurrentTo(workspace)
    End If
 
-   MyBase.OnPropertyChanged("ActiveResourceCollection")
-   MyBase.OnPropertyChanged("HasActiveResourceCollection")
+   ActiveResourceCollectionChanged()
   End Sub
 
   Public ReadOnly Property ActiveWorkspace As WorkspaceViewModel
@@ -336,6 +335,11 @@ Namespace ViewModel
 #End Region
 
 #Region " Resource Files "
+  Public Sub ActiveResourceCollectionChanged()
+   MyBase.OnPropertyChanged("ActiveResourceCollection")
+   MyBase.OnPropertyChanged("HasActiveResourceCollection")
+  End Sub
+
   Public ReadOnly Property ActiveResourceCollection As ResourceCollectionViewModel
    Get
     If ActiveWorkspace Is Nothing Then Return Nothing
@@ -381,7 +385,7 @@ Namespace ViewModel
     Dim resFilename As String = resource.Substring(resource.LastIndexOf("\"c) + 1)
     Dim result As New OpenResourceFileResult
     result.mustAdd = False
-    result.workspace = CType(Me.Workspaces.FirstOrDefault(Function(vm) vm.ID = resFilename), ResourceFileViewModel)
+    result.workspace = CType(Me.Workspaces.FirstOrDefault(Function(vm) vm.ID = resource), ResourceFileViewModel)
     If result.workspace Is Nothing Then
      result.workspace = New ResourceFileViewModel(CType(e.Argument, Common.ParameterList))
      result.mustAdd = True
@@ -396,11 +400,11 @@ Namespace ViewModel
 
   Private Sub OpenResourceFileCompleted(sender As Object, e As RunWorkerCompletedEventArgs)
    Try
-   Dim result As OpenResourceFileResult = CType(e.Result, Global.DotNetNuke.Translator.ViewModel.MainWindowViewModel.OpenResourceFileResult)
-   If result.mustAdd Then
-    Workspaces.Add(result.workspace)
-   End If
-   SetActiveWorkspace(result.workspace)
+    Dim result As OpenResourceFileResult = CType(e.Result, Global.DotNetNuke.Translator.ViewModel.MainWindowViewModel.OpenResourceFileResult)
+    If result.mustAdd Then
+     Workspaces.Add(result.workspace)
+    End If
+    SetActiveWorkspace(result.workspace)
    Catch ex As Exception
     MsgBox(e.Error.Message, MsgBoxStyle.Critical)
    End Try

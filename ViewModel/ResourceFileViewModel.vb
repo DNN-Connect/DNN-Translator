@@ -20,7 +20,7 @@ Namespace ViewModel
    _originalResourceFile = parameters.Params(0)
    _fileName = _originalResourceFile.Substring(_originalResourceFile.LastIndexOf("\"c) + 1)
    Me.DisplayName = _fileName
-   Me.ID = _fileName
+   Me.ID = _originalResourceFile
    _fileName = _fileName.Replace(".en-US.", ".") ' deal with DNN 6.2 template files
    _fileName = _fileName.Substring(0, _fileName.Length - 5) ' take off the resx
    _targetResourceFile = IO.Path.GetDirectoryName(_originalResourceFile) & "\" & _fileName & "." & TargetLocale.Name & ".resx" ' it won't normally find something if locale is empty

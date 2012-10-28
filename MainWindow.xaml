@@ -106,7 +106,7 @@
       ToolTipTitle="Edit As Html"
       ToolTipDescription="Edit the selected key as HTML"
       Command="{Binding ActiveResourceCollection.EditHtmlCommand}"
-      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}"
+      IsEnabled="{Binding Path=HasActiveResourceCollection, FallbackValue=False}"
        />
     </ribbon:RibbonGroup>
     <ribbon:RibbonGroup x:Name="Clipboard" Header="Clipboard">

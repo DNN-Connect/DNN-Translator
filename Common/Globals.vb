@@ -76,6 +76,47 @@ Namespace Common
    Return res
   End Function
 
+#Region " UI "
+  Public Shared Function FindChild(Of T As DependencyObject)(parent As DependencyObject, childName As String) As T
+   ' Confirm parent and childName are valid. 
+   If parent Is Nothing Then
+    Return Nothing
+   End If
+
+   Dim foundChild As T = Nothing
+
+   Dim childrenCount As Integer = VisualTreeHelper.GetChildrenCount(parent)
+   For i As Integer = 0 To childrenCount - 1
+    Dim child = VisualTreeHelper.GetChild(parent, i)
+    ' If the child is not of the request child type child
+    Dim childType As T = TryCast(child, T)
+    If childType Is Nothing Then
+     ' recursively drill down the tree
+     foundChild = FindChild(Of T)(child, childName)
+
+     ' If the child is found, break so we do not overwrite the found child. 
+     If foundChild IsNot Nothing Then
+      Exit For
+     End If
+    ElseIf Not String.IsNullOrEmpty(childName) Then
+     Dim frameworkElement = TryCast(child, FrameworkElement)
+     ' If the child's name is set for search
+     If frameworkElement IsNot Nothing AndAlso frameworkElement.Name = childName Then
+      ' if the child's name is of the request name
+      foundChild = DirectCast(child, T)
+      Exit For
+     End If
+    Else
+     ' child element found.
+     foundChild = DirectCast(child, T)
+     Exit For
+    End If
+   Next
+
+   Return foundChild
+  End Function
+#End Region
+
 #Region " Encryption "
   Shared entropy As Byte() = System.Text.Encoding.Unicode.GetBytes("Not A Password")
 

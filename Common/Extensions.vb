@@ -3,6 +3,7 @@
 Namespace Common
  Public Module Extensions
 
+#Region " Various "
   <System.Runtime.CompilerServices.Extension()>
   Public Function GetIWin32Window(visual As System.Windows.Media.Visual) As System.Windows.Forms.IWin32Window
    Dim source = TryCast(System.Windows.PresentationSource.FromVisual(visual), System.Windows.Interop.HwndSource)
@@ -36,6 +37,22 @@ Namespace Common
    Return rootItem
   End Function
 
+  <System.Runtime.CompilerServices.Extension()>
+  Public Function GetDataGridRows(grid As System.Windows.Controls.DataGrid) As IEnumerable(Of System.Windows.Controls.DataGridRow)
+   Dim itemsSource = TryCast(grid.ItemsSource, IEnumerable)
+   Dim res As New List(Of System.Windows.Controls.DataGridRow)
+   If itemsSource Is Nothing Then Return res
+   For Each item As Object In itemsSource
+    Dim row = TryCast(grid.ItemContainerGenerator.ContainerFromItem(item), System.Windows.Controls.DataGridRow)
+    If row IsNot Nothing Then
+     res.Add(row)
+    End If
+   Next
+   Return res
+  End Function
+#End Region
+
+#Region " Xml "
   <System.Runtime.CompilerServices.Extension()>
   Public Function CreateAndAppendElement(ByRef node As Xml.XmlNode, name As String) As Xml.XmlNode
    Dim newElement As Xml.XmlNode = node.OwnerDocument.CreateElement(name)
@@ -71,9 +88,11 @@ Namespace Common
    End While
    Return originalString
   End Function
+#End Region
 
  End Module
 
+#Region " OldWindow "
  Public Class OldWindow
   Implements System.Windows.Forms.IWin32Window
   Private ReadOnly _handle As System.IntPtr
@@ -81,13 +100,13 @@ Namespace Common
    _handle = handle
   End Sub
 
-#Region "IWin32Window Members"
   Private ReadOnly Property System_Windows_Forms_IWin32Window_Handle() As System.IntPtr Implements System.Windows.Forms.IWin32Window.Handle
    Get
     Return _handle
    End Get
   End Property
-#End Region
 
  End Class
+#End Region
+
 End Namespace
