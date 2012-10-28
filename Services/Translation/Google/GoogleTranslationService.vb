@@ -57,6 +57,7 @@ Namespace Services.Translation.Google
      End If
     Next
    Catch ex As Exception
+    MsgBox(String.Format("Error connecting to Google: {0}", ex.Message), MsgBoxStyle.Critical)
    End Try
 
    Return res

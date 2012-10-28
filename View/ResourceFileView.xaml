@@ -43,7 +43,7 @@
       AutoGenerateColumns="false"
       ItemsSource="{Binding Path=ResourceKeys}" EnableRowVirtualization="False">
    <DataGrid.Columns>
-    <DataGridTemplateColumn Header="File" Width="SizeToCells" IsReadOnly="True"
+    <DataGridTemplateColumn Header="File" Width="SizeToCells" IsReadOnly="True" SortMemberPath="ResourceFile"
      Visibility="{Binding (FrameworkElement.DataContext).ShowFileColumn, RelativeSource={x:Static RelativeSource.Self}, Converter={StaticResource BoolToVisConverter}}">
      <DataGridTemplateColumn.CellTemplate>
       <DataTemplate>
@@ -51,14 +51,14 @@
       </DataTemplate>
      </DataGridTemplateColumn.CellTemplate>
     </DataGridTemplateColumn>
-    <DataGridTemplateColumn Header="Key" Width="SizeToCells" IsReadOnly="True">
+    <DataGridTemplateColumn Header="Key" Width="SizeToCells" IsReadOnly="True" SortMemberPath="Key">
      <DataGridTemplateColumn.CellTemplate>
       <DataTemplate>
        <TextBlock Text="{Binding Key}" />
       </DataTemplate>
      </DataGridTemplateColumn.CellTemplate>
     </DataGridTemplateColumn>
-    <DataGridTemplateColumn Header="Original Value" Width="*" IsReadOnly="True">
+    <DataGridTemplateColumn Header="Original Value" Width="*" IsReadOnly="True" SortMemberPath="OriginalValue">
      <DataGridTemplateColumn.CellTemplate>
       <DataTemplate>
        <TextBox Text="{Binding OriginalValue, Mode=OneWay}" TextWrapping="Wrap" IsReadOnly="True" />
@@ -66,7 +66,7 @@
      </DataGridTemplateColumn.CellTemplate>
     </DataGridTemplateColumn>
     <DataGridTemplateColumn
-     Width="*" IsReadOnly="False" 
+     Width="*" IsReadOnly="False" SortMemberPath="TargetValue"
      Header="{Binding (FrameworkElement.DataContext).TargetColumnHeader, RelativeSource={x:Static RelativeSource.Self}}"
      Visibility="{Binding (FrameworkElement.DataContext).ShowTargetColumn, RelativeSource={x:Static RelativeSource.Self}, Converter={StaticResource BoolToVisConverter}}">
      <DataGridTemplateColumn.CellTemplate>
@@ -81,7 +81,7 @@
      </DataGridTemplateColumn.CellTemplate>
     </DataGridTemplateColumn>
     <DataGridTemplateColumn
-     Width="*" IsReadOnly="True"
+     Width="*" IsReadOnly="True" SortMemberPath="CompareValue"
      Header="{Binding (FrameworkElement.DataContext).CompareColumnHeader, RelativeSource={x:Static RelativeSource.Self}}"
      Visibility="{Binding (FrameworkElement.DataContext).ShowCompareColumn, RelativeSource={x:Static RelativeSource.Self}, Converter={StaticResource BoolToVisConverter}}">
      <DataGridTemplateColumn.CellTemplate>

@@ -88,7 +88,7 @@ Namespace Services.Translation.Bing
      End Try
     Next
    Catch ex As Exception
-
+    MsgBox(String.Format("Error connecting to Bing: {0}", ex.Message), MsgBoxStyle.Critical)
    End Try
 
    Return res
@@ -167,7 +167,7 @@ Namespace Services.Translation.Bing
      requestSize = 0
     Next
    Catch ex As Exception
-
+    MsgBox(String.Format("Error connecting to Bing: {0}", ex.Message), MsgBoxStyle.Critical)
    End Try
 
    Return res
