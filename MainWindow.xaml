@@ -168,6 +168,10 @@
      <ribbon:RibbonSplitButton
       Label="Translate To Target"
       LargeImageSource="Images\32\preferences-desktop-locale-3.png"
+      ToolTipTitle="Selected To Target"
+      ToolTipDescription="Attempt to translate all selected keys"
+      Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
+      CommandParameter="Selected,2Target"
       IsEnabled="{Binding Path=ActiveResourceCollection.HasTranslationServiceLocale, FallbackValue=False}">
       <ribbon:RibbonButton
       Label="All"
@@ -183,18 +187,14 @@
       ToolTipDescription="Attempt to translate all empty keys"
       Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
       CommandParameter="Empty,2Target" />
-      <ribbon:RibbonButton
-      Label="Selected"
-      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
-      ToolTipTitle="Selected To Target"
-      ToolTipDescription="Attempt to translate all selected keys"
-      Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
-      CommandParameter="Selected,2Target"
-      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
      </ribbon:RibbonSplitButton>
      <ribbon:RibbonSplitButton
       Label="Translate To Temp"
       LargeImageSource="Images\32\preferences-desktop-locale-3.png"
+      ToolTipTitle="Selected To Temp"
+      ToolTipDescription="Attempt to translate all selected keys and put the value in the comparison column"
+      Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
+      CommandParameter="Selected,2Compare"
       IsEnabled="{Binding Path=ActiveResourceCollection.HasTranslationServiceLocale, FallbackValue=False}">
       <ribbon:RibbonButton
       Label="All"
@@ -210,14 +210,6 @@
       ToolTipDescription="Attempt to translate all empty keys and put the value in the comparison column"
       Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
       CommandParameter="Empty,2Compare" />
-      <ribbon:RibbonButton
-      Label="Selected"
-      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
-      ToolTipTitle="Selected To Temp"
-      ToolTipDescription="Attempt to translate all selected keys and put the value in the comparison column"
-      Command="{Binding ActiveResourceCollection.TranslationServiceTranslateCommand}"
-      CommandParameter="Selected,2Compare"
-      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
      </ribbon:RibbonSplitButton>
      <ribbon:RibbonComboBox Width="110">
       <ribbon:RibbonGallery SelectedItem="{Binding Path=ActiveResourceCollection.TranslationServiceLocale}">
@@ -230,6 +222,10 @@
       IsEnabled="{Binding Path=ActiveResourceCollection.Exists, FallbackValue=False}">
      <ribbon:RibbonSplitButton
       Label="Original To Target"
+      ToolTipTitle="Copy Selected Original To Target"
+      ToolTipDescription="Copy resources from original values to target for the selected keys"
+      Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
+      CommandParameter="Selected,Original2Target"
       LargeImageSource="Images\32\go-next-5.png">
       <ribbon:RibbonButton
       Label="All"
@@ -245,18 +241,14 @@
       ToolTipDescription="Copy resources from original values to target where there is no target value"
       Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
       CommandParameter="Empty,Original2Target" />
-      <ribbon:RibbonButton
-      Label="Selected"
-      SmallImageSource="Images\16\go-next-5.png"
-      ToolTipTitle="Copy Selected Original To Target"
-      ToolTipDescription="Copy resources from original values to target for the selected keys"
-      Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
-      CommandParameter="Selected,Original2Target"
-      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
      </ribbon:RibbonSplitButton>
      <ribbon:RibbonSplitButton
       Label="Temp To Target"
       LargeImageSource="Images\32\go-previous-5.png"
+      ToolTipTitle="Copy Selected From Temp To Target"
+      ToolTipDescription="Copy resources from comparison values to target for the selected keys"
+      Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
+      CommandParameter="Selected,Compare2Target"
       IsEnabled="{Binding Path=ActiveResourceCollection.ShowCompareColumn, FallbackValue=False}">
       <ribbon:RibbonButton
       Label="All"
@@ -272,14 +264,6 @@
       ToolTipDescription="Copy resources from comparison values to target where there is no target value"
       Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
       CommandParameter="Empty,Compare2Target" />
-      <ribbon:RibbonButton
-      Label="Selected"
-      SmallImageSource="Images\16\go-previous-5.png"
-      ToolTipTitle="Copy Selected From Temp To Target"
-      ToolTipDescription="Copy resources from comparison values to target for the selected keys"
-      Command="{Binding Path=ActiveResourceCollection.CopyAllCommand}"
-      CommandParameter="Selected,Compare2Target"
-      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
      </ribbon:RibbonSplitButton>
     </ribbon:RibbonGroup>
     <ribbon:RibbonGroup x:Name="DictionaryGroup" Header="Dictionary">
@@ -293,6 +277,10 @@
      <ribbon:RibbonSplitButton
       Label="Add To Dictionary"
       LargeImageSource="Images\32\preferences-desktop-locale-3.png"
+      ToolTipTitle="Selected To Target"
+      ToolTipDescription="Attempt to translate all selected keys"
+      Command="{Binding ActiveResourceCollection.AddToDictionaryCommand}"
+      CommandParameter="Selected"
       IsEnabled="{Binding Path=HasActiveResourceCollection, FallbackValue=False}">
       <ribbon:RibbonButton
       Label="All"
@@ -301,18 +289,14 @@
       ToolTipDescription="Attempt to translate all keys and overwrite any existing values on target"
       Command="{Binding ActiveResourceCollection.AddToDictionaryCommand}"
       CommandParameter="All" />
-      <ribbon:RibbonButton
-      Label="Selected"
-      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
-      ToolTipTitle="Selected To Target"
-      ToolTipDescription="Attempt to translate all selected keys"
-      Command="{Binding ActiveResourceCollection.AddToDictionaryCommand}"
-      CommandParameter="Selected"
-      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
      </ribbon:RibbonSplitButton>
      <ribbon:RibbonSplitButton
       Label="Translate To Target"
       LargeImageSource="Images\32\preferences-desktop-locale-3.png"
+      ToolTipTitle="Selected To Target"
+      ToolTipDescription="Attempt to translate all selected keys"
+      Command="{Binding ActiveResourceCollection.GetFromDictionaryCommand}"
+      CommandParameter="Selected,2Target"
       IsEnabled="{Binding Path=HasActiveResourceCollection, FallbackValue=False}">
       <ribbon:RibbonButton
       Label="All"
@@ -328,18 +312,14 @@
       ToolTipDescription="Attempt to translate all empty keys"
       Command="{Binding ActiveResourceCollection.GetFromDictionaryCommand}"
       CommandParameter="Empty,2Target" />
-      <ribbon:RibbonButton
-      Label="Selected"
-      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
-      ToolTipTitle="Selected To Target"
-      ToolTipDescription="Attempt to translate all selected keys"
-      Command="{Binding ActiveResourceCollection.GetFromDictionaryCommand}"
-      CommandParameter="Selected,2Target"
-      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
      </ribbon:RibbonSplitButton>
      <ribbon:RibbonSplitButton
       Label="Translate To Temp"
       LargeImageSource="Images\32\preferences-desktop-locale-3.png"
+      ToolTipTitle="Selected To Temp"
+      ToolTipDescription="Attempt to translate all selected keys and put the value in the comparison column"
+      Command="{Binding ActiveResourceCollection.GetFromDictionaryCommand}"
+      CommandParameter="Selected,2Compare"
       IsEnabled="{Binding Path=HasActiveResourceCollection, FallbackValue=False}">
       <ribbon:RibbonButton
       Label="All"
@@ -355,14 +335,6 @@
       ToolTipDescription="Attempt to translate all empty keys and put the value in the comparison column"
       Command="{Binding ActiveResourceCollection.GetFromDictionaryCommand}"
       CommandParameter="Empty,2Compare" />
-      <ribbon:RibbonButton
-      Label="Selected"
-      SmallImageSource="Images\16\preferences-desktop-locale-3.png"
-      ToolTipTitle="Selected To Temp"
-      ToolTipDescription="Attempt to translate all selected keys and put the value in the comparison column"
-      Command="{Binding ActiveResourceCollection.GetFromDictionaryCommand}"
-      CommandParameter="Selected,2Compare"
-      IsEnabled="{Binding Path=ActiveResourceCollection.HasSelection, FallbackValue=False}" />
      </ribbon:RibbonSplitButton>
     </ribbon:RibbonGroup>
    </ribbon:RibbonTab>
