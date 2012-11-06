@@ -251,7 +251,9 @@ Namespace ViewModel
   'End Sub
 
   Public Function Clone() As ResourceKeyViewModel
-   Return New ResourceKeyViewModel(OriginalResource, TranslatedResource, CompareValue, LEText)
+   Dim res As New ResourceKeyViewModel(OriginalResource, TranslatedResource, CompareValue, LEText)
+   res.TargetValue = TargetValue
+   Return res
   End Function
 #End Region
 

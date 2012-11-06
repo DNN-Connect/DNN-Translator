@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 	xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Height="600" Width="800">
+             d:DesignHeight="300" d:DesignWidth="500" Height="800" Width="900">
  <Grid Margin="6">
 
   <Grid.RowDefinitions>
@@ -25,7 +25,9 @@
 				Name="teOriginalText"
 				FontFamily="Courier New"
 				FontSize="10pt"
-				SyntaxHighlighting="HTML" Grid.Row="2" IsEnabled="False">
+				SyntaxHighlighting="HTML"
+    Grid.Row="2"
+    WordWrap="True">
   </avalonEdit:TextEditor>
 
   <Label Grid.Row="3" Content="Translation" FontWeight="Bold" Background="Silver" />
@@ -34,7 +36,9 @@
 				Name="teTargetText"
 				FontFamily="Courier New"
 				FontSize="10pt"
-				SyntaxHighlighting="HTML" Grid.Row="4">
+				SyntaxHighlighting="HTML"
+    Grid.Row="4"
+    WordWrap="True">
   </avalonEdit:TextEditor>
 
   <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="5">

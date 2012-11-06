@@ -350,6 +350,7 @@ Namespace ViewModel
      Dim ws As New HtmlKeyViewModel(MainWindow, rkv, TargetLocale)
      htmlEdit.DataContext = ws
      htmlEdit.ShowDialog()
+     Exit Sub
     End If
    Next
   End Sub
