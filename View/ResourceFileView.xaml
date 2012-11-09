@@ -76,6 +76,9 @@
                 Background="{Binding TargetColor, UpdateSourceTrigger=PropertyChanged}"
                 x:Name="txtTarget"
                 >
+        <TextBox.InputBindings>
+         <KeyBinding Key="Enter" Modifiers="Control" Command="{Binding Path=KeyPressCommand}" CommandParameter="{Binding ElementName=txtTarget, Path=CaretIndex}" />
+        </TextBox.InputBindings>
        </TextBox>
       </DataTemplate>
      </DataGridTemplateColumn.CellTemplate>
