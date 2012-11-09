@@ -50,6 +50,47 @@ Namespace Common
    Next
    Return res
   End Function
+
+  <System.Runtime.CompilerServices.Extension()>
+  Public Function FindElementByName(root As FrameworkElement, name As String) As FrameworkElement
+   Dim tree As New Stack(Of FrameworkElement)()
+   tree.Push(root)
+   While tree.Count > 0
+    Dim current As FrameworkElement = tree.Pop()
+    ' root is null
+    If current.Name = name Then
+     Return current
+    End If
+    Dim count As Integer = VisualTreeHelper.GetChildrenCount(current)
+    For SupplierCounter As Integer = 0 To count - 1
+     Dim child As DependencyObject = VisualTreeHelper.GetChild(current, SupplierCounter)
+     If TypeOf child Is FrameworkElement Then
+      tree.Push(DirectCast(child, FrameworkElement))
+     End If
+    Next
+   End While
+   Return Nothing
+  End Function
+
+  <System.Runtime.CompilerServices.Extension()>
+  Public Function GetVisualChild(Of T As Visual)(parent As Visual, name As String) As T
+   Dim child As T = Nothing
+   Dim numVisuals As Integer = VisualTreeHelper.GetChildrenCount(parent)
+   For i As Integer = 0 To numVisuals - 1
+    Dim v As Visual = DirectCast(VisualTreeHelper.GetChild(parent, i), Visual)
+    Dim element As FrameworkElement = TryCast(v, FrameworkElement)
+    If element IsNot Nothing AndAlso element.Name.ToLower = name.ToLower Then
+     child = TryCast(v, T)
+    End If
+    If child Is Nothing Then
+     child = GetVisualChild(Of T)(v, name)
+    End If
+    If child IsNot Nothing Then
+     Exit For
+    End If
+   Next
+   Return child
+  End Function
 #End Region
 
 #Region " Xml "

@@ -257,22 +257,5 @@ Namespace ViewModel
   End Function
 #End Region
 
-#Region " KeyPress "
-  Private _keyPress As RelayCommand
-  Public ReadOnly Property KeyPressCommand As RelayCommand
-   Get
-    If _keyPress Is Nothing Then
-     _keyPress = New RelayCommand(Sub(param) Me.KeyPressed(param))
-    End If
-    Return _keyPress
-   End Get
-  End Property
-  Protected Sub KeyPressed(param As Object)
-
-   TargetValue.Insert(CInt(param), vbCrLf)
-
-  End Sub
-#End Region
-
  End Class
 End Namespace
