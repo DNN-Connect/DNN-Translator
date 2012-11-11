@@ -443,5 +443,11 @@
   <ItemGroup>
     <Resource Include="Images\32\format-justify-left-4.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="SmithHtmlEditor\SmithHtmlEditor.csproj">
+      <Project>{84BADDA1-AB3A-4064-B87E-178D7446901D}</Project>
+      <Name>SmithHtmlEditor</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

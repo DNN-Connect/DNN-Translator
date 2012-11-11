@@ -514,13 +514,19 @@ Namespace ViewModel
   Private Sub OpenLocationCompleted(sender As Object, e As RunWorkerCompletedEventArgs)
 
    Dim result As Common.ProjectSettings = CType(e.Result, Common.ProjectSettings)
-   Me.ProjectSettings = result
-   If ProjectSettings.TargetLocale <> "" Then
-    SetLocale(ProjectSettings.TargetLocale)
+   If Not IO.Directory.Exists(ProjectSettings.Location) Then
+    If ProjectSettings.SettingsFileName <> "" Then
+     _RecentLocations.Remove(ProjectSettings.SettingsFileName)
+    End If
+   Else
+    Me.ProjectSettings = result
+    If ProjectSettings.TargetLocale <> "" Then
+     SetLocale(ProjectSettings.TargetLocale)
+    End If
+    _treeContent = Nothing
+    _currentLocation = ProjectSettings.Location
+    MainStatus = "Location: " & ProjectSettings.Location
    End If
-   _treeContent = Nothing
-   _currentLocation = ProjectSettings.Location
-   MainStatus = "Location: " & ProjectSettings.Location
 
    MyBase.OnPropertyChanged("RecentLocationsList")
    MyBase.OnPropertyChanged("TreeContent")

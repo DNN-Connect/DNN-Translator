@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-	xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+        xmlns:smith="clr-namespace:Smith.WPF.HtmlEditor;assembly=Smith.WPF.HtmlEditor"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500" Height="800" Width="900">
  <Grid Margin="6">
@@ -21,25 +21,15 @@
 
   <Label Grid.Row="1" Content="Original" FontWeight="Bold" Background="Silver" />
 
-  <avalonEdit:TextEditor
-				Name="teOriginalText"
-				FontFamily="Courier New"
-				FontSize="10pt"
-				SyntaxHighlighting="HTML"
+  <smith:HtmlEditor x:Name="teOriginalText"
     Grid.Row="2"
-    WordWrap="True">
-  </avalonEdit:TextEditor>
+                          />
 
   <Label Grid.Row="3" Content="Translation" FontWeight="Bold" Background="Silver" />
 
-  <avalonEdit:TextEditor
-				Name="teTargetText"
-				FontFamily="Courier New"
-				FontSize="10pt"
-				SyntaxHighlighting="HTML"
+  <smith:HtmlEditor x:Name="teTargetText"
     Grid.Row="4"
-    WordWrap="True">
-  </avalonEdit:TextEditor>
+                          />
 
   <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="5">
    <Button Content="Cancel" Margin="6" Width="80" Name="cmdCancel" />
