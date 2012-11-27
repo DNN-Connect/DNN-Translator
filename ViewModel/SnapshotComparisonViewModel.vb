@@ -30,7 +30,8 @@
      Dim key As String = resKey.Key
      Dim origRow As IEnumerable(Of Snapshot.ResourcesRow) = From x In ComparisonSnapshot.Resources Where x.FileKey = fileKey And x.ResourceKey = key Select x
      If origRow.Count > 0 Then
-      If System.Web.HttpUtility.HtmlDecode(resKey.Value) <> origRow(0).ResourceValue Then
+      'If System.Web.HttpUtility.HtmlDecode(resKey.Value) <> origRow(0).ResourceValue Then
+      If resKey.Value <> origRow(0).ResourceValue Then
        ChangedKeys.Add(New ResourceKeyViewModel(resKey, Common.Globals.GetTranslation(mainWindow.ProjectSettings.Location, resKey.FileKey, resKey.Key, locale), origRow(0).ResourceValue))
        NewWords += resKey.Value.Length - resKey.Value.Replace(" ", "").Length
       End If

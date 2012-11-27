@@ -1,4 +1,5 @@
-﻿Imports System.Xml
+﻿Imports System.Linq
+Imports System.Xml
 
 Namespace Common
  Public Class ResourceFile
@@ -46,7 +47,8 @@ Namespace Common
     For Each x As XmlNode In Me.DocumentElement.SelectNodes("/root/data")
      Dim r As New Resource
      r.Key = x.Attributes("name").InnerText
-     r.Value = x.SelectSingleNode("value").InnerXml
+     'r.Value = x.SelectSingleNode("value").InnerXml
+     r.Value = x.SelectSingleNode("value").InnerText
      If x.Attributes("lastModified") IsNot Nothing Then
       r.LastModified = CDate(x.Attributes("lastModified").InnerText)
      End If
@@ -70,7 +72,7 @@ Namespace Common
    If Copyright <> "" Then
     Me.DocumentElement.SelectSingleNode("/root").AppendChild(Me.CreateComment(Copyright))
    End If
-   For Each k As KeyValuePair(Of String, Resource) In Resources
+   For Each k As KeyValuePair(Of String, Resource) In Resources.OrderBy(Function(u) u.Value.Key)
     If Not String.IsNullOrEmpty(k.Value.Value) Then
      Dim x As XmlNode = Me.CreateElement("data")
      Me.DocumentElement.SelectSingleNode("/root").AppendChild(x)
@@ -84,7 +86,8 @@ Namespace Common
      End If
      Dim v As XmlNode = Me.CreateElement("value")
      x.AppendChild(v)
-     v.InnerXml = k.Value.Value
+     'v.InnerXml = k.Value.Value
+     v.InnerText = k.Value.Value
      Dim space As XmlAttribute = Me.CreateAttribute("xml:space")
      v.Attributes.Append(space)
      space.InnerText = "preserve"

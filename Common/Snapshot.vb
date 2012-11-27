@@ -44,7 +44,8 @@ Partial Class Snapshot
        Dim rr As ResourcesRow = Me.Resources.NewResourcesRow
        rr.FileKey = fileKey
        rr.ResourceKey = key
-       rr.ResourceValue = System.Web.HttpUtility.HtmlDecode(resFile.Resources(key).Value)
+       'rr.ResourceValue = System.Web.HttpUtility.HtmlDecode(resFile.Resources(key).Value)
+       rr.ResourceValue = resFile.Resources(key).Value
        Me.Resources.AddResourcesRow(rr)
        Me.ResFileOriginalCasings(fileKey) = fileKeyOriginalCasing
       Next

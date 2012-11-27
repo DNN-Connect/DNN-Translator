@@ -31,7 +31,8 @@ Namespace ViewModel
     For Each resFile As Common.ResourceFile In MainWindow.ProjectSettings.CurrentSnapShot.ResourceFiles.Values
      If resFile.FilePath.ToLower.StartsWith(directory) Then
       For Each key As String In resFile.Resources.Keys
-       Dim contents As String = System.Web.HttpUtility.HtmlDecode(resFile.Resources(key).Value)
+       'Dim contents As String = System.Web.HttpUtility.HtmlDecode(resFile.Resources(key).Value)
+       Dim contents As String = resFile.Resources(key).Value
        If contents.IndexOf(SearchString, StringComparison.InvariantCultureIgnoreCase) > -1 Then
         AddKey(New ResourceKeyViewModel(resFile.Resources(key), Common.Globals.GetTranslation(_basePath, resFile.fileKey, key, TargetLocale.Name)))
        End If
