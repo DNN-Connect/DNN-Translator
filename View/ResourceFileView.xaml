@@ -42,9 +42,12 @@
       CanUserResizeRows="False"
       AutoGenerateColumns="false"
       ItemsSource="{Binding Path=ResourceKeys}" EnableRowVirtualization="False">
+   <DataGrid.Resources>
+    <cm:BindingProxy x:Key="Proxy" Data="{Binding}" />
+   </DataGrid.Resources>
    <DataGrid.Columns>
     <DataGridTemplateColumn Header="File" Width="SizeToCells" IsReadOnly="True" SortMemberPath="ResourceFile"
-     Visibility="{Binding (FrameworkElement.DataContext).ShowFileColumn, RelativeSource={x:Static RelativeSource.Self}, Converter={StaticResource BoolToVisConverter}}">
+     Visibility="{Binding Data.ShowFileColumn, Source={StaticResource Proxy}, Converter={StaticResource BoolToVisConverter}}">
      <DataGridTemplateColumn.CellTemplate>
       <DataTemplate>
        <TextBlock Text="{Binding ResourceFile}" />
@@ -67,8 +70,8 @@
     </DataGridTemplateColumn>
     <DataGridTemplateColumn
      Width="*" IsReadOnly="False" SortMemberPath="TargetValue"
-     Header="{Binding (FrameworkElement.DataContext).TargetColumnHeader, RelativeSource={x:Static RelativeSource.Self}}"
-     Visibility="{Binding Path=(FrameworkElement.DataContext).ShowTargetColumn, RelativeSource={x:Static RelativeSource.Self}, Converter={StaticResource BoolToVisConverter}}">
+     Header="{Binding Data.TargetColumnHeader, Source={StaticResource Proxy}}"
+     Visibility="{Binding Data.ShowTargetColumn, Source={StaticResource Proxy}, Converter={StaticResource BoolToVisConverter}}">
      <DataGridTemplateColumn.CellTemplate>
       <DataTemplate>
        <TextBox Text="{Binding TargetValue, UpdateSourceTrigger=PropertyChanged}" 
@@ -82,8 +85,8 @@
     </DataGridTemplateColumn>
     <DataGridTemplateColumn
      Width="*" IsReadOnly="True" SortMemberPath="CompareValue"
-     Header="{Binding (FrameworkElement.DataContext).CompareColumnHeader, RelativeSource={x:Static RelativeSource.Self}}"
-     Visibility="{Binding (FrameworkElement.DataContext).ShowCompareColumn, RelativeSource={x:Static RelativeSource.Self}, Converter={StaticResource BoolToVisConverter}}">
+     Header="{Binding Data.CompareColumnHeader, Source={StaticResource Proxy}}"
+     Visibility="{Binding Data.ShowCompareColumn, Source={StaticResource Proxy}, Converter={StaticResource BoolToVisConverter}}">
      <DataGridTemplateColumn.CellTemplate>
       <DataTemplate>
        <TextBox Text="{Binding CompareValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Background="{Binding CompareColor, UpdateSourceTrigger=PropertyChanged}" />

@@ -88,6 +88,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\BindingProxy.vb" />
+    <Compile Include="Common\BoolToWidthConverter.vb" />
     <Compile Include="Common\FocusExtension.vb" />
     <Compile Include="Common\TreeItem.vb" />
     <Compile Include="Common\ApplicationState.vb" />
