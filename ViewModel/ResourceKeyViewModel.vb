@@ -34,6 +34,7 @@ Namespace ViewModel
    Set(ByVal value As String)
     _targetValue = value
     _changed = True
+    Downloaded = False
     Me.OnPropertyChanged("TargetValue")
     Me.OnPropertyChanged("Changed")
     Me.OnPropertyChanged("TargetColor")
@@ -111,6 +112,7 @@ Namespace ViewModel
 
   Public Property LEText As Common.LEService.TextInfo
   Public Property OriginalResource() As Resource
+  Public Property Downloaded As Boolean = False
 
   Private _targetColor As SolidColorBrush
   Public Property TargetColor() As SolidColorBrush
@@ -255,6 +257,13 @@ Namespace ViewModel
    res.TargetValue = TargetValue
    Return res
   End Function
+
+  Public Sub SetDownloadedValue(text As Common.LEService.TextInfo)
+   _targetValue = text.Translation
+   _LastModified = text.LastModified
+   Me.OnPropertyChanged("TargetValue")
+   Me.OnPropertyChanged("TargetColor")
+  End Sub
 #End Region
 
  End Class

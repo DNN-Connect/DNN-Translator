@@ -390,7 +390,11 @@ Namespace ViewModel
     Dim targetFile As String = MainWindow.ProjectSettings.Location & "\" & resFile.Replace(".resx", "." & TargetLocale.Name & ".resx")
     Dim targetResx As New Common.ResourceFile(fileKey, targetFile)
     For Each k As ResourceKeyViewModel In From x In ResourceKeys Where x.Changed And x.ResourceFile = fileKey Select x
-     targetResx.SetResourceValue(k.Key, k.TargetValue)
+     If k.Changed And Not k.Downloaded Then
+      targetResx.SetResourceValue(k.Key, k.TargetValue, Now)
+     Else
+      targetResx.SetResourceValue(k.Key, k.TargetValue, k.LastModified)
+     End If
      k.Changed = False
     Next
     targetResx.Save()

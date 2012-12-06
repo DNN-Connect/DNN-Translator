@@ -370,13 +370,29 @@
       ToolTipDescription="Upload all keys in this view to the server"
       Command="{Binding ActiveResourceCollection.UploadCommand}"
       CommandParameter="All" />
-     <ribbon:RibbonButton
-      Label="Download"
+     <ribbon:RibbonSplitButton
+      Label="Download To Target"
       LargeImageSource="Images\32\go-down-5.png"
-      ToolTipTitle="Download remote resources for this file"
-      ToolTipDescription=""
+      ToolTipTitle="Selected To Target"
+      ToolTipDescription="Attempt to translate all selected keys"
       Command="{Binding ActiveResourceCollection.DownloadLatestCommand}"
-      CommandParameter="" />
+      CommandParameter="Selected"
+      IsEnabled="{Binding Path=ActiveResourceCollection.HasTranslationServiceLocale, FallbackValue=False}">
+      <ribbon:RibbonButton
+      Label="All"
+      SmallImageSource="Images\16\go-down-5.png"
+      ToolTipTitle="All To Target"
+      ToolTipDescription="Attempt to translate all keys and overwrite any existing values on target"
+      Command="{Binding ActiveResourceCollection.DownloadLatestCommand}"
+      CommandParameter="All" />
+      <ribbon:RibbonButton
+      Label="Empty"
+      SmallImageSource="Images\16\go-down-5.png"
+      ToolTipTitle="Empty To Target"
+      ToolTipDescription="Attempt to translate all empty keys"
+      Command="{Binding ActiveResourceCollection.DownloadLatestCommand}"
+      CommandParameter="Empty" />
+     </ribbon:RibbonSplitButton>
     </ribbon:RibbonGroup>
     <ribbon:RibbonGroup x:Name="PackSave" Header="Save Languagepack">
      <ribbon:RibbonButton

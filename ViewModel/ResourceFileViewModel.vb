@@ -70,7 +70,7 @@ Namespace ViewModel
      Case MessageBoxResult.Yes
       TargetFile.Resources.Clear()
       For Each k As ResourceKeyViewModel In ResourceKeys
-       If k.Changed Then
+       If k.Changed And Not k.Downloaded Then
         TargetFile.SetResourceValue(k.Key, k.TargetValue, Now)
        Else
         TargetFile.SetResourceValue(k.Key, k.TargetValue, k.LastModified)
@@ -120,6 +120,26 @@ Namespace ViewModel
 
   Private Sub OpenResourceFile(sender As Object, e As DoWorkEventArgs)
    ' this is not foolproof!
+   Dim selection As String = CStr(e.Argument)
+   Dim keyList As New List(Of String)
+   Select Case selection.ToLower
+    Case "selected"
+     For Each rkv As ResourceKeyViewModel In ResourceKeys
+      If rkv.Selected Then
+       keyList.Add(rkv.Key.ToLower)
+      End If
+     Next
+    Case "empty"
+     For Each rkv As ResourceKeyViewModel In ResourceKeys
+      If String.IsNullOrEmpty(rkv.TargetValue) Then
+       keyList.Add(rkv.Key.ToLower)
+      End If
+     Next
+    Case Else 'all
+     For Each rkv As ResourceKeyViewModel In ResourceKeys
+      keyList.Add(rkv.Key.ToLower)
+     Next
+   End Select
    Dim objName As String = "Core"
    Dim objVersion As String = MainWindow.ProjectSettings.DotNetNukeVersion
    For Each p As InstalledPackageViewModel In MainWindow.ProjectSettings.InstalledPackages
@@ -137,9 +157,13 @@ Namespace ViewModel
     End If
     For Each ti As Common.LEService.TextInfo In remoteResources
      Dim k As String = ti.TextKey
-     Dim reskey As ResourceKeyViewModel = ResourceKeys.FirstOrDefault(Function(rk) rk.Key = k)
-     If reskey IsNot Nothing Then
-      reskey.CompareValue = ti.Translation
+     If keyList.Contains(k.ToLower) Then
+      Dim reskey As ResourceKeyViewModel = ResourceKeys.FirstOrDefault(Function(rk) rk.Key = k)
+      If reskey IsNot Nothing Then
+       reskey.TargetValue = ti.Translation
+       reskey.LastModified = ti.LastModified
+       reskey.Downloaded = True
+      End If
      End If
     Next
    Catch ex As Exception
