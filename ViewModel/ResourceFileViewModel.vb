@@ -115,6 +115,7 @@ Namespace ViewModel
    AddHandler _backgroundWorker.DoWork, AddressOf OpenResourceFile
    AddHandler _backgroundWorker.RunWorkerCompleted, Sub(sender As Object, e As RunWorkerCompletedEventArgs) MainWindow.IsBusy = False
    _backgroundWorker.RunWorkerAsync(param)
+   ShowTargetColumn = True
   End Sub
 
   Private Sub OpenResourceFile(sender As Object, e As DoWorkEventArgs)

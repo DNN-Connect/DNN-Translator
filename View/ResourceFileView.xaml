@@ -68,7 +68,7 @@
     <DataGridTemplateColumn
      Width="*" IsReadOnly="False" SortMemberPath="TargetValue"
      Header="{Binding (FrameworkElement.DataContext).TargetColumnHeader, RelativeSource={x:Static RelativeSource.Self}}"
-     Visibility="{Binding (FrameworkElement.DataContext).ShowTargetColumn, RelativeSource={x:Static RelativeSource.Self}, Converter={StaticResource BoolToVisConverter}}">
+     Visibility="{Binding Path=(FrameworkElement.DataContext).ShowTargetColumn, RelativeSource={x:Static RelativeSource.Self}, Converter={StaticResource BoolToVisConverter}}">
      <DataGridTemplateColumn.CellTemplate>
       <DataTemplate>
        <TextBox Text="{Binding TargetValue, UpdateSourceTrigger=PropertyChanged}" 
