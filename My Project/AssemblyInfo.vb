@@ -15,7 +15,7 @@ Imports System.Windows
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("Translator")> 
-<Assembly: AssemblyCopyright("Copyright @  2012")> 
+<Assembly: AssemblyCopyright("Copyright DotNetNuke Corp 2012")> 
 <Assembly: AssemblyTrademark("")> 
 <Assembly: ComVisible(false)>
 
@@ -55,5 +55,5 @@ Imports System.Windows
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.6.0")> 
-<Assembly: AssemblyFileVersion("1.0.6.0")> 
+<Assembly: AssemblyVersion("1.0.7.0")> 
+<Assembly: AssemblyFileVersion("1.0.7.0")> 

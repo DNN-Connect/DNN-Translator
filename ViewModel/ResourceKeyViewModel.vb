@@ -39,7 +39,7 @@ Namespace ViewModel
     Me.OnPropertyChanged("Changed")
     Me.OnPropertyChanged("TargetColor")
     If _leText IsNot Nothing Then
-     _leText.Translation = value
+     _LEText.Translation = Microsoft.Security.Application.UnicodeCharacterEncoder.XmlEncode(value)
     End If
    End Set
   End Property
@@ -150,11 +150,11 @@ Namespace ViewModel
    _leText = leText
    _resourceFile = leText.FilePath
    _key = leText.TextKey
-   _originalValue = leText.OriginalValue
+   _originalValue = Web.HttpUtility.HtmlDecode(leText.OriginalValue)
    If translatedResource IsNot Nothing Then
     _targetValue = translatedResource.Value
    End If
-   _compareValue = leText.Translation
+   _compareValue = Web.HttpUtility.HtmlDecode(leText.Translation)
    Me.ID = _resourceFile & ":" & _key
   End Sub
 
@@ -259,7 +259,7 @@ Namespace ViewModel
   End Function
 
   Public Sub SetDownloadedValue(text As Common.LEService.TextInfo)
-   _targetValue = text.Translation
+   _targetValue = Web.HttpUtility.HtmlDecode(text.Translation)
    _LastModified = text.LastModified
    Me.OnPropertyChanged("TargetValue")
    Me.OnPropertyChanged("TargetColor")

@@ -160,7 +160,7 @@ Namespace ViewModel
      If keyList.Contains(k.ToLower) Then
       Dim reskey As ResourceKeyViewModel = ResourceKeys.FirstOrDefault(Function(rk) rk.Key = k)
       If reskey IsNot Nothing Then
-       reskey.TargetValue = ti.Translation
+       reskey.TargetValue = Web.HttpUtility.HtmlDecode(ti.Translation)
        reskey.LastModified = ti.LastModified
        reskey.Downloaded = True
       End If

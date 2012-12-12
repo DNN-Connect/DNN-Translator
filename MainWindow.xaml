@@ -363,13 +363,21 @@
       ToolTipDescription="Compare the current original resources with what is on the server"
       Command="{Binding Path=LECompareCommand}"
        />
-     <ribbon:RibbonButton
+     <ribbon:RibbonSplitButton
       Label="Upload"
       LargeImageSource="Images\32\system-software-update-2.png"
+      ToolTipTitle="Upload selected keys in this view to the server"
+      ToolTipDescription="Upload keys in this view to a DNN installation with the Localization Editor"
+      Command="{Binding ActiveResourceCollection.UploadCommand}"
+      CommandParameter="Selected">
+      <ribbon:RibbonButton
+      Label="Upload All"
+      SmallImageSource="Images\16\system-software-update-2.png"
       ToolTipTitle="Upload All"
       ToolTipDescription="Upload all keys in this view to the server"
       Command="{Binding ActiveResourceCollection.UploadCommand}"
       CommandParameter="All" />
+     </ribbon:RibbonSplitButton>
      <ribbon:RibbonSplitButton
       Label="Download To Target"
       LargeImageSource="Images\32\go-down-5.png"

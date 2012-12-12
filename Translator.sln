@@ -7,6 +7,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TranslatorSetup", "_Setup\T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmithHtmlEditor", "SmithHtmlEditor\SmithHtmlEditor.csproj", "{84BADDA1-AB3A-4064-B87E-178D7446901D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslatorLibrary", "TranslatorLibrary\TranslatorLibrary.csproj", "{343ABC8A-D4D0-44A3-A767-A5450488FD57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,16 @@ Global
 		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Release|x86.ActiveCfg = Release|Any CPU
+		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

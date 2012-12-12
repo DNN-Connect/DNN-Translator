@@ -90,7 +90,9 @@ Namespace ViewModel
      MainWindow.BusyMessage = String.Format("Comparing {0}:{1}", ti.FilePath, ti.TextKey)
      Dim localValue As Common.Resource = Nothing
      If LocalData(ti.FilePath) IsNot Nothing AndAlso LocalData(ti.FilePath).Resources.ContainsKey(ti.TextKey) Then localValue = LocalData(ti.FilePath).Resources(ti.TextKey)
-     If localValue IsNot Nothing AndAlso localValue.Value = ti.Translation Then
+     If localValue IsNot Nothing AndAlso localValue.Value = Web.HttpUtility.HtmlDecode(ti.Translation) Then
+      SameKeys.Add(New ResourceKeyViewModel(localValue, ti))
+     ElseIf localValue Is Nothing AndAlso ti.Translation = "" Then
       SameKeys.Add(New ResourceKeyViewModel(localValue, ti))
      ElseIf localValue Is Nothing Then ' empty local value
       MissingLocalKeys.Add(New ResourceKeyViewModel(localValue, ti))
@@ -184,6 +186,7 @@ Namespace ViewModel
    resEdit.DisplayName = displayName
    resEdit.IsRemoteResourceCollection = True
    resEdit.CompareColumnHeader = "Remote Values"
+   resEdit.ShowCompareColumn = True
    Return resEdit
   End Function
 #End Region
@@ -273,12 +276,12 @@ Namespace ViewModel
     Dim targetFile As String = MainWindow.ProjectSettings.Location & "\" & resFile.Replace(".resx", "." & MainWindow.ProjectSettings.TargetLocale & ".resx")
     Dim targetResx As New Common.ResourceFile(fileKey, targetFile)
     For Each k As ResourceKeyViewModel In From x In MissingLocalKeys Where x.ResourceFile = fileKey Select x
-     targetResx.SetResourceValue(k.Key, k.LEText.Translation, k.LEText.LastModified)
-     k.TargetValue = k.LEText.Translation
+     targetResx.SetResourceValue(k.Key, Web.HttpUtility.HtmlDecode(k.LEText.Translation), k.LEText.LastModified)
+     k.TargetValue = Web.HttpUtility.HtmlDecode(k.LEText.Translation)
     Next
     For Each k As ResourceKeyViewModel In From x In DifferentKeys Where x.ResourceFile = fileKey Select x
-     targetResx.SetResourceValue(k.Key, k.LEText.Translation, k.LEText.LastModified)
-     k.TargetValue = k.LEText.Translation
+     targetResx.SetResourceValue(k.Key, Web.HttpUtility.HtmlDecode(k.LEText.Translation), k.LEText.LastModified)
+     k.TargetValue = Web.HttpUtility.HtmlDecode(k.LEText.Translation)
     Next
     targetResx.Save()
    Next

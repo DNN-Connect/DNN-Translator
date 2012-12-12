@@ -447,9 +447,16 @@
       <Project>{84BADDA1-AB3A-4064-B87E-178D7446901D}</Project>
       <Name>SmithHtmlEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="TranslatorLibrary\TranslatorLibrary.csproj">
+      <Project>{343ABC8A-D4D0-44A3-A767-A5450488FD57}</Project>
+      <Name>TranslatorLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\16\go-down-5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16\system-software-update-2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

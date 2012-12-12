@@ -440,7 +440,7 @@ Namespace ViewModel
      For Each rkv As ResourceKeyViewModel In ResourceKeys
       If rkv.LEText IsNot Nothing Then
        rkv.LEText.Locale = MainWindow.ProjectSettings.MappedLocale
-       rkv.LEText.Translation = rkv.TargetValue
+       rkv.LEText.Translation = Microsoft.Security.Application.UnicodeCharacterEncoder.XmlEncode(rkv.TargetValue)
        tosend.Add(rkv.LEText)
       End If
      Next
@@ -449,7 +449,7 @@ Namespace ViewModel
       If rkv.Selected Then
        If rkv.LEText IsNot Nothing Then
         rkv.LEText.Locale = MainWindow.ProjectSettings.MappedLocale
-        rkv.LEText.Translation = rkv.TargetValue
+        rkv.LEText.Translation = Microsoft.Security.Application.UnicodeCharacterEncoder.XmlEncode(rkv.TargetValue)
         tosend.Add(rkv.LEText)
        End If
       End If
