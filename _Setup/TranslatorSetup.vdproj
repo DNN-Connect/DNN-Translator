@@ -28,13 +28,13 @@
         "Entry"
         {
         "MsmKey" = "8:_40E49E2DD8397B207AD012AABC11D6BD"
-        "OwnerKey" = "8:_BF8AAEFFA63547F38847EBA65F5124E5"
+        "OwnerKey" = "8:_46FC09422DFD1C88D04D4DEEDDA19A12"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_40E49E2DD8397B207AD012AABC11D6BD"
-        "OwnerKey" = "8:_46FC09422DFD1C88D04D4DEEDDA19A12"
+        "OwnerKey" = "8:_BF8AAEFFA63547F38847EBA65F5124E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -82,13 +82,13 @@
         "Entry"
         {
         "MsmKey" = "8:_CBCB07F171ABBA1610AFD40A541A3D7E"
-        "OwnerKey" = "8:_BF8AAEFFA63547F38847EBA65F5124E5"
+        "OwnerKey" = "8:_F393280FCF4D4A2C014C38DF1D7A71C1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_CBCB07F171ABBA1610AFD40A541A3D7E"
-        "OwnerKey" = "8:_F393280FCF4D4A2C014C38DF1D7A71C1"
+        "OwnerKey" = "8:_BF8AAEFFA63547F38847EBA65F5124E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -142,37 +142,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_52232E53B8DD46E28EDFAA3CE50A6FD8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D8F2ACCF6A65AABD141B85A321EEB101"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B7A755E023EC1A7C038F666019EF288C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F0B5B6D50708B6AD66096FFF1B324966"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_46FC09422DFD1C88D04D4DEEDDA19A12"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_40E49E2DD8397B207AD012AABC11D6BD"
+        "OwnerKey" = "8:_CBCB07F171ABBA1610AFD40A541A3D7E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -184,7 +154,37 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CBCB07F171ABBA1610AFD40A541A3D7E"
+        "OwnerKey" = "8:_40E49E2DD8397B207AD012AABC11D6BD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_46FC09422DFD1C88D04D4DEEDDA19A12"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F0B5B6D50708B6AD66096FFF1B324966"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B7A755E023EC1A7C038F666019EF288C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D8F2ACCF6A65AABD141B85A321EEB101"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_52232E53B8DD46E28EDFAA3CE50A6FD8"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -603,15 +603,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Translator"
-        "ProductCode" = "8:{72281BA6-112F-4E2D-BB4B-A998D349E7A1}"
-        "PackageCode" = "8:{083CBD57-242D-4875-97BC-9A82B6F57DEE}"
+        "ProductCode" = "8:{0B920137-CC01-471C-8A7E-989EC81B9D10}"
+        "PackageCode" = "8:{4CB9B2B3-D227-46FB-BEBC-A4CC79FEB970}"
         "UpgradeCode" = "8:{DE355882-EFCC-4A40-A728-76AEC4FB94A3}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.7"
+        "ProductVersion" = "8:1.0.8"
         "Manufacturer" = "8:DotNetNuke Corp"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
