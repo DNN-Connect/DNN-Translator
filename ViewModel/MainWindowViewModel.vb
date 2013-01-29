@@ -878,6 +878,77 @@ Namespace ViewModel
   End Sub
 #End Region
 
+#Region " Verify Resources "
+  Private _VerifyResources As RelayCommand
+  Public ReadOnly Property VerifyResourcesCommand As RelayCommand
+   Get
+    If _VerifyResources Is Nothing Then
+     _VerifyResources = New RelayCommand(Sub() Me.VerifyResourcesClicked(), Function() Me.VerifyResourcesEnabled)
+    End If
+    Return _VerifyResources
+   End Get
+  End Property
+
+  Protected Function VerifyResourcesEnabled() As Boolean
+   Return CBool(_currentLocation <> "")
+  End Function
+
+  Protected Sub VerifyResourcesClicked()
+
+   Dim start As String = ""
+   Dim version As String = ProjectSettings.DotNetNukeVersion
+   Dim name As String = SelectedPackage.PackageName
+   If name = "Core" Then
+    Select Case ProjectSettings.DotNetNukeType
+     Case "Professional Edition"
+      name = "DNNPE"
+     Case "Enterprise Edition"
+      name = "DNNEE"
+     Case Else
+      name = "DNNCE"
+    End Select
+   ElseIf name = "DNN_HTML" Then
+    If ProjectSettings.DotNetNukeType <> "Community Edition" Then name &= "_PRO"
+   Else
+    start &= "DesktopModules\" & SelectedPackage.FolderName
+    version = SelectedPackage.Version
+   End If
+
+   For Each ws As WorkspaceViewModel In Workspaces
+    If ws.ID = String.Format("Verify {0}", name) Then
+     SetActiveWorkspace(ws)
+     Exit Sub
+    End If
+   Next
+
+   IsBusy = True
+   BusyMessage = "Comparing Snapshot"
+   _backgroundWorker = New BackgroundWorker
+   AddHandler _backgroundWorker.DoWork, AddressOf VerifyResourcesFile
+   AddHandler _backgroundWorker.RunWorkerCompleted, AddressOf VerifyResourcesFileCompleted
+   Dim p As New Common.ParameterList(Me)
+   p.Params.Add(name)
+   p.Params.Add(Common.Globals.NormalizeVersion(version))
+   p.Params.Add(start)
+   _backgroundWorker.RunWorkerAsync(p)
+
+  End Sub
+
+  Private Sub VerifyResourcesFile(sender As Object, e As DoWorkEventArgs)
+   Dim p As Common.ParameterList = CType(e.Argument, Common.ParameterList)
+   Dim ssc As New ResourceVerifierViewModel(p)
+   e.Result = ssc
+  End Sub
+
+  Private Sub VerifyResourcesFileCompleted(sender As Object, e As RunWorkerCompletedEventArgs)
+   Dim ssc As ResourceVerifierViewModel = CType(e.Result, ResourceVerifierViewModel)
+   ssc.MainWindow = Me
+   Me.Workspaces.Add(ssc)
+   SetActiveWorkspace(ssc)
+   IsBusy = False
+  End Sub
+#End Region
+
 #Region " Search "
   Private _searchString As String = ""
   Public Property SearchString() As String

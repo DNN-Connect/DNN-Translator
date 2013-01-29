@@ -161,6 +161,7 @@
     <Compile Include="ViewModel\CommandViewModel.vb" />
     <Compile Include="ViewModel\HtmlKeyViewModel.vb" />
     <Compile Include="ViewModel\LEMergeViewModel.vb" />
+    <Compile Include="ViewModel\ResourceVerifierViewModel.vb" />
     <Compile Include="ViewModel\SearchViewModel.vb" />
     <Compile Include="ViewModel\SnapshotComparisonViewModel.vb" />
     <Compile Include="ViewModel\SpecialKeysCollectionViewModel.vb" />
@@ -196,6 +197,9 @@
     </Compile>
     <Compile Include="View\ResourceFileView.xaml.vb">
       <DependentUpon>ResourceFileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ResourceVerifierView.xaml.vb">
+      <DependentUpon>ResourceVerifierView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SnapshotComparisonView.xaml.vb">
       <DependentUpon>SnapshotComparisonView.xaml</DependentUpon>
@@ -235,6 +239,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ResourceFileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ResourceVerifierView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

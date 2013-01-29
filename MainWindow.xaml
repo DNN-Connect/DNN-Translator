@@ -339,6 +339,15 @@
     </ribbon:RibbonGroup>
    </ribbon:RibbonTab>
    <ribbon:RibbonTab x:Name="ComponentTab" Header="Component" KeyTip="I" IsEnabled="{Binding Path=HasSelectedPackage, FallbackValue=False}">
+    <ribbon:RibbonGroup x:Name="AnalyzeGroup" Header="Analyze">
+     <ribbon:RibbonButton
+      Label="Analyze"
+      LargeImageSource="Images\32\edit-find-4.png"
+      ToolTipTitle="Check Translation"
+      ToolTipDescription="Checks the current translation for missing translations"
+      Command="{Binding Path=VerifyResourcesCommand}"
+       />
+    </ribbon:RibbonGroup>
     <ribbon:RibbonGroup x:Name="SnapshotGroup" Header="Snapshot">
      <ribbon:RibbonButton
       Label="Save"
