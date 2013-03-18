@@ -1,5 +1,6 @@
 ﻿Imports ICSharpCode.SharpZipLib.Zip
 Imports DotNetNuke.Translator.Common
+Imports DotNetNuke.Translator.Common.Globals
 
 Namespace Services.Packing
  Public Class LanguagePack
@@ -57,12 +58,12 @@ Namespace Services.Packing
 
    Dim packageNode As Xml.XmlNode = Manifest.CreatePackage(package)
    For Each fileKey As String In package.Manifest.ResourceFiles
-    Dim targetFile As String = fileKey.Replace(".resx", "." & Locale.Name & ".resx")
+    Dim targetFile As String = GetLocalizedFilePath(fileKey, Locale.Name)
     If Not AddedFiles.Contains(targetFile) AndAlso IO.File.Exists(Settings.Location & targetFile) Then
      AddedFiles.Add(targetFile)
      Dim resFile As New ResourceFile(targetFile, Settings.Location & targetFile)
      If resFile.Resources.Count > 0 Then
-      Dim targetFileOriginalCase As String = Settings.CurrentSnapShot.ResFileOriginalCasings(fileKey).Replace(".resx", "." & Locale.Name & ".resx", StringComparison.InvariantCultureIgnoreCase)
+      Dim targetFileOriginalCase As String = GetLocalizedFilePath(Settings.CurrentSnapShot.ResFileOriginalCasings(fileKey), Locale.Name)
       resFile.Copyright = Copyright
       resFile.Regenerate(True)
       Dim resFileData As Byte() = Globals.XmlToFormattedByteArray(resFile)

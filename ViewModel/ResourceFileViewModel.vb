@@ -1,6 +1,7 @@
 ﻿Imports System.Text.RegularExpressions
 Imports System.ComponentModel
 Imports System.Collections.ObjectModel
+Imports DotNetNuke.Translator.Common.Globals
 
 Namespace ViewModel
  Public Class ResourceFileViewModel
@@ -19,11 +20,13 @@ Namespace ViewModel
    MyBase.New(CType(parameters.ParentWindow, MainWindowViewModel))
    _originalResourceFile = parameters.Params(0)
    _fileName = _originalResourceFile.Substring(_originalResourceFile.LastIndexOf("\"c) + 1)
+   _targetResourceFile = GetLocalizedFilePath(_originalResourceFile, TargetLocale.Name) ' it won't normally find something if locale is empty
    Me.DisplayName = _fileName
    Me.ID = _originalResourceFile
-   _fileName = _fileName.Replace(".en-US.", ".") ' deal with DNN 6.2 template files
    _fileName = _fileName.Substring(0, _fileName.Length - 5) ' take off the resx
-   _targetResourceFile = IO.Path.GetDirectoryName(_originalResourceFile) & "\" & _fileName & "." & TargetLocale.Name & ".resx" ' it won't normally find something if locale is empty
+   If _fileName.ToLower.EndsWith(".en-us") Then
+    _fileName = _fileName.Substring(0, _fileName.Length - 6) ' deal with DNN 6.2+ template files
+   End If
    _fileKey = _originalResourceFile.Replace(MainWindow.ProjectSettings.Location, "")
    _fileKey = _fileKey.TrimStart("\"c)
 

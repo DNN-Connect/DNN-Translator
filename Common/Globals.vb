@@ -48,6 +48,14 @@ Namespace Common
    Return resourceFile
   End Function
 
+  Public Shared Function GetLocalizedFilePath(resourceFile As String, locale As String) As String
+   If resourceFile.ToLower.EndsWith("template.en-us.resx") Then
+    Return resourceFile.Substring(0, resourceFile.Length - 11) & "." & locale & ".resx"
+   Else
+    Return resourceFile.Substring(0, resourceFile.Length - 5) & "." & locale & ".resx"
+   End If
+  End Function
+
   Public Shared Function GetTranslation(installationPath As String, resourceFile As String, resourceKey As String, locale As String) As String
    Dim resFile As String = GetResourceFilePath(installationPath, resourceFile, locale)
    If IO.File.Exists(resFile) Then

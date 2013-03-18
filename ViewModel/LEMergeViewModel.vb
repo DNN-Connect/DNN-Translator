@@ -1,4 +1,5 @@
 ﻿Imports DotNetNuke.Translator.Common.LEService
+Imports DotNetNuke.Translator.Common.Globals
 Imports System.ComponentModel
 Imports System.Collections.ObjectModel
 
@@ -273,7 +274,7 @@ Namespace ViewModel
    ' handle each file
    For Each resFile As String In fileList
     Dim fileKey As String = resFile
-    Dim targetFile As String = MainWindow.ProjectSettings.Location & "\" & resFile.Replace(".resx", "." & MainWindow.ProjectSettings.TargetLocale & ".resx")
+    Dim targetFile As String = GetLocalizedFilePath(MainWindow.ProjectSettings.Location & "\" & resFile, MainWindow.ProjectSettings.TargetLocale)
     Dim targetResx As New Common.ResourceFile(fileKey, targetFile)
     For Each k As ResourceKeyViewModel In From x In MissingLocalKeys Where x.ResourceFile = fileKey Select x
      targetResx.SetResourceValue(k.Key, Web.HttpUtility.HtmlDecode(k.LEText.Translation), k.LEText.LastModified)

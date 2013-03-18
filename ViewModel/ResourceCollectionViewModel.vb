@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports DotNetNuke.Translator.Common.Globals
 
 Namespace ViewModel
  Public Class ResourceCollectionViewModel
@@ -387,7 +388,7 @@ Namespace ViewModel
    ' handle each file
    For Each resFile As String In fileList
     Dim fileKey As String = resFile
-    Dim targetFile As String = MainWindow.ProjectSettings.Location & "\" & resFile.Replace(".resx", "." & TargetLocale.Name & ".resx")
+    Dim targetFile As String = GetLocalizedFilePath(MainWindow.ProjectSettings.Location & "\" & resFile, TargetLocale.Name)
     Dim targetResx As New Common.ResourceFile(fileKey, targetFile)
     For Each k As ResourceKeyViewModel In From x In ResourceKeys Where x.Changed And x.ResourceFile = fileKey Select x
      If k.Changed And Not k.Downloaded Then
