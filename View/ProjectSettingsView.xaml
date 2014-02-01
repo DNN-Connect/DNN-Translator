@@ -45,8 +45,7 @@
    <RowDefinition Height="Auto" />
    <RowDefinition Height="10" />
    <RowDefinition Height="Auto" />
-   <RowDefinition Height="10" />
-   <RowDefinition Height="Auto" />
+   <RowDefinition Height="82*" />
   </Grid.RowDefinitions>
 
   <Label Content="DNN Location:"
@@ -86,155 +85,126 @@
 
   <Label 
       Grid.Row="6" Grid.Column="0" 
-      Content="Username:" 
+      Content="Access Key:" 
          ToolTip="Your DNN username for the remote service."
       HorizontalAlignment="Right"
-      Target="{Binding ElementName=txtUsername}" 
+      Target="{Binding ElementName=txtAccessKey}" 
       />
   <TextBox
       Grid.Row="6" Grid.Column="2" 
-      x:Name="txtUsername"
-    IsEnabled="{Binding HasRemote}"
-      Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
+      x:Name="txtAccessKey"
+      Text="{Binding AccessKey, UpdateSourceTrigger=PropertyChanged}" />
 
   <Label 
-      Grid.Row="8" Grid.Column="0" 
-      Content="Password:" 
-         ToolTip="DNN Password for the remote service"
-      HorizontalAlignment="Right"
-      Target="{Binding ElementName=txtPassword}" 
-      />
-  <PasswordBox
-      Grid.Row="8" Grid.Column="2" 
-      x:Name="txtPassword"
-    IsEnabled="{Binding HasRemote}"
-    com:PasswordHelper.Attach="True"
-    com:PasswordHelper.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-  <Label 
-      Grid.Row="10" Grid.Column="0" 
-      Content="Get Locales:" 
+      Grid.Row="8" Content="Get Locales:" 
          ToolTip="This will attempt to connect to the remote service and check to see which locales you have access to"
       HorizontalAlignment="Right"
       />
   <Button
-      Grid.Row="10" Grid.Column="2" 
+      Grid.Row="8" Grid.Column="2" 
     x:Name="btmTest"
     Content="Connect"
-    IsEnabled="{Binding HasRemote}"
     Command="{Binding TestConnectionCommand}"
     />
 
   <Label 
-      Grid.Row="12" Grid.Column="0" 
-      Content="Mapped Locale:" 
+      Grid.Row="10" Content="Mapped Locale:" 
          ToolTip="The locale you will be maping your translation to in this project. You can map specific cultures to generic cultures (e.g. es-ES to es) if you are granted access on that target locale."
       HorizontalAlignment="Right"
       Target="{Binding ElementName=cmbMappedLocale}" 
       />
-  <ComboBox
-    Grid.Row="12" Grid.Column="2"
-    ItemsSource="{Binding AvailableLocales}"
-    DisplayMemberPath="EnglishName"
-    SelectedItem="{Binding MappedLocale}"
-    IsEnabled="{Binding HasRemote}"
-    x:Name="cmbMappedLocale" />
+  <TextBox
+      Grid.Row="10" Grid.Column="2" 
+      x:Name="txtMappedLocale"
+      IsEnabled="False"
+      Text="{Binding MappedLocale}" />
 
   <Label 
-      Grid.Row="14" Grid.Column="0" 
-      Content="Override Default Manifest Settings:" 
+      Grid.Row="12" Content="Override Default Manifest Settings:" 
          ToolTip="If selected the manifests of the language packs you'll produce in this project will contain these items."
       HorizontalAlignment="Right"
       Target="{Binding ElementName=chkOverrideOwner}" 
       />
   <CheckBox
-    Grid.Row="14" Grid.Column="2"
+    Grid.Row="12" Grid.Column="2"
     x:Name="chkOverrideOwner"
     IsChecked="{Binding OverrideOwner, UpdateSourceTrigger=PropertyChanged}" />
 
   <Label 
-      Grid.Row="16" Grid.Column="0" 
-      Content="Owner Name:" 
+      Grid.Row="14" Content="Owner Name:" 
       HorizontalAlignment="Right"
       Target="{Binding ElementName=txtOwnerName}" 
       />
   <TextBox
-      Grid.Row="16" Grid.Column="2" 
+      Grid.Row="14" Grid.Column="2" 
       x:Name="txtOwnerName"
     IsEnabled="{Binding OverrideOwner}"
       Text="{Binding OwnerName, UpdateSourceTrigger=PropertyChanged}" />
 
   <Label 
-      Grid.Row="18" Grid.Column="0" 
-      Content="Owner Organization:" 
+      Grid.Row="16" Content="Owner Organization:" 
       HorizontalAlignment="Right"
       Target="{Binding ElementName=txtOwnerOrganization}" 
       />
   <TextBox
-      Grid.Row="18" Grid.Column="2" 
+      Grid.Row="16" Grid.Column="2" 
       x:Name="txtOwnerOrganization"
     IsEnabled="{Binding OverrideOwner}"
       Text="{Binding OwnerOrganization, UpdateSourceTrigger=PropertyChanged}" />
 
   <Label 
-      Grid.Row="20" Grid.Column="0" 
-      Content="Owner Url:" 
+      Grid.Row="18" Content="Owner Url:" 
       HorizontalAlignment="Right"
       Target="{Binding ElementName=txtOwnerUrl}" 
       />
   <TextBox
-      Grid.Row="20" Grid.Column="2" 
+      Grid.Row="18" Grid.Column="2" 
       x:Name="txtOwnerUrl"
     IsEnabled="{Binding OverrideOwner}"
       Text="{Binding OwnerUrl, UpdateSourceTrigger=PropertyChanged}" />
 
   <Label 
-      Grid.Row="22" Grid.Column="0" 
-      Content="Owner Email:" 
+      Grid.Row="20" Content="Owner Email:" 
       HorizontalAlignment="Right"
       Target="{Binding ElementName=txtOwnerEmail}" 
       />
   <TextBox
-      Grid.Row="22" Grid.Column="2" 
+      Grid.Row="20" Grid.Column="2" 
       x:Name="txtOwnerEmail"
     IsEnabled="{Binding OverrideOwner}"
       Text="{Binding OwnerEmail, UpdateSourceTrigger=PropertyChanged}" />
 
   <Label 
-      Grid.Row="24" Grid.Column="0" 
-      Content="License:" 
+      Grid.Row="22" Content="License:" 
       HorizontalAlignment="Right"
       Target="{Binding ElementName=txtLicense}" 
       />
   <TextBox
-      Grid.Row="24" Grid.Column="2" 
+      Grid.Row="22" Grid.Column="2" 
       x:Name="txtLicense"
    Height="150"
     IsEnabled="{Binding OverrideOwner}"
       Text="{Binding License, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" AutoWordSelection="True" FontFamily="Courier New" FontSize="12" AcceptsReturn="True" AcceptsTab="True" />
 
   <Label 
-      Grid.Row="26" Grid.Column="0" 
-      Content="Copyright:" 
+      Grid.Row="24" Content="Copyright:" 
    ToolTip="This message will be embedded in resource files generated by this tool when creating language packs"
       HorizontalAlignment="Right"
       Target="{Binding ElementName=txtCopyright}" 
       />
   <TextBox
-      Grid.Row="26" Grid.Column="2" 
+      Grid.Row="24" Grid.Column="2" 
       x:Name="txtCopyright"
     IsEnabled="{Binding OverrideOwner}"
       Text="{Binding Copyright, UpdateSourceTrigger=PropertyChanged}" />
 
   <Label 
-      Grid.Row="28" Grid.Column="0" 
-      Content="Dictionary:" 
+      Grid.Row="26" Content="Dictionary:" 
    ToolTip="The dictionary is a set of translations you keep for later use. Leave empty to use the default dictionary"
       HorizontalAlignment="Right"
-      Target="{Binding ElementName=txtDictionary}" 
-      />
+      Target="{Binding ElementName=txtDictionary}" Grid.RowSpan="5" />
   <Grid
-      Grid.Row="28" Grid.Column="2" HorizontalAlignment="Stretch">
+      Grid.Row="26" Grid.Column="2" HorizontalAlignment="Stretch" Grid.RowSpan="5">
    <Grid.ColumnDefinitions>
     <ColumnDefinition Width="*" />
     <ColumnDefinition Width="6" />

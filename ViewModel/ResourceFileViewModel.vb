@@ -152,7 +152,7 @@ Namespace ViewModel
     End If
    Next
    ' now get the resources
-   Dim service As New Common.LEService.LEService(MainWindow.ProjectSettings.ConnectionUrl, MainWindow.ProjectSettings.Username, MainWindow.ProjectSettings.Password)
+   Dim service As New Common.LEService.LEService(MainWindow.ProjectSettings.ConnectionUrl, MainWindow.ProjectSettings.AccessKey)
    Try
     Dim remoteResources As List(Of Common.LEService.TextInfo) = service.GetResourceFile(objName, Common.Globals.NormalizeVersion(objVersion), MainWindow.ProjectSettings.MappedLocale, _fileKey)
     If remoteResources.Count = 0 Then

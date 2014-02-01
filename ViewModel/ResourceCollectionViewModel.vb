@@ -456,7 +456,7 @@ Namespace ViewModel
       End If
      Next
    End Select
-   Dim service As New Common.LEService.LEService(MainWindow.ProjectSettings.ConnectionUrl, MainWindow.ProjectSettings.Username, MainWindow.ProjectSettings.Password)
+   Dim service As New Common.LEService.LEService(MainWindow.ProjectSettings.ConnectionUrl, MainWindow.ProjectSettings.AccessKey)
    service.UploadResources(tosend)
   End Sub
 #End Region

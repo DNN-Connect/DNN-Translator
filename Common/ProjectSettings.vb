@@ -10,8 +10,7 @@ Namespace Common
   Public Property TargetLocale As String = ""
   Public Property MappedLocale As String = ""
   Public Property ConnectionUrl As String = ""
-  Public Property Username As String = ""
-  Public Property Password As Security.SecureString
+  Public Property AccessKey As Security.SecureString
   Public Property LocalUrl As String = ""
   Public Property OverrideOwner As Boolean = False
   Public Property OwnerName As String = ""
@@ -52,10 +51,9 @@ Namespace Common
      Next
     End If
     ReadSettingValue("ConnectionUrl", ConnectionUrl)
-    ReadSettingValue("Username", Username)
-    If Setting("Password") IsNot Nothing Then
+    If Setting("AccessKey") IsNot Nothing Then
      Try
-      Password = Common.Globals.DecryptString(Setting("Password"))
+      AccessKey = Common.Globals.DecryptString(Setting("AccessKey"))
      Catch ex As Exception
      End Try
     End If
@@ -151,8 +149,7 @@ Namespace Common
    Next
    Setting("AvailableLocales", False) = String.Join(";", al)
    Setting("ConnectionUrl", False) = ConnectionUrl
-   Setting("Username", False) = Username
-   Setting("Password", False) = Common.Globals.EncryptString(Password)
+   Setting("AccessKey", False) = Common.Globals.EncryptString(AccessKey)
    Setting("LocalUrl", False) = LocalUrl
    Setting("OverrideOwner", False) = OverrideOwner.ToString
    Setting("OwnerName", False) = OwnerName

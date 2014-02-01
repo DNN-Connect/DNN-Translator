@@ -60,23 +60,13 @@
    End Set
   End Property
 
-  Public Property Username() As String
+  Public Property AccessKey() As String
    Get
-    Return _projectSettings.Username
+    Return Common.Globals.ToInsecureString(_projectSettings.AccessKey)
    End Get
    Set(ByVal value As String)
-    _projectSettings.Username = value
-    Me.OnPropertyChanged("Username")
-   End Set
-  End Property
-
-  Public Property Password() As String
-   Get
-    Return Common.Globals.ToInsecureString(_projectSettings.Password)
-   End Get
-   Set(ByVal value As String)
-    _projectSettings.Password = Common.Globals.ToSecureString(value)
-    Me.OnPropertyChanged("Password")
+    _projectSettings.AccessKey = Common.Globals.ToSecureString(value)
+    Me.OnPropertyChanged("AccessKey")
    End Set
   End Property
 
@@ -194,6 +184,7 @@
   Private _hasRemote As Boolean
   Public Property HasRemote() As Boolean
    Get
+    _hasRemote = CBool(ConnectionUrl <> "" And AccessKey <> "")
     Return _hasRemote
    End Get
    Set(ByVal value As Boolean)
@@ -216,17 +207,19 @@
   End Property
 
   Protected Function TestConnectionEnabled() As Boolean
-   Return CBool(ConnectionUrl <> "" And Username <> "" And Password <> "")
+   Return CBool(ConnectionUrl <> "" And AccessKey <> "")
   End Function
 
   Protected Sub TestConnectionClicked(param As Object)
 
-   Dim service As New Common.LEService.LEService(ConnectionUrl, Username, _projectSettings.Password)
+   Dim service As New Common.LEService.LEService(ConnectionUrl, _projectSettings.AccessKey)
    Try
     Dim locs As List(Of CultureInfo) = service.GetEditLanguages
     AvailableLocales = locs
     Me.OnPropertyChanged("TargetLocale")
     Me.OnPropertyChanged("AvailableLocales")
+    MappedLocale = AvailableLocales.FirstOrDefault
+    Me.OnPropertyChanged("MappedLocale")
    Catch ex As Exception
    End Try
 

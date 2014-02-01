@@ -107,7 +107,6 @@
     <Compile Include="Common\LEService\LEService.vb" />
     <Compile Include="Common\LEService\TextInfo.vb" />
     <Compile Include="Common\ParameterList.vb" />
-    <Compile Include="Common\PasswordHelper.vb" />
     <Compile Include="Common\Snapshot.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

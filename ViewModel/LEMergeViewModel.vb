@@ -36,7 +36,7 @@ Namespace ViewModel
 
    ' download current situation from server
    MainWindow.BusyMessage = "Downloading from server"
-   service = New Common.LEService.LEService(MainWindow.ProjectSettings.ConnectionUrl, MainWindow.ProjectSettings.Username, MainWindow.ProjectSettings.Password)
+   service = New Common.LEService.LEService(MainWindow.ProjectSettings.ConnectionUrl, MainWindow.ProjectSettings.AccessKey)
    Try
     RemoteResources = service.GetResources(ObjectName, ObjectVersion, MainWindow.ProjectSettings.MappedLocale, Start)
    Catch ex As Exception
@@ -54,6 +54,11 @@ Namespace ViewModel
     FailedCompare = True
     Exit Sub
    End If
+   For Each t As TextInfo In RemoteResources
+    If t.Locale = "" Then
+     Dim x As String = t.TextKey
+    End If
+   Next
 
    ' load res files
    MainWindow.BusyMessage = "Loading local data"
@@ -216,12 +221,14 @@ Namespace ViewModel
 
    Dim toupload As New List(Of TextInfo)
    For Each rkv As ResourceKeyViewModel In MissingRemoteKeys
+    rkv.LEText.Translation = rkv.TargetValue
+    rkv.LEText.Locale = MainWindow.ProjectSettings.MappedLocale
     toupload.Add(rkv.LEText)
    Next
    For Each rkv As ResourceKeyViewModel In DifferentKeys
     toupload.Add(rkv.LEText)
    Next
-   Dim service As New Common.LEService.LEService(MainWindow.ProjectSettings.ConnectionUrl, MainWindow.ProjectSettings.Username, MainWindow.ProjectSettings.Password)
+   Dim service As New Common.LEService.LEService(MainWindow.ProjectSettings.ConnectionUrl, MainWindow.ProjectSettings.AccessKey)
    Try
     service.UploadResources(toupload)
    Catch ex As Exception
