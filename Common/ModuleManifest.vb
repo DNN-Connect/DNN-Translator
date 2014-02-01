@@ -37,7 +37,7 @@ Namespace Common
     Else
      path = rf.ParentNode.SelectSingleNode("basePath").InnerText.Replace("/", "\").ToLower.Trim("\"c)
     End If
-    If path <> "" And Not ResourcePaths.Contains(path) Then ResourcePaths.Add(path)
+    If path <> "" And path <> "DesktopModules\DNNCorp" And Not ResourcePaths.Contains(path) Then ResourcePaths.Add(path)
    Next
 
    If Not String.IsNullOrEmpty(dnnLocation) Then

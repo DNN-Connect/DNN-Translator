@@ -76,6 +76,7 @@
       <DataTemplate>
        <TextBox Text="{Binding TargetValue, UpdateSourceTrigger=PropertyChanged}" 
                 TextWrapping="Wrap" 
+                AcceptsReturn="True"
                 Background="{Binding TargetColor, UpdateSourceTrigger=PropertyChanged}"
                 x:Name="txtTarget"
                 >
