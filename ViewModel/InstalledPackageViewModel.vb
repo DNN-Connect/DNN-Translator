@@ -44,10 +44,15 @@ Namespace ViewModel
 
   End Sub
 
-  Public Function LoadManifest(dnnBasePath As String) As Boolean
-   If ManifestXml = "" Then Return False
-   Manifest = New Common.ModuleManifest(ManifestXml, dnnBasePath)
-   If Manifest.ResourceFiles.Count = 0 Then Return False
+  Public Function LoadManifest(dnnBasePath As String, folderName As String) As Boolean
+   If ManifestXml = "" Then
+    Manifest = New Common.ModuleManifest(dnnBasePath, folderName)
+   Else
+    Manifest = New Common.ModuleManifest(ManifestXml, dnnBasePath, folderName)
+   End If
+   If Manifest.ResourceFiles.Count = 0 Then
+    Return False
+   End If
    Return True
   End Function
 

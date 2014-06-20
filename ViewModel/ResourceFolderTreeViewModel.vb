@@ -23,7 +23,10 @@ Namespace ViewModel
 
    For Each child As Common.TreeItem In tree.Children
     If IO.Directory.Exists(dnnRoot & child.FullName) Then
-     Me.Children.Add(New ResourceFolderTreeViewModel(Me, dnnRoot, child, allResources, resourceFileCommands, folderCommands))
+     Try
+      Me.Children.Add(New ResourceFolderTreeViewModel(Me, dnnRoot, child, allResources, resourceFileCommands, folderCommands))
+     Catch ex As Exception
+     End Try
     Else
      Me.Children.Add(New ResourceFileTreeViewModel(Me, allResources(child.FullName), resourceFileCommands))
     End If

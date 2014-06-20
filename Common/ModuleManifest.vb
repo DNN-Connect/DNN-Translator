@@ -12,9 +12,31 @@ Namespace Common
    MyBase.New()
   End Sub
 
-  Public Sub New(objectManifest As String, dnnLocation As String)
+  Public Sub New(dnnLocation As String, folderName As String)
+   MyBase.New()
+
+   If Not String.IsNullOrEmpty(folderName) Then
+    folderName = "desktopmodules\" & folderName.Replace("/", "\").ToLower.Trim("\"c)
+    ResourcePaths.Add(folderName)
+   End If
+
+   If Not String.IsNullOrEmpty(dnnLocation) Then
+    If Not dnnLocation.EndsWith("\"c) Then dnnLocation &= "\"
+    For Each p As String In ResourcePaths
+     ScanForResourceFiles(dnnLocation, p)
+    Next
+   End If
+
+  End Sub
+
+  Public Sub New(objectManifest As String, dnnLocation As String, folderName As String)
    MyBase.New()
    MyBase.LoadXml(objectManifest)
+
+   If Not String.IsNullOrEmpty(folderName) Then
+    folderName = "desktopmodules\" & folderName.Replace("/", "\").ToLower.Trim("\"c)
+    ResourcePaths.Add(folderName)
+   End If
 
    For Each f As XmlNode In Me.DocumentElement.SelectNodes("/package/components/component[@type='File']/files/file[substring(name, string-length(name) - 4)='.resx']")
     Dim fname As String = f.SelectSingleNode("name").InnerText.Replace("/", "\").ToLower
@@ -66,7 +88,9 @@ Namespace Common
    Next
    If path <> "" Then path &= "\"
    For Each subdir As IO.DirectoryInfo In d.GetDirectories
-    ScanForResourceFiles(basepath, path & subdir.Name.ToLower)
+    If Not subdir.Name.StartsWith(".") Then
+     ScanForResourceFiles(basepath, path & subdir.Name.ToLower)
+    End If
    Next
 
   End Sub

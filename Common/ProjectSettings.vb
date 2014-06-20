@@ -99,11 +99,11 @@ Namespace Common
     Using c As New SqlConnection(ConnectionString)
      c.Open()
      Dim q As SqlCommand = c.CreateCommand
-     q.CommandText = String.Format("SELECT *, dm.FolderName ModuleFolderName FROM {0}{1}Packages p LEFT JOIN {0}{1}DesktopModules dm ON dm.PackageID=p.PackageID", DatabaseOwner, ObjectQualifier)
+     q.CommandText = String.Format("SELECT p.*, dm.FolderName ModuleFolderName FROM {0}{1}Packages p LEFT JOIN {0}{1}DesktopModules dm ON dm.PackageID=p.PackageID WHERE p.IsSystemPackage=0 AND NOT p.FolderName IS NULL", DatabaseOwner, ObjectQualifier)
      Using ir As SqlDataReader = q.ExecuteReader
       Do While ir.Read
        Dim package As New InstalledPackageViewModel(ir)
-       If package.LoadManifest(Me.Location) Then
+       If package.LoadManifest(Me.Location, package.FolderName) Then
         InstalledPackages.Add(package)
        End If
       Loop
@@ -120,9 +120,7 @@ Namespace Common
     ' Now adjust the list for the core
     Dim allNonCoreResourceFiles As New List(Of String)
     For Each p As InstalledPackageViewModel In InstalledPackages
-     If p.Manifest IsNot Nothing Then
-      allNonCoreResourceFiles.AddRange(p.Manifest.ResourceFiles)
-     End If
+     allNonCoreResourceFiles.AddRange(p.Manifest.ResourceFiles)
     Next
     core.Manifest = New ModuleManifest
     For Each resFile As String In CurrentSnapShot.ResourceFiles.Keys
