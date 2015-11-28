@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>DotNetNuke.Translator</RootNamespace>
     <AssemblyName>Translator</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <MyType>Custom</MyType>
@@ -23,6 +23,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>Translator.xml</DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42314</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -35,6 +36,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>Translator.xml</DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42314</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -63,12 +65,14 @@
       <HintPath>_References\SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -81,7 +85,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RibbonControlsLibrary" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="Application.xaml">
@@ -115,6 +118,7 @@
     <Compile Include="Common\Snapshot.vb">
       <DependentUpon>Snapshot.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Services\Translation\Bing\AzureDataMarket.vb" />
     <Compile Include="Services\Translation\Bing\BingTranslationService.vb" />
     <Compile Include="Services\Translation\Google\GoogleTranslationService.vb" />
     <Compile Include="Services\Translation\ITranslationService.vb" />
@@ -148,11 +152,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Template.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\MicrosoftTranslatorService\Reference.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="SettingsWindow.xaml.vb">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -334,26 +333,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <AppDesigner Include="My Project\" />
-    <None Include="Service References\MicrosoftTranslatorService\DotNetNuke.Translator.MicrosoftTranslatorService.GetTranslationsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\MicrosoftTranslatorService\DotNetNuke.Translator.MicrosoftTranslatorService.TranslateArrayResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\MicrosoftTranslatorService\soap.wsdl" />
-    <None Include="Service References\MicrosoftTranslatorService\soap.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MicrosoftTranslatorService\soap1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MicrosoftTranslatorService\soap2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MicrosoftTranslatorService\soap3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\MicrosoftTranslatorService\SoapService.wsdl" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\32\document-new-4.png" />
@@ -373,21 +353,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\TextFile1.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\MicrosoftTranslatorService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\MicrosoftTranslatorService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\MicrosoftTranslatorService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\MicrosoftTranslatorService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.vb</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\16\format-justify-fill-4.png" />

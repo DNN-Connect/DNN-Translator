@@ -1,5 +1,8 @@
 ﻿Imports System.ServiceModel.Channels
 Imports System.ServiceModel
+Imports System.Net.Http
+Imports System.Threading.Tasks
+Imports System.Xml
 
 Namespace Services.Translation.Bing
  Public Class BingTranslationService
@@ -16,7 +19,7 @@ Namespace Services.Translation.Bing
    _bingClientSecret = appSettings.BingClientSecret
 
    If appSettings.BingLastLanguagesRetrieve < Now.AddMonths(-1) OrElse appSettings.BingLanguages = "" Then
-    _SupportedLanguages = RetrieveLanguages()
+    Task.Run(Function() Me.RetrieveLanguages).Wait()
     If _SupportedLanguages.Count > 0 Then
      Dim _cache As String = ""
      For Each ci As CultureInfo In _SupportedLanguages
@@ -56,120 +59,57 @@ Namespace Services.Translation.Bing
    End Get
   End Property
 
-  Private Function RetrieveLanguages() As List(Of CultureInfo)
-
+  Private Async Function RetrieveLanguages() As Task(Of Boolean)
    Dim res As New List(Of CultureInfo)
-   If _bingClientId = "" Then Return res
-
+   Dim _Authentication = New AzureDataMarket(_bingClientId, _bingClientSecret)
+   Dim m_Token As AzureDataMarket.Token = Await _Authentication.GetTokenAsync()
+   Dim auth As String = m_Token.Header
+   Dim client As New HttpClient()
+   client.DefaultRequestHeaders.Add("Authorization", auth)
+   Dim RequestUri As String = "http://api.microsofttranslator.com/v2/Http.svc/GetLanguagesForTranslate?appId="
    Try
-    ' Add TranslatorService as a service reference, Address:http://api.microsofttranslator.com/V2/Soap.svc
-    Dim translator = New MicrosoftTranslatorService.LanguageServiceClient()
-    Dim binding = DirectCast(translator.Endpoint.Binding, BasicHttpBinding)
-    binding.MaxReceivedMessageSize = Integer.MaxValue
-    binding.MaxBufferSize = Integer.MaxValue
-
-    ' Set Authorization header before sending the request
-    Dim httpRequestProperty = New HttpRequestMessageProperty() With {.Method = "POST"}
-    httpRequestProperty.Headers.Add("Authorization", AccessToken)
-
-    Dim languagesForTranslate As String()
-
-    ' Creates a block within which an OperationContext object is in scope.
-    Using New OperationContextScope(translator.InnerChannel)
-     OperationContext.Current.OutgoingMessageProperties(HttpRequestMessageProperty.Name) = httpRequestProperty
-     ' Keep appId parameter blank as we are sending access token in authorization header.
-     languagesForTranslate = translator.GetLanguagesForTranslate(String.Empty)
+    Dim ret As Byte() = Await client.GetByteArrayAsync(RequestUri)
+    Dim dcs As New System.Runtime.Serialization.DataContractSerializer(GetType(List(Of String)))
+    Using reader As XmlDictionaryReader = XmlDictionaryReader.CreateTextReader(ret, New XmlDictionaryReaderQuotas())
+     Dim lngs As List(Of String) = CType(dcs.ReadObject(reader), List(Of String))
+     For Each lng As String In lngs
+      res.Add(New CultureInfo(lng))
+     Next
     End Using
-
-    For Each lang As String In languagesForTranslate
-     Try
-      res.Add(New CultureInfo(lang))
-     Catch ex As Exception
-     End Try
-    Next
    Catch ex As Exception
-    MsgBox(String.Format("Error connecting to Bing: {0}", ex.Message), MsgBoxStyle.Critical)
    End Try
-
-   Return res
-
+   _SupportedLanguages = res
+   Return True
   End Function
 #End Region
 
 #Region " Public Methods "
-  Public ReadOnly Property SupportedLanguages As System.Collections.Generic.List(Of System.Globalization.CultureInfo) Implements ITranslationService.SupportedLanguages
+  Public ReadOnly Property SupportedLanguages As List(Of CultureInfo) Implements ITranslationService.SupportedLanguages
    Get
     Return _SupportedLanguages
    End Get
   End Property
 
-  Public Function Translate(entriesToTranslate As Dictionary(Of String, String), targetLocale As CultureInfo) As Dictionary(Of String, String) Implements ITranslationService.Translate
+  Public Async Function Translate(entriesToTranslate As Dictionary(Of String, String), targetLocale As CultureInfo) As Task(Of Dictionary(Of String, String)) Implements ITranslationService.Translate
 
    Dim res As New Dictionary(Of String, String)
-   If _bingClientId = "" Then Return res
-
-   Try
-    ' get bing reference and response
-    Dim translator = New MicrosoftTranslatorService.LanguageServiceClient()
-    Dim binding = DirectCast(translator.Endpoint.Binding, BasicHttpBinding)
-    binding.MaxReceivedMessageSize = Integer.MaxValue
-    binding.MaxBufferSize = Integer.MaxValue
-
-    ' Set Authorization header before sending the request
-    Dim httpRequestProperty = New HttpRequestMessageProperty() With { _
-      .Method = "POST" _
-    }
-    httpRequestProperty.Headers.Add("Authorization", AccessToken)
-    Dim options = New MicrosoftTranslatorService.TranslateOptions()
-
-    Dim requestSize = 0
-    Dim lastEntryHash = entriesToTranslate.Last().GetHashCode()
-    Dim translationBatch As New Dictionary(Of String, String)
-
-    For Each entry As KeyValuePair(Of String, String) In entriesToTranslate
-
-     translationBatch.Add(entry.Key, entry.Value)
-     requestSize += entry.Value.ToString().Length
-
-     ' The total of all texts to be translated must not exceed 10000 characters. The maximum number of array elements is 2000. 
-     If (requestSize <= 8000) AndAlso (entriesToTranslate.Count < 2000) AndAlso (entry.GetHashCode() <> lastEntryHash) Then
-      Continue For
-     End If
-
-     Dim stringsToTranslate = translationBatch.[Select](Function(t) t.Value.ToString()).ToArray()
-     Dim translatedTexts As MicrosoftTranslatorService.TranslateArrayResponse() = Nothing
-     Try
-      ' Creates a block within which an OperationContext object is in scope.
-      Using New OperationContextScope(translator.InnerChannel)
-       OperationContext.Current.OutgoingMessageProperties(HttpRequestMessageProperty.Name) = httpRequestProperty
-       translatedTexts = translator.TranslateArray(String.Empty, stringsToTranslate, "en", targetLocale.Name, options)
-      End Using
-     Catch e As Exception
-
-     End Try
-
-     ' loop orginal resx and create new one from translated text
-     Dim l = 0
-     For Each translateEntry As KeyValuePair(Of String, String) In translationBatch
-      If (translatedTexts Is Nothing) OrElse (l >= translatedTexts.Length) Then
-       ' incomplete
-      Else
-       res.Add(translateEntry.Key, translatedTexts(l).TranslatedText)
-      End If
-      l += 1
-     Next
-
-     'If (abortRequested IsNot Nothing) AndAlso abortRequested() Then
-     ' Exit For
-     'End If
-
-     translationBatch = New Dictionary(Of String, String)
-     requestSize = 0
-    Next
-   Catch ex As Exception
-    MsgBox(String.Format("Error connecting to Bing: {0}", ex.Message), MsgBoxStyle.Critical)
-   End Try
-
+   Dim _Authentication = New AzureDataMarket(_bingClientId, _bingClientSecret)
+   Dim m_Token As AzureDataMarket.Token = Await _Authentication.GetTokenAsync()
+   Dim auth As String = m_Token.Header
+   For Each ett As KeyValuePair(Of String, String) In entriesToTranslate
+    Dim client As New HttpClient()
+    Dim strSource As String = ett.Value
+    client.DefaultRequestHeaders.Add("Authorization", auth)
+    Dim RequestUri As String = "http://api.microsofttranslator.com/v2/Http.svc/Translate?text=" + Net.WebUtility.UrlEncode(strSource) + "&to=" + targetLocale.TwoLetterISOLanguageName
+    Try
+     Dim strTranslated As String = Await client.GetStringAsync(RequestUri)
+     Dim xTranslation As XDocument = XDocument.Parse(strTranslated)
+     Dim strTransText As String = xTranslation.Root.FirstNode.ToString()
+     res.Add(ett.Key, strTransText)
+    Catch ex As Exception
+     res.Add(ett.Key, "")
+    End Try
+   Next
    Return res
 
   End Function

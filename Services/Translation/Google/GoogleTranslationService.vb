@@ -26,7 +26,7 @@ Namespace Services.Translation.Google
    End Get
   End Property
 
-  Public Function Translate(entriesToTranslate As System.Collections.Generic.Dictionary(Of String, String), targetLocale As System.Globalization.CultureInfo) As System.Collections.Generic.Dictionary(Of String, String) Implements ITranslationService.Translate
+  Public Async Function Translate(entriesToTranslate As System.Collections.Generic.Dictionary(Of String, String), targetLocale As System.Globalization.CultureInfo) As System.Threading.Tasks.Task(Of System.Collections.Generic.Dictionary(Of String, String)) Implements ITranslationService.Translate
 
    Dim res As New Dictionary(Of String, String)
    If _googleApiKey = "" Then Return res

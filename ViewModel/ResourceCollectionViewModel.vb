@@ -271,7 +271,7 @@ Namespace ViewModel
    End Get
   End Property
 
-  Public Sub TranslationServiceTranslateCommandHandler(param As Object)
+  Public Async Sub TranslationServiceTranslateCommandHandler(param As Object)
    If TranslationServiceLocale Is Nothing Then Exit Sub
    Dim translateParams As String = CType(param, String)
    Dim toTranslate As New Dictionary(Of String, String)
@@ -292,7 +292,7 @@ Namespace ViewModel
      End If
     Next
    End If
-   Dim translated As Dictionary(Of String, String) = MainWindow.TranslationService.Translate(toTranslate, TranslationServiceLocale)
+   Dim translated As Dictionary(Of String, String) = Await MainWindow.TranslationService.Translate(toTranslate, TranslationServiceLocale)
    If translateParams.EndsWith("2Target") Then
     For Each rkv As ResourceKeyViewModel In ResourceKeys
      If translated.ContainsKey(rkv.Key) Then
