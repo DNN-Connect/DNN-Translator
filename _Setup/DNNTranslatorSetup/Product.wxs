@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+ <Product Id="*" Name="DNN Translator" Language="1033" Version="1.1.0.0" Manufacturer="DNN Connect Association" UpgradeCode="71310ee5-37df-4d0a-94d9-19a9f7d9ede6">
+  <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+  <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+  <MediaTemplate EmbedCab="yes" />
+
+  <Feature Id="ProductFeature" Title="DNNTranslatorSetup" Level="1">
+   <ComponentGroupRef Id="ProductComponents" />
+   <ComponentGroupRef Id="ProductShortCuts" />
+  </Feature>
+
+  <UIRef Id="WixUI_InstallDir"/>
+  <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+  <Icon Id="icon_Translator" SourceFile="$(var.Translator.TargetDir)\Translator.exe" />
+  <WixVariable Id="WixUILicenseRtf" Value="$(var.SolutionDir)\_Documentation\License.rtf" />
+
+ </Product>
+
+ <Fragment>
+  <Directory Id="TARGETDIR" Name="SourceDir">
+   <Directory Id="ProgramFilesFolder">
+    <Directory Id="dir_parent" Name="Dnn">
+     <Directory Id="INSTALLFOLDER" Name="Translator" />
+    </Directory>
+   </Directory>
+   <Directory Id="ProgramMenuFolder">
+    <Directory Id="ApplicationProgramsFolder" Name="Dnn"/>
+   </Directory>
+  </Directory>
+ </Fragment>
+
+ <Fragment>
+  <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+   <Component Id="cmp_SmithHtmlEditor" Guid="bdda7e4e-9659-4682-8e4f-deebf1fa4a1b">
+    <File Id="fil_SmithHmtlEditor" KeyPath="yes" Source="$(var.Translator.TargetDir)\Smith.WPF.HtmlEditor.dll" />
+   </Component>
+   <Component Id="cmp_TranslatorLib" Guid="d5daa059-6f57-439e-8773-0a9c95934948">
+    <File Id="fil_TranslatorLib" KeyPath="yes" Source="$(var.Translator.TargetDir)\TranslatorLibrary.dll" />
+   </Component>
+   <Component Id="cmp_Newtonsoft" Guid="fd67cb96-090c-4aab-89f4-83e2247772bc">
+    <File Id="fil_Newtonsoft" KeyPath="yes" Source="$(var.Translator.TargetDir)\Newtonsoft.Json.dll" />
+   </Component>
+   <Component Id="cmp_mshtml" Guid="1f126906-a961-4c68-a023-fcc13cbe7501">
+    <File Id="fil_mshtml" KeyPath="yes" Source="$(var.Translator.TargetDir)\Microsoft.mshtml.dll" />
+   </Component>
+   <Component Id="cmp_zip" Guid="63df5d3e-2fdc-4797-b433-f97f7649625a">
+    <File Id="fil_zip" KeyPath="yes" Source="$(var.Translator.TargetDir)\SharpZipLib.dll" />
+   </Component>
+   <Component Id="cmp_app" Guid="b76b5e8a-fbb0-44b1-8fb6-7bb6e6c8fc04">
+    <File Id="fil_app" KeyPath="yes" Source="$(var.Translator.TargetDir)\Translator.exe" />
+   </Component>
+  </ComponentGroup>
+ </Fragment>
+
+ <Fragment>
+  <ComponentGroup Id="ProductShortCuts" Directory="ApplicationProgramsFolder">
+   <Component Id="ApplicationShortcut" Guid="95a5187a-8b49-42ca-a0ae-d75ded635725">
+    <Shortcut Id="ApplicationStartMenuShortcut" Name="Translator" Description="Dnn Translator" Target="[#fil_app]" />
+    <RemoveFolder Id="del_ApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall"/>
+    <RegistryValue Root="HKCU" Key="Software\Microsoft\DnnTranslator" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+   </Component>
+  </ComponentGroup>
+ </Fragment>
+
+</Wix>

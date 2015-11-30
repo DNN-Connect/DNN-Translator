@@ -11,11 +11,11 @@ Imports System.Windows
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("DotNetNuke Translator")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("Translator")> 
-<Assembly: AssemblyCopyright("Copyright DotNetNuke Corp 2014")> 
+<Assembly: AssemblyTitle("DNN Translator")>
+<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyCompany("DNN Connect Association")>
+<Assembly: AssemblyProduct("Translator")>
+<Assembly: AssemblyCopyright("")>
 <Assembly: AssemblyTrademark("")> 
 <Assembly: ComVisible(false)>
 
@@ -42,7 +42,7 @@ Imports System.Windows
 
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("b76b5e8a-fbb0-44b1-8fb6-7bb6e6c8fc04")> 
+<Assembly: Guid("b76b5e8a-fbb0-44b1-8fb6-7bb6e6c8fc04")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -55,5 +55,5 @@ Imports System.Windows
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.11.0")> 
-<Assembly: AssemblyFileVersion("1.0.11.0")> 
+<Assembly: AssemblyVersion("1.1.0.0")>
+<Assembly: AssemblyFileVersion("1.1.0.0")>
