@@ -73,29 +73,29 @@ Namespace Common
 
    CurrentSnapShot = New Snapshot(Location, Location)
 
+   ' Load various DNN and reflect
+   Dim ass As System.Reflection.Assembly = System.Reflection.Assembly.LoadFile(Location & "bin\dotnetnuke.dll")
+   DotNetNukeVersion = ass.GetName.Version.ToString
+   If IO.File.Exists(Location & "bin\DotNetNuke.Professional.dll") Then
+    DotNetNukeType = "Professional Edition"
+   End If
+   If IO.File.Exists(Location & "bin\DotNetNuke.Enterprise.dll") Then
+    DotNetNukeType = "Enterprise Edition"
+   End If
+
+   Dim core As New InstalledPackageViewModel("Core", DotNetNukeType, DotNetNukeVersion, "")
+   InstalledPackages.Add(core)
+
+   ' Load web.config
+   WebConfig.Load(Location & "web.config")
+   ConnectionString = WebConfig.SelectSingleNode("/configuration/connectionStrings/add[@name='SiteSqlServer']/@connectionString").InnerText
+   DatabaseOwner = WebConfig.SelectSingleNode("/configuration/dotnetnuke/data/providers/add[@name='SqlDataProvider']/@databaseOwner").InnerText
+   If DatabaseOwner <> "" AndAlso Not DatabaseOwner.EndsWith(".") Then DatabaseOwner &= "."
+   ObjectQualifier = WebConfig.SelectSingleNode("/configuration/dotnetnuke/data/providers/add[@name='SqlDataProvider']/@objectQualifier").InnerText
+   If ObjectQualifier <> "" AndAlso Not ObjectQualifier.EndsWith("_") Then ObjectQualifier &= "_"
+
+   ' Try to get a list of installed packages and attempt to build the resource file list of each object
    Try
-    ' Load various DNN and reflect
-    Dim ass As System.Reflection.Assembly = System.Reflection.Assembly.LoadFile(Location & "bin\dotnetnuke.dll")
-    DotNetNukeVersion = ass.GetName.Version.ToString
-    If IO.File.Exists(Location & "bin\DotNetNuke.Professional.dll") Then
-     DotNetNukeType = "Professional Edition"
-    End If
-    If IO.File.Exists(Location & "bin\DotNetNuke.Enterprise.dll") Then
-     DotNetNukeType = "Enterprise Edition"
-    End If
-
-    Dim core As New InstalledPackageViewModel("Core", DotNetNukeType, DotNetNukeVersion, "")
-    InstalledPackages.Add(core)
-
-    ' Load web.config
-    WebConfig.Load(Location & "web.config")
-    ConnectionString = WebConfig.SelectSingleNode("/configuration/connectionStrings/add[@name='SiteSqlServer']/@connectionString").InnerText
-    DatabaseOwner = WebConfig.SelectSingleNode("/configuration/dotnetnuke/data/providers/add[@name='SqlDataProvider']/@databaseOwner").InnerText
-    If DatabaseOwner <> "" AndAlso Not DatabaseOwner.EndsWith(".") Then DatabaseOwner &= "."
-    ObjectQualifier = WebConfig.SelectSingleNode("/configuration/dotnetnuke/data/providers/add[@name='SqlDataProvider']/@objectQualifier").InnerText
-    If ObjectQualifier <> "" AndAlso Not ObjectQualifier.EndsWith("_") Then ObjectQualifier &= "_"
-
-    ' Try to get a list of installed packages and attempt to build the resource file list of each object
     Using c As New SqlConnection(ConnectionString)
      c.Open()
      Dim q As SqlCommand = c.CreateCommand
@@ -116,22 +116,20 @@ Namespace Common
       Loop
      End Using
     End Using
-
-    ' Now adjust the list for the core
-    Dim allNonCoreResourceFiles As New List(Of String)
-    For Each p As InstalledPackageViewModel In InstalledPackages
-     allNonCoreResourceFiles.AddRange(p.Manifest.ResourceFiles)
-    Next
-    core.Manifest = New ModuleManifest
-    For Each resFile As String In CurrentSnapShot.ResourceFiles.Keys
-     If Not allNonCoreResourceFiles.Contains(resFile) Then
-      core.Manifest.ResourceFiles.Add(resFile)
-     End If
-    Next
-
    Catch ex As Exception
-
    End Try
+
+   ' Now adjust the list for the core
+   Dim allNonCoreResourceFiles As New List(Of String)
+   For Each p As InstalledPackageViewModel In InstalledPackages
+    allNonCoreResourceFiles.AddRange(p.Manifest.ResourceFiles)
+   Next
+   core.Manifest = New ModuleManifest
+   For Each resFile As String In CurrentSnapShot.ResourceFiles.Keys
+    If Not allNonCoreResourceFiles.Contains(resFile) Then
+     core.Manifest.ResourceFiles.Add(resFile)
+    End If
+   Next
 
   End Sub
 
