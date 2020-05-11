@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Translator", "Translator.vbproj", "{DC7B7B19-07A7-44C9-A624-67895E092C52}"
 EndProject
@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmithHtmlEditor", "SmithHtm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslatorLibrary", "TranslatorLibrary\TranslatorLibrary.csproj", "{343ABC8A-D4D0-44A3-A767-A5450488FD57}"
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "DNNTranslatorSetup", "_Setup\DNNTranslatorSetup\DNNTranslatorSetup.wixproj", "{6BDDAEE9-751B-45DB-A8A7-62C2BE1D8734}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TranslatorSetup", "TranslatorSetup\TranslatorSetup.vdproj", "{5D6B4FC7-412C-4253-BBA3-2596FB275571}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,19 +50,17 @@ Global
 		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Release|x86.ActiveCfg = Release|Any CPU
-		{6BDDAEE9-751B-45DB-A8A7-62C2BE1D8734}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{6BDDAEE9-751B-45DB-A8A7-62C2BE1D8734}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{6BDDAEE9-751B-45DB-A8A7-62C2BE1D8734}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{6BDDAEE9-751B-45DB-A8A7-62C2BE1D8734}.Debug|x86.ActiveCfg = Debug|x86
-		{6BDDAEE9-751B-45DB-A8A7-62C2BE1D8734}.Debug|x86.Build.0 = Debug|x86
-		{6BDDAEE9-751B-45DB-A8A7-62C2BE1D8734}.Release|Any CPU.ActiveCfg = Release|x86
-		{6BDDAEE9-751B-45DB-A8A7-62C2BE1D8734}.Release|Any CPU.Build.0 = Release|x86
-		{6BDDAEE9-751B-45DB-A8A7-62C2BE1D8734}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{6BDDAEE9-751B-45DB-A8A7-62C2BE1D8734}.Release|Mixed Platforms.Build.0 = Release|x86
-		{6BDDAEE9-751B-45DB-A8A7-62C2BE1D8734}.Release|x86.ActiveCfg = Release|x86
-		{6BDDAEE9-751B-45DB-A8A7-62C2BE1D8734}.Release|x86.Build.0 = Release|x86
+		{5D6B4FC7-412C-4253-BBA3-2596FB275571}.Debug|Any CPU.ActiveCfg = Debug
+		{5D6B4FC7-412C-4253-BBA3-2596FB275571}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{5D6B4FC7-412C-4253-BBA3-2596FB275571}.Debug|x86.ActiveCfg = Debug
+		{5D6B4FC7-412C-4253-BBA3-2596FB275571}.Release|Any CPU.ActiveCfg = Release
+		{5D6B4FC7-412C-4253-BBA3-2596FB275571}.Release|Mixed Platforms.ActiveCfg = Release
+		{5D6B4FC7-412C-4253-BBA3-2596FB275571}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {51B2BA42-DB21-4BD8-A9AC-9EA9FBC7F924}
 	EndGlobalSection
 EndGlobal
