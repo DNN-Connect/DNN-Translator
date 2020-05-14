@@ -140,6 +140,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -164,6 +172,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -1014,7 +1030,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4FD0113B56934827800877C4A65494E9"
             {
-            "SourcePath" = "8:..\\obj\\x86\\Release\\Translator.exe"
+            "SourcePath" = "8:..\\obj\\x86\\Debug\\Translator.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_7CB42EB425464627BB96C05FB068CFE2"
