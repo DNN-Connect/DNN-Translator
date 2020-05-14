@@ -1,81 +1,75 @@
-﻿Imports ICSharpCode.SharpZipLib.Zip
+﻿Imports System.IO
+Imports System.IO.Compression
 Imports DotNetNuke.Translator.Common
 Imports DotNetNuke.Translator.Common.Globals
 
 Namespace Services.Packing
- Public Class LanguagePack
+  Public Class LanguagePack
 
-  Public Property Manifest As PackManifest
-  Private Property Settings As ProjectSettings
-  Private Property LanguagePack As Byte()
-  Private Property Locale As CultureInfo
-  Private Property Copyright As String = ""
-  Private Property AddedFiles As New List(Of String)
+    Public Property Manifest As PackManifest
+    Private Property Settings As ProjectSettings
+    Private Property LanguagePack As Byte()
+    Private Property Locale As CultureInfo
+    Private Property Copyright As String = ""
+    Private Property AddedFiles As New List(Of String)
 
-  Public Sub New(appSettings As TranslatorSettings, projectSettings As ProjectSettings, packageFriendlyName As String, targetLocale As CultureInfo)
+    Public Sub New(appSettings As TranslatorSettings, projectSettings As ProjectSettings, packageFriendlyName As String, targetLocale As CultureInfo)
 
-   Settings = projectSettings
-   Locale = targetLocale
-   If projectSettings.OverrideOwner Then
-    Copyright = projectSettings.Copyright
-   Else
-    Copyright = appSettings.Copyright
-   End If
-
-   Manifest = New PackManifest(appSettings, projectSettings, Locale)
-
-   Using LanguagePackStream As New IO.MemoryStream
-    Using strmZipStream As New ZipOutputStream(LanguagePackStream)
-     strmZipStream.SetLevel(9)
-     For Each package As ViewModel.InstalledPackageViewModel In projectSettings.InstalledPackages
-      If package.FriendlyName = packageFriendlyName Or packageFriendlyName = "Full" Then
-       AddPackage(package, strmZipStream)
+      Settings = projectSettings
+      Locale = targetLocale
+      If projectSettings.OverrideOwner Then
+        Copyright = projectSettings.Copyright
+      Else
+        Copyright = appSettings.Copyright
       End If
-     Next
-     Manifest.Clean()
-     Dim manifestName As String = packageFriendlyName & "_" & Locale.Name & ".dnn"
-     manifestName = manifestName.Replace("/", "_").Replace("\", "_")
-     Dim myZipEntry As New ZipEntry(manifestName)
-     strmZipStream.PutNextEntry(myZipEntry)
-     Dim fileData As Byte() = Globals.XmlToFormattedByteArray(Manifest)
-     strmZipStream.Write(fileData, 0, fileData.Length)
-     strmZipStream.Flush()
-    End Using
-    LanguagePack = LanguagePackStream.ToArray
-   End Using
 
-  End Sub
+      Manifest = New PackManifest(appSettings, projectSettings, Locale)
 
-  Public Sub Save(path As String)
+      Using LanguagePackStream As New MemoryStream
+        Using archive As New ZipArchive(LanguagePackStream, ZipArchiveMode.Create, False)
+          For Each package As ViewModel.InstalledPackageViewModel In projectSettings.InstalledPackages
+            If package.FriendlyName = packageFriendlyName Or packageFriendlyName = "Full" Then
+              AddPackage(package, archive)
+            End If
+          Next
+          Manifest.Clean()
+          Dim manifestName As String = packageFriendlyName & "_" & Locale.Name & ".dnn"
+          manifestName = manifestName.Replace("/", "_").Replace("\", "_")
+          TranslatorLibrary.Compression.ZipXmlFileToStream(archive, Manifest, manifestName)
+        End Using
+        LanguagePack = LanguagePackStream.ToArray()
+      End Using
 
-   Using strmZipFile As New IO.FileStream(path, IO.FileMode.Create)
-    strmZipFile.Write(LanguagePack, 0, LanguagePack.Length)
-   End Using
+    End Sub
 
-  End Sub
+    Public Sub Save(path As String)
 
-  Private Sub AddPackage(package As ViewModel.InstalledPackageViewModel, zipStream As ZipOutputStream)
+      Using strmZipFile As New IO.FileStream(path, IO.FileMode.Create)
+        strmZipFile.Write(LanguagePack, 0, LanguagePack.Length)
+      End Using
 
-   Dim packageNode As Xml.XmlNode = Manifest.CreatePackage(package)
-   For Each fileKey As String In package.Manifest.ResourceFiles
-    Dim targetFile As String = GetLocalizedFilePath(fileKey, Locale.Name)
-    If Not AddedFiles.Contains(targetFile) AndAlso IO.File.Exists(Settings.Location & targetFile) Then
-     AddedFiles.Add(targetFile)
-     Dim resFile As New ResourceFile(targetFile, Settings.Location & targetFile)
-     If resFile.Resources.Count > 0 Then
-      Dim targetFileOriginalCase As String = GetLocalizedFilePath(Settings.CurrentSnapShot.ResFileOriginalCasings(fileKey), Locale.Name)
-      resFile.Copyright = Copyright
-      resFile.Regenerate(True)
-      Dim resFileData As Byte() = Globals.XmlToFormattedByteArray(resFile)
-      Dim myZipEntry As New ZipEntry(targetFileOriginalCase)
-      zipStream.PutNextEntry(myZipEntry)
-      zipStream.Write(resFileData, 0, resFileData.Length)
-      Manifest.AddResourceFile(packageNode, targetFileOriginalCase)
-     End If
-    End If
-   Next
+    End Sub
 
-  End Sub
+    Private Sub AddPackage(package As ViewModel.InstalledPackageViewModel, archive As ZipArchive)
 
- End Class
+      Dim packageNode As Xml.XmlNode = Manifest.CreatePackage(package)
+      For Each fileKey As String In package.Manifest.ResourceFiles
+        Dim targetFile As String = GetLocalizedFilePath(fileKey, Locale.Name)
+        If Not AddedFiles.Contains(targetFile) AndAlso IO.File.Exists(Settings.Location & targetFile) Then
+          AddedFiles.Add(targetFile)
+
+          Dim resFile As New ResourceFile(targetFile, Settings.Location & targetFile)
+          If resFile.Resources.Count > 0 Then
+            Dim targetFileOriginalCase As String = GetLocalizedFilePath(Settings.CurrentSnapShot.ResFileOriginalCasings(fileKey), Locale.Name)
+            resFile.Copyright = Copyright
+            resFile.Regenerate(True)
+            TranslatorLibrary.Compression.ZipXmlFileToStream(archive, resFile, targetFileOriginalCase)
+            Manifest.AddResourceFile(packageNode, targetFileOriginalCase)
+          End If
+        End If
+      Next
+
+    End Sub
+
+  End Class
 End Namespace
