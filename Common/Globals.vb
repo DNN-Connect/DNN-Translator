@@ -126,52 +126,52 @@ Namespace Common
 #End Region
 
 #Region " Encryption "
-  Shared entropy As Byte() = System.Text.Encoding.Unicode.GetBytes("Not A Password")
+    Shared entropy As Byte() = System.Text.Encoding.Unicode.GetBytes("Not A Password")
 
-  Public Shared Function EncryptString(input As System.Security.SecureString) As String
-   If input Is Nothing Then Return ""
-   Dim encryptedData As Byte() = System.Security.Cryptography.ProtectedData.Protect(System.Text.Encoding.Unicode.GetBytes(ToInsecureString(input)), entropy, System.Security.Cryptography.DataProtectionScope.CurrentUser)
-   Return Convert.ToBase64String(encryptedData)
-  End Function
+    Public Shared Function EncryptString(input As System.Security.SecureString) As String
+      If input Is Nothing Then Return ""
+      Dim encryptedData As Byte() = System.Security.Cryptography.ProtectedData.Protect(System.Text.Encoding.Unicode.GetBytes(ToInsecureString(input)), entropy, System.Security.Cryptography.DataProtectionScope.CurrentUser)
+      Return Convert.ToBase64String(encryptedData)
+    End Function
 
-  Public Shared Function DecryptString(encryptedData As String) As SecureString
-   Try
-    Dim decryptedData As Byte() = System.Security.Cryptography.ProtectedData.Unprotect(Convert.FromBase64String(encryptedData), entropy, System.Security.Cryptography.DataProtectionScope.CurrentUser)
-    Return ToSecureString(System.Text.Encoding.Unicode.GetString(decryptedData))
-   Catch
-    Return New SecureString()
-   End Try
-  End Function
+    Public Shared Function DecryptString(encryptedData As String) As SecureString
+      Try
+        Dim decryptedData As Byte() = System.Security.Cryptography.ProtectedData.Unprotect(Convert.FromBase64String(encryptedData), entropy, System.Security.Cryptography.DataProtectionScope.CurrentUser)
+        Return ToSecureString(System.Text.Encoding.Unicode.GetString(decryptedData))
+      Catch
+        Return New SecureString()
+      End Try
+    End Function
 
-  Public Shared Function ToSecureString(input As String) As SecureString
-   Dim secure As New SecureString()
-   For Each c As Char In input
-    secure.AppendChar(c)
-   Next
-   secure.MakeReadOnly()
-   Return secure
-  End Function
+    Public Shared Function ToSecureString(input As String) As SecureString
+      Dim secure As New SecureString()
+      For Each c As Char In input
+        secure.AppendChar(c)
+      Next
+      secure.MakeReadOnly()
+      Return secure
+    End Function
 
-  Public Shared Function ToInsecureString(input As SecureString) As String
-   If input Is Nothing Then Return ""
-   Dim returnValue As String = String.Empty
-   Dim ptr As IntPtr = System.Runtime.InteropServices.Marshal.SecureStringToBSTR(input)
-   Try
-    returnValue = System.Runtime.InteropServices.Marshal.PtrToStringBSTR(ptr)
-   Finally
-    System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(ptr)
-   End Try
-   Return returnValue
-  End Function
+    Public Shared Function ToInsecureString(input As SecureString) As String
+      If input Is Nothing Then Return ""
+      Dim returnValue As String = String.Empty
+      Dim ptr As IntPtr = System.Runtime.InteropServices.Marshal.SecureStringToBSTR(input)
+      Try
+        returnValue = System.Runtime.InteropServices.Marshal.PtrToStringBSTR(ptr)
+      Finally
+        System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(ptr)
+      End Try
+      Return returnValue
+    End Function
 #End Region
 
 #Region " Html/XML Encoding "
-  ''' <summary>
-  ''' Not used for now. May come in handy later.
-  ''' </summary>
-  ''' <returns></returns>
-  ''' <remarks></remarks>
-  Function getEncodingDictionary() As String(,)
+    ''' <summary>
+    ''' Not used for now. May come in handy later.
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Function getEncodingDictionary() As String(,)
 
    Dim s As String = "&Aacute;,193,C1,Á|"
    s = s & "&aacute;,225,E1,á|"

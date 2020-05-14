@@ -66,7 +66,7 @@ namespace Smith.WPF.HtmlEditor
         {
             TextBox tb = sender as TextBox;
             if (tb != null) tb.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
-        }        
+        }
 
         /// <summary>
         /// 响应文本输入事件
@@ -219,7 +219,7 @@ namespace Smith.WPF.HtmlEditor
         static void OnEnableChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             ScrollViewer scrollviewer = sender as ScrollViewer;
-            if (scrollviewer != null && e.NewValue is bool && 
+            if (scrollviewer != null && e.NewValue is bool &&
                 scrollviewer.Content != null && scrollviewer.Content is FrameworkElement)
             {
                 FrameworkElement fe = scrollviewer.Content as FrameworkElement;

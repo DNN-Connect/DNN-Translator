@@ -35,7 +35,7 @@ namespace Smith.WPF.HtmlEditor
                 value = value.Replace("&#39;", "\'");
                 value = value.Replace("&amp;", "&");
                 return value;
-            } 
+            }
             return string.Empty;
         }
 

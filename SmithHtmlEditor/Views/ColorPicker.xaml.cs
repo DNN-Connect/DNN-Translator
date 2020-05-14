@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Collections.ObjectModel;
 
 namespace Smith.WPF.HtmlEditor
 {
@@ -26,7 +19,7 @@ namespace Smith.WPF.HtmlEditor
             InitColors();
         }
 
-        public event EventHandler<PropertyChangedEventArgs<Color>> SelectedColorChanged; 
+        public event EventHandler<PropertyChangedEventArgs<Color>> SelectedColorChanged;
 
         public Color SelectedColor
         {
@@ -57,9 +50,9 @@ namespace Smith.WPF.HtmlEditor
         {
             List<Color> ls = new List<Color>()
             {
-                Color.FromRgb(0x00, 0x00, 0x00), Color.FromRgb(0x99, 0x33, 0x00), 
+                Color.FromRgb(0x00, 0x00, 0x00), Color.FromRgb(0x99, 0x33, 0x00),
                 Color.FromRgb(0x33, 0x33, 0x00), Color.FromRgb(0x00, 0x33, 0x00),
-                Color.FromRgb(0x00, 0x33, 0x66), Color.FromRgb(0x00, 0x00, 0x80), 
+                Color.FromRgb(0x00, 0x33, 0x66), Color.FromRgb(0x00, 0x00, 0x80),
                 Color.FromRgb(0x33, 0x33, 0x99), Color.FromRgb(0x33, 0x33, 0x33),
 
                 Color.FromRgb(0x80, 0x00, 0x00), Color.FromRgb(0xff, 0x66, 0x00),
@@ -68,7 +61,7 @@ namespace Smith.WPF.HtmlEditor
                 Color.FromRgb(0x66, 0x66, 0x99), Color.FromRgb(0x80, 0x80, 0x80),
 
                 Color.FromRgb(0xff, 0x00, 0x00), Color.FromRgb(0xff, 0x99, 0x00),
-                Color.FromRgb(0x99, 0xcc, 0x00), Color.FromRgb(0x33, 0x99, 0x66), 
+                Color.FromRgb(0x99, 0xcc, 0x00), Color.FromRgb(0x33, 0x99, 0x66),
                 Color.FromRgb(0x33, 0xcc, 0xcc), Color.FromRgb(0x33, 0x66, 0xff),
                 Color.FromRgb(0x80, 0x00, 0x80), Color.FromRgb(0x99, 0x99, 0x99),
 

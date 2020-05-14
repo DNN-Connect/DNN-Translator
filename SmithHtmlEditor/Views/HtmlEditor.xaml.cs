@@ -1,16 +1,15 @@
-﻿using System;
+﻿using mshtml;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using System.Xml;
 using System.Xml.XPath;
-using mshtml;
 
 namespace Smith.WPF.HtmlEditor
 {
@@ -24,7 +23,7 @@ namespace Smith.WPF.HtmlEditor
         private Dictionary<string, ImageObject> imageDic;
         private string stylesheet;
         bool isDocReady;
-        
+
         #endregion
 
         #region Constructor
@@ -81,7 +80,7 @@ namespace Smith.WPF.HtmlEditor
         private void InitEvents()
         {
             this.Loaded += new RoutedEventHandler(OnHtmlEditorLoaded);
-            this.Unloaded += new RoutedEventHandler(OnHtmlEditorUnloaded);            
+            this.Unloaded += new RoutedEventHandler(OnHtmlEditorUnloaded);
             ToggleFontColor.Click += new RoutedEventHandler(OnFontColorClick);
             ToggleLineColor.Click += new RoutedEventHandler(OnLineColorClick);
             ToggleCodeMode.Checked += new RoutedEventHandler(OnCodeModeChecked);
@@ -173,7 +172,7 @@ namespace Smith.WPF.HtmlEditor
         #endregion
 
         #region Initalize Editors
-   
+
         RoutedEventArgs DocumentStateChangedEventArgs = new RoutedEventArgs(HtmlEditor.DocumentStateChangedEvent);
 
         private void InitContainer()
@@ -197,14 +196,14 @@ namespace Smith.WPF.HtmlEditor
                 }
                 else
                 {
-                    isDocReady = true;                    
+                    isDocReady = true;
                     RaiseEvent(new RoutedEventArgs(HtmlEditor.DocumentReadyEvent));
                 }
             }
         }
 
         private void OnVisualEditorDocumentNavigated(object sender, System.Windows.Forms.WebBrowserNavigatedEventArgs e)
-        {            
+        {
             VisualEditor.Document.ContextMenuShowing += this.OnDocumentContextMenuShowing;
             htmldoc = new HtmlDocument(VisualEditor.Document);
             //((IHTMLDocument2)VisualEditor.Document.DomDocument).designMode = "ON";
@@ -219,7 +218,7 @@ namespace Smith.WPF.HtmlEditor
             EditingContextMenu.IsOpen = true;
             e.ReturnValue = false;
         }
-        
+
         /// <summary>
         /// Set style for visual editor.
         /// </summary>
@@ -296,7 +295,7 @@ namespace Smith.WPF.HtmlEditor
         /// Initalize font family and font size of code editor.
         /// </summary>
         private void InitStyles()
-        {            
+        {
             //ConfigProvider.Load();
             List<FontFamily> families = new List<FontFamily>();
             //List<FontSize> sizes = new List<FontSize>();
@@ -363,7 +362,7 @@ namespace Smith.WPF.HtmlEditor
                 Smith.WPF.HtmlEditor.FontSize.XXLarge
             };
             return new ReadOnlyCollection<FontSize>(ls);
-        } 
+        }
 
         /// <summary>
         /// Invoke when selected font family changed
@@ -402,7 +401,7 @@ namespace Smith.WPF.HtmlEditor
             }
             catch (Exception)
             {
-            }            
+            }
         }
 
         private static readonly string ConfigPath = "smithhtmleditor.config.xml";
@@ -500,7 +499,7 @@ namespace Smith.WPF.HtmlEditor
         {
             HtmlEditor editor = (HtmlEditor)sender;
             editor.myBindingContent = (string)e.NewValue;
-            editor.ContentHtml = editor.myBindingContent;            
+            editor.ContentHtml = editor.myBindingContent;
         }
 
         private void NotifyBindingContentChanged()
@@ -555,7 +554,7 @@ namespace Smith.WPF.HtmlEditor
                 BindingContent = value;
                 if (VisualEditor.Document != null && VisualEditor.Document.Body != null)
                     VisualEditor.Document.Body.InnerHtml = value;
-                
+
                 if (ToggleCodeMode.IsChecked == true)
                     CodeEditor.Text = VisualEditor.Document.Body.InnerHtml;
             }
@@ -593,8 +592,8 @@ namespace Smith.WPF.HtmlEditor
             get
             {
                 return
-                    mode == EditMode.Visual && 
-                    htmldoc != null && 
+                    mode == EditMode.Visual &&
+                    htmldoc != null &&
                     htmldoc.QueryCommandEnabled("Undo");
             }
         }
@@ -607,9 +606,9 @@ namespace Smith.WPF.HtmlEditor
         {
             get
             {
-                return 
-                    mode == EditMode.Visual && 
-                    htmldoc != null && 
+                return
+                    mode == EditMode.Visual &&
+                    htmldoc != null &&
                     htmldoc.QueryCommandEnabled("Redo");
             }
         }
@@ -623,8 +622,8 @@ namespace Smith.WPF.HtmlEditor
             get
             {
                 return
-                    mode == EditMode.Visual && 
-                    htmldoc != null && 
+                    mode == EditMode.Visual &&
+                    htmldoc != null &&
                     htmldoc.QueryCommandEnabled("Cut");
             }
         }
@@ -637,9 +636,9 @@ namespace Smith.WPF.HtmlEditor
         {
             get
             {
-                return 
-                    mode == EditMode.Visual && 
-                    htmldoc != null && 
+                return
+                    mode == EditMode.Visual &&
+                    htmldoc != null &&
                     htmldoc.QueryCommandEnabled("Copy");
             }
         }
@@ -652,9 +651,9 @@ namespace Smith.WPF.HtmlEditor
         {
             get
             {
-                return 
-                    mode == EditMode.Visual && 
-                    htmldoc != null && 
+                return
+                    mode == EditMode.Visual &&
+                    htmldoc != null &&
                     htmldoc.QueryCommandEnabled("Paste");
             }
         }
@@ -667,9 +666,9 @@ namespace Smith.WPF.HtmlEditor
         {
             get
             {
-                return 
-                    mode == EditMode.Visual && 
-                    htmldoc != null && 
+                return
+                    mode == EditMode.Visual &&
+                    htmldoc != null &&
                     htmldoc.QueryCommandEnabled("Delete");
             }
         }
@@ -684,7 +683,7 @@ namespace Smith.WPF.HtmlEditor
         /// </summary>
         public void Undo()
         {
-            if (htmldoc != null) 
+            if (htmldoc != null)
                 htmldoc.ExecuteCommand("Undo", false, null);
         }
 
@@ -694,7 +693,7 @@ namespace Smith.WPF.HtmlEditor
         /// </summary>
         public void Redo()
         {
-            if (htmldoc != null) 
+            if (htmldoc != null)
                 htmldoc.ExecuteCommand("Redo", false, null);
         }
 
@@ -704,7 +703,7 @@ namespace Smith.WPF.HtmlEditor
         /// </summary>
         public void Cut()
         {
-            if (htmldoc != null) 
+            if (htmldoc != null)
                 htmldoc.ExecuteCommand("Cut", false, null);
         }
 
@@ -724,7 +723,7 @@ namespace Smith.WPF.HtmlEditor
         /// </summary>
         public void Paste()
         {
-            if (htmldoc != null) 
+            if (htmldoc != null)
                 htmldoc.ExecuteCommand("Paste", false, null);
         }
 
@@ -734,7 +733,7 @@ namespace Smith.WPF.HtmlEditor
         /// </summary>
         public void Delete()
         {
-            if (htmldoc != null) 
+            if (htmldoc != null)
                 htmldoc.ExecuteCommand("Delete", false, null);
         }
 
@@ -744,7 +743,7 @@ namespace Smith.WPF.HtmlEditor
         /// </summary>
         public void SelectAll()
         {
-            if (htmldoc != null) 
+            if (htmldoc != null)
                 htmldoc.ExecuteCommand("SelectAll", false, null);
         }
 
@@ -955,7 +954,7 @@ namespace Smith.WPF.HtmlEditor
         private void InsertCodeBlockExecuted(object sender, ExecutedRoutedEventArgs e)
         {
 
-        } 
+        }
 
         #endregion
     }

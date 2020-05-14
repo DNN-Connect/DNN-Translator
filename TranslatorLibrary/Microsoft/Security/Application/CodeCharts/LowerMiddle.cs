@@ -46,7 +46,7 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x1000; i <= 0x109F; i++)
             {
                 yield return i;
-            }            
+            }
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x13A0; i <= 0x13F4; i++)
             {
                 yield return i;
-            }            
+            }
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x1400; i <= 0x167F; i++)
             {
                 yield return i;
-            }            
+            }
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x1680; i <= 0x169C; i++)
             {
                 yield return i;
-            }              
+            }
         }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x16A0; i <= 0x16F0; i++)
             {
                 yield return i;
-            }              
+            }
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace Microsoft.Security.Application.CodeCharts
                 }
 
                 yield return i;
-            }               
+            }
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x1720; i <= 0x1736; i++)
             {
                 yield return i;
-            }             
+            }
         }
 
         /// <summary>
@@ -232,7 +232,7 @@ namespace Microsoft.Security.Application.CodeCharts
                 }
 
                 yield return i;
-            }                         
+            }
         }
 
         /// <summary>
@@ -322,7 +322,7 @@ namespace Microsoft.Security.Application.CodeCharts
                 {
                     continue;
                 }
-                
+
                 yield return i;
             }
         }
@@ -342,7 +342,7 @@ namespace Microsoft.Security.Application.CodeCharts
                     continue;
                 }
 
-                yield return i;            
+                yield return i;
             }
         }
 
@@ -427,7 +427,7 @@ namespace Microsoft.Security.Application.CodeCharts
                     continue;
                 }
 
-                yield return i;                
+                yield return i;
             }
         }
 
@@ -511,7 +511,7 @@ namespace Microsoft.Security.Application.CodeCharts
                 }
 
                 yield return i;
-            }            
+            }
         }
 
         /// <summary>

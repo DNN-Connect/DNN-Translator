@@ -1,7 +1,5 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Windows.Media;
-using mshtml;
 
 namespace Smith.WPF.HtmlEditor
 {
@@ -132,7 +130,7 @@ namespace Smith.WPF.HtmlEditor
         /// </summary>
         public static bool IsSubscript(this HtmlDocument document)
         {
-            return document.QueryCommandSupported("Subscript") && 
+            return document.QueryCommandSupported("Subscript") &&
                    document.QueryCommandState("Subscript");
         }
 
@@ -141,7 +139,7 @@ namespace Smith.WPF.HtmlEditor
         /// </summary>
         public static bool IsSuperscript(this HtmlDocument document)
         {
-            return document.QueryCommandSupported("Superscript") && 
+            return document.QueryCommandSupported("Superscript") &&
                    document.QueryCommandState("Superscript");
         }
 
@@ -247,7 +245,7 @@ namespace Smith.WPF.HtmlEditor
         public static void Subscript(this HtmlDocument document)
         {
             if (document.QueryCommandSupported("Subscript") &&
-                document.QueryCommandEnabled("Subscript")) 
+                document.QueryCommandEnabled("Subscript"))
                 document.ExecuteCommand("Subscript", false, null);
         }
 
@@ -257,7 +255,7 @@ namespace Smith.WPF.HtmlEditor
         public static void Superscript(this HtmlDocument document)
         {
             if (document.QueryCommandSupported("Superscript") &&
-                document.QueryCommandEnabled("Superscript")) 
+                document.QueryCommandEnabled("Superscript"))
                 document.ExecuteCommand("Superscript", false, null);
         }
 
@@ -332,7 +330,7 @@ namespace Smith.WPF.HtmlEditor
         public static void JustifyFull(this HtmlDocument document)
         {
             document.ExecuteCommand("JustifyFull", false, null);
-        }        
+        }
 
         /// <summary>
         /// 执行插入超链接命令
@@ -403,7 +401,7 @@ namespace Smith.WPF.HtmlEditor
                         {
                             bx.Append("<th></th>");
                         }
-                        else bx.Append("<td></td>"); 
+                        else bx.Append("<td></td>");
                     }
                 }
                 bx.Append("</tr>");

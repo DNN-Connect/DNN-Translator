@@ -256,7 +256,7 @@ namespace Microsoft.Security.Application.CodeCharts
         {
             for (int i = 0xFB50; i <= 0xFDFD; i++)
             {
-                if ((i >= 0xFBB2 && i <= 0xFBD2) || 
+                if ((i >= 0xFBB2 && i <= 0xFBD2) ||
                     (i >= 0xFD40 && i <= 0xFD4F) ||
                     i == 0xFD90 ||
                     i == 0xFD91 ||

@@ -120,8 +120,8 @@ namespace Microsoft.Security.Application
 
                 string surrogatePair = string.Format(
                     CultureInfo.CurrentUICulture,
-                    "Surrogate Pair = 	{0:x4}:{1:x4}", 
-                    Convert.ToInt32(this.HighSurrogate), 
+                    "Surrogate Pair = 	{0:x4}:{1:x4}",
+                    Convert.ToInt32(this.HighSurrogate),
                     Convert.ToInt32(this.LowSurrogate));
 
                 return surrogatePair + Environment.NewLine + "Message: " + base.Message;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Smith.WPF.HtmlEditor
+﻿namespace Smith.WPF.HtmlEditor
 {
     /// <summary>
     /// 提供 System.Drawing.Color 和 System.Windows.Media.Color 之间的转换方法。

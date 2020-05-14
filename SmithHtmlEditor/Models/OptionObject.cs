@@ -10,22 +10,22 @@
     {
         protected ImageAlignment() { }
 
-        public static readonly ImageAlignment Default = 
+        public static readonly ImageAlignment Default =
             new ImageAlignment { Text = Resources.UiText.Align_Default, Value = "" };
 
-        public static readonly ImageAlignment Left = 
+        public static readonly ImageAlignment Left =
             new ImageAlignment { Text = Resources.UiText.Align_Left, Value = "left" };
 
-        public static readonly ImageAlignment Right = 
+        public static readonly ImageAlignment Right =
             new ImageAlignment { Text = Resources.UiText.Align_Right, Value = "right" };
 
-        public static readonly ImageAlignment Top = 
+        public static readonly ImageAlignment Top =
             new ImageAlignment { Text = Resources.UiText.Align_Top, Value = "top" };
 
-        public static readonly ImageAlignment Center = 
+        public static readonly ImageAlignment Center =
             new ImageAlignment { Text = Resources.UiText.Align_Center, Value = "center" };
 
-        public static readonly ImageAlignment Bottom = 
+        public static readonly ImageAlignment Bottom =
             new ImageAlignment { Text = Resources.UiText.Align_Bottom, Value = "bottom" };
     }
 
@@ -50,17 +50,17 @@
     {
         protected TableAlignment() { }
 
-        public static readonly TableAlignment Default = 
+        public static readonly TableAlignment Default =
             new TableAlignment { Text = Resources.UiText.Align_Default, Value = "" };
 
-        public static readonly TableAlignment Center = 
+        public static readonly TableAlignment Center =
             new TableAlignment { Text = Resources.UiText.Align_Center, Value = "center" };
 
-        public static readonly TableAlignment Left = 
+        public static readonly TableAlignment Left =
             new TableAlignment { Text = Resources.UiText.Align_Left, Value = "left" };
 
-        public static readonly TableAlignment Right = 
-            new TableAlignment { Text = Resources.UiText.Align_Right, Value = "right" };        
+        public static readonly TableAlignment Right =
+            new TableAlignment { Text = Resources.UiText.Align_Right, Value = "right" };
     }
 
     public class Unit : OptionObject

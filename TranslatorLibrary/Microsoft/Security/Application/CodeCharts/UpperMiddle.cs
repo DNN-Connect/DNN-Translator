@@ -46,7 +46,7 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x2DE0; i <= 0x2DFF; i++)
             {
                 yield return i;
-            }            
+            }
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x2FF0; i <= 0x2FFB; i++)
             {
                 yield return i;
-            }            
+            }
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x3400; i <= 0x4DB5; i++)
             {
                 yield return i;
-            }            
+            }
         }
 
         /// <summary>

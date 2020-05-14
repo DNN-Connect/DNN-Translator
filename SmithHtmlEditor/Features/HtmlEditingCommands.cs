@@ -74,7 +74,7 @@ namespace Smith.WPF.HtmlEditor
         /// 清除样式命令
         /// </summary>
         public static RoutedUICommand ClearStyle { get { return _clearStyle; } }
- 
+
         #endregion
 
         #region 文本格式命令
@@ -118,7 +118,7 @@ namespace Smith.WPF.HtmlEditor
         /// 两端对齐命令
         /// </summary>
         public static RoutedUICommand JustifyFull { get { return _justifyFull; } }
- 
+
         #endregion
 
         #region 插入对象命令
@@ -151,7 +151,7 @@ namespace Smith.WPF.HtmlEditor
         /// <summary>
         /// 插入段落命令
         /// </summary>
-        public static RoutedUICommand InsertParagraph { get { return _insertParagraph; } } 
+        public static RoutedUICommand InsertParagraph { get { return _insertParagraph; } }
 
         #endregion
 
@@ -186,8 +186,8 @@ namespace Smith.WPF.HtmlEditor
         static RoutedUICommand _insertTable = new RoutedUICommand();
         static RoutedUICommand _insertCodeBlock = new RoutedUICommand();
         static RoutedUICommand _insertLineBreak = new RoutedUICommand();
-        static RoutedUICommand _insertParagraph = new RoutedUICommand(); 
+        static RoutedUICommand _insertParagraph = new RoutedUICommand();
 
         #endregion
-     }
+    }
 }

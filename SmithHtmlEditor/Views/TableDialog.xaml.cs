@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Smith.WPF.HtmlEditor
 {
@@ -31,7 +21,7 @@ namespace Smith.WPF.HtmlEditor
             InitHeaderOptions();
             InitAlignmentOptions();
             InitEvents();
-            InitBindingContext();            
+            InitBindingContext();
         }
 
         public TableObject Model
@@ -59,10 +49,10 @@ namespace Smith.WPF.HtmlEditor
         {
             List<TableHeaderOption> ls = new List<TableHeaderOption>
             {
-                TableHeaderOption.Default, 
-                TableHeaderOption.FirstRow, 
-                TableHeaderOption.FirstColumn, 
-                TableHeaderOption.FirstRowAndColumn 
+                TableHeaderOption.Default,
+                TableHeaderOption.FirstRow,
+                TableHeaderOption.FirstColumn,
+                TableHeaderOption.FirstRowAndColumn
             };
             headerOptions = new ReadOnlyCollection<TableHeaderOption>(ls);
             HeaderSelection.ItemsSource = headerOptions;
@@ -72,9 +62,9 @@ namespace Smith.WPF.HtmlEditor
         {
             List<TableAlignment> ls = new List<TableAlignment>()
             {
-                TableAlignment.Default, 
-                TableAlignment.Left, 
-                TableAlignment.Right, 
+                TableAlignment.Default,
+                TableAlignment.Left,
+                TableAlignment.Right,
                 TableAlignment.Center
             };
             alignmentOptions = new ReadOnlyCollection<TableAlignment>(ls);

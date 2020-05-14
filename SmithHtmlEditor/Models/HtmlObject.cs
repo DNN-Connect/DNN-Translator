@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Media.Imaging;
 
 namespace Smith.WPF.HtmlEditor
@@ -194,7 +190,7 @@ namespace Smith.WPF.HtmlEditor
         int fdOriginalHeight;
         int fdOriginalWidth;
         int fdHeight;
-        int fdWidth; 
+        int fdWidth;
 
         #endregion
     }

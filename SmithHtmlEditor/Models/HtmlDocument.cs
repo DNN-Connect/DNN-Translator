@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using mshtml;
+﻿using mshtml;
 
 namespace Smith.WPF.HtmlEditor
 {
@@ -97,7 +93,7 @@ namespace Smith.WPF.HtmlEditor
             var range = msHtmlDocInterface.selection.createRange() as IHTMLTxtRange;
             range.pasteHTML(content);
             RaiseContentChanged();
-        }        
+        }
 
         /// <summary>
         /// 获取文档状态

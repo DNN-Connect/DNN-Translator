@@ -284,7 +284,7 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x07C0; i <= 0x07FA; i++)
             {
                 yield return i;
-            }            
+            }
         }
 
         /// <summary>
@@ -324,7 +324,7 @@ namespace Microsoft.Security.Application.CodeCharts
                 }
 
                 yield return i;
-            }            
+            }
         }
 
         /// <summary>
@@ -336,11 +336,11 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x0981; i <= 0x09FB; i++)
             {
                 if (i == 0x0984 ||
-                    i == 0x098D || 
+                    i == 0x098D ||
                     i == 0x098E ||
                     i == 0x0991 ||
                     i == 0x0992 ||
-                    i == 0x09A9 || 
+                    i == 0x09A9 ||
                     i == 0x09B1 ||
                     i == 0x09B3 ||
                     i == 0x09B4 ||
@@ -499,7 +499,7 @@ namespace Microsoft.Security.Application.CodeCharts
                     i == 0x0BC9 ||
                     i == 0x0BCE ||
                     i == 0x0BCF ||
-                    (i >= 0x0BD1 && i <= 0x0BD6) ||                    
+                    (i >= 0x0BD1 && i <= 0x0BD6) ||
                     (i >= 0x0BD8 && i <= 0x0BE5))
                 {
                     continue;
@@ -538,7 +538,7 @@ namespace Microsoft.Security.Application.CodeCharts
                 }
 
                 yield return i;
-            }            
+            }
         }
 
         /// <summary>
@@ -550,14 +550,14 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x0C82; i <= 0x0CF2; i++)
             {
                 if (i == 0x0C84 ||
-                    i == 0x0C8D || 
+                    i == 0x0C8D ||
                     i == 0x0C91 ||
                     i == 0x0CA9 ||
                     i == 0x0CB4 ||
                     i == 0x0CBA ||
                     i == 0x0CBB ||
                     i == 0x0CC5 ||
-                    i == 0x0CC9 || 
+                    i == 0x0CC9 ||
                     (i >= 0x0CCE && i <= 0x0CD4) ||
                     (i >= 0x0CD7 && i <= 0x0CDD) ||
                     i == 0x0CDF ||
@@ -567,7 +567,7 @@ namespace Microsoft.Security.Application.CodeCharts
                 {
                     continue;
                 }
-                
+
                 yield return i;
             }
         }
@@ -647,7 +647,7 @@ namespace Microsoft.Security.Application.CodeCharts
                 {
                     continue;
                 }
-                
+
                 yield return i;
             }
         }

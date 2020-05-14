@@ -1,19 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Net;
-using System.ComponentModel;
-using System.Collections.ObjectModel;
-using System.IO;
 
 namespace Smith.WPF.HtmlEditor
 {
@@ -62,7 +52,7 @@ namespace Smith.WPF.HtmlEditor
             ls.Add(ImageAlignment.Bottom);
             ImageAlignmentSelection.ItemsSource = new ReadOnlyCollection<ImageAlignment>(ls);
             ImageAlignmentSelection.DisplayMemberPath = "Text";
-        } 
+        }
 
         void InitEvents()
         {
@@ -128,7 +118,7 @@ namespace Smith.WPF.HtmlEditor
 
         void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            if(!string.IsNullOrEmpty(UrlText.Text)) LoadImageAsyn(UrlText.Text);
+            if (!string.IsNullOrEmpty(UrlText.Text)) LoadImageAsyn(UrlText.Text);
         }
 
         /// <summary>
@@ -138,7 +128,7 @@ namespace Smith.WPF.HtmlEditor
         {
             StatusPrompt.Content = "正在加载";
             PreviewImage.Source = null;
-            bindingContext.Image = null; 
+            bindingContext.Image = null;
 
             // 加载图像
             Uri u = new Uri(uri, UriKind.RelativeOrAbsolute);

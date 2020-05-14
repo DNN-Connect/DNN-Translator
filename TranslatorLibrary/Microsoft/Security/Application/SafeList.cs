@@ -62,10 +62,10 @@ namespace Microsoft.Security.Application
         /// <param name="upperCodeCharts">The combination of upper code charts to use.</param>
         internal static void PunchUnicodeThrough(
             ref char[][] safeList,
-            LowerCodeCharts lowerCodeCharts, 
-            LowerMidCodeCharts lowerMidCodeCharts, 
-            MidCodeCharts midCodeCharts, 
-            UpperMidCodeCharts upperMidCodeCharts, 
+            LowerCodeCharts lowerCodeCharts,
+            LowerMidCodeCharts lowerMidCodeCharts,
+            MidCodeCharts midCodeCharts,
+            UpperMidCodeCharts upperMidCodeCharts,
             UpperCodeCharts upperCodeCharts)
         {
             if (lowerCodeCharts != LowerCodeCharts.None)
@@ -245,7 +245,7 @@ namespace Microsoft.Security.Application
         /// </remarks>
         private static char[] StringToCharArrayWithHashPrefix(string value)
         {
-            return StringToCharArrayWithPrefix(value, '#');            
+            return StringToCharArrayWithPrefix(value, '#');
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace Microsoft.Security.Application
         /// </remarks>
         private static char[] StringToCharArrayWithPercentPrefix(string value)
         {
-            return StringToCharArrayWithPrefix(value, '%');            
+            return StringToCharArrayWithPrefix(value, '%');
         }
 
         /// <summary>

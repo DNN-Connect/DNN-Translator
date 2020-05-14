@@ -146,7 +146,7 @@ namespace Microsoft.Security.Application.CodeCharts
                 yield return i;
             }
         }
-    
+
         /// <summary>
         /// Provides the safe characters for the Number Forms code table.
         /// </summary>
@@ -156,7 +156,7 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x2150; i <= 0x2189; i++)
             {
                 yield return i;
-            }            
+            }
         }
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x2440; i <= 0x244A; i++)
             {
                 yield return i;
-            }        
+            }
         }
 
         /// <summary>
@@ -228,7 +228,7 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x2460; i <= 0x24FF; i++)
             {
                 yield return i;
-            }                
+            }
         }
 
         /// <summary>
@@ -275,7 +275,7 @@ namespace Microsoft.Security.Application.CodeCharts
         {
             for (int i = 0x2600; i <= 0x26FF; i++)
             {
-                if (i == 0x26CE || 
+                if (i == 0x26CE ||
                     i == 0x26E2 ||
                     (i >= 0x26E4 && i <= 0x26E7))
                 {
@@ -283,7 +283,7 @@ namespace Microsoft.Security.Application.CodeCharts
                 }
 
                 yield return i;
-            }            
+            }
         }
 
         /// <summary>
@@ -316,7 +316,7 @@ namespace Microsoft.Security.Application.CodeCharts
                 yield return i;
             }
         }
-        
+
         /// <summary>
         /// Provides the safe characters for the Miscellaneous Mathematical Symbols A code table.
         /// </summary>
@@ -334,7 +334,7 @@ namespace Microsoft.Security.Application.CodeCharts
                 }
 
                 yield return i;
-            }            
+            }
         }
 
         /// <summary>
@@ -394,7 +394,7 @@ namespace Microsoft.Security.Application.CodeCharts
             for (int i = 0x2A00; i <= 0x2AFF; i++)
             {
                 yield return i;
-            }            
+            }
         }
 
         /// <summary>
@@ -405,7 +405,7 @@ namespace Microsoft.Security.Application.CodeCharts
         {
             for (int i = 0x2B00; i <= 0x2B59; i++)
             {
-                if (i == 0x2B4D || 
+                if (i == 0x2B4D ||
                     i == 0x2B4E ||
                     i == 0x2B4F)
                 {

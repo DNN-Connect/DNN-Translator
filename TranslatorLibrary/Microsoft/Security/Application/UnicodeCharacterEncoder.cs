@@ -45,7 +45,7 @@ namespace Microsoft.Security.Application
         /// The XML named entity for an apostrophe, used in XML encoding.
         /// </summary>
         private static readonly char[] XmlApostrophe = "&apos;".ToCharArray();
-        
+
         /// <summary>
         /// The current lower code chart settings.
         /// </summary>
@@ -309,11 +309,11 @@ namespace Microsoft.Security.Application
                     {
                         throw new InvalidUnicodeValueException(currentCodePoint);
                     }
-                    else if (char.IsHighSurrogate(currentCharacter)) 
+                    else if (char.IsHighSurrogate(currentCharacter))
                     {
                         if (i + 1 == inputLength)
                         {
-                            throw new InvalidSurrogatePairException(currentCharacter, '\0');                            
+                            throw new InvalidSurrogatePairException(currentCharacter, '\0');
                         }
 
                         // Now peak ahead and check if the following character is a low surrogate.
@@ -342,7 +342,7 @@ namespace Microsoft.Security.Application
                     }
                     else if (char.IsLowSurrogate(currentCharacter))
                     {
-                        throw new InvalidSurrogatePairException('\0', currentCharacter);    
+                        throw new InvalidSurrogatePairException('\0', currentCharacter);
                     }
                     else if (encoderTweak != null && encoderTweak(currentCharacter, out tweekedValue))
                     {
@@ -433,8 +433,8 @@ namespace Microsoft.Security.Application
         /// Initialises the HTML named entities list.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Maintainability", 
-            "CA1505:AvoidUnmaintainableCode", 
+            "Microsoft.Maintainability",
+            "CA1505:AvoidUnmaintainableCode",
             Justification = "Splitting or initialising via lookups has too large a performance increase.")]
         private static void InitialiseNamedEntityList()
         {
@@ -535,7 +535,7 @@ namespace Microsoft.Security.Application
             namedEntities[253] = "yacute".ToCharArray();
             namedEntities[254] = "thorn".ToCharArray();
             namedEntities[255] = "yuml".ToCharArray();
-                    
+
             namedEntities[338] = "OElig".ToCharArray();
             namedEntities[339] = "oelig".ToCharArray();
             namedEntities[352] = "Scaron".ToCharArray();
@@ -597,7 +597,7 @@ namespace Microsoft.Security.Application
             namedEntities[977] = "thetasym".ToCharArray();
             namedEntities[978] = "upsih".ToCharArray();
             namedEntities[982] = "piv".ToCharArray();
-            
+
             namedEntities[0x2002] = "ensp".ToCharArray();
             namedEntities[0x2003] = "emsp".ToCharArray();
             namedEntities[0x2009] = "thinsp".ToCharArray();
