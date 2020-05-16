@@ -77,6 +77,9 @@ Namespace Common
           Dim a As XmlAttribute = Me.CreateAttribute("name")
           x.Attributes.Append(a)
           a.InnerText = k.Key
+          Dim space As XmlAttribute = Me.CreateAttribute("xml:space")
+          x.Attributes.Append(space)
+          space.InnerText = "preserve"
           If Not minimal AndAlso k.Value.LastModified <> DateTime.MinValue Then
             Dim lm As XmlAttribute = Me.CreateAttribute("lastModified")
             x.Attributes.Append(lm)
@@ -84,11 +87,7 @@ Namespace Common
           End If
           Dim v As XmlNode = Me.CreateElement("value")
           x.AppendChild(v)
-          'v.InnerXml = k.Value.Value
           v.InnerText = k.Value.Value
-          Dim space As XmlAttribute = Me.CreateAttribute("xml:space")
-          v.Attributes.Append(space)
-          space.InnerText = "preserve"
         End If
       Next
 
