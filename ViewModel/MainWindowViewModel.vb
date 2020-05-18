@@ -570,6 +570,24 @@ Namespace ViewModel
       End Get
     End Property
 
+    Private _cleanProjectCommand As RelayCommand
+    Public ReadOnly Property CleanProjectCommand As RelayCommand
+      Get
+        If _cleanProjectCommand Is Nothing Then
+          _cleanProjectCommand = New RelayCommand(Sub(param)
+                                                    For Each package As InstalledPackageViewModel In Me.ProjectSettings.InstalledPackages
+                                                      CleanPack.Clean(Me.ProjectSettings, package, Me.SelectedLocale)
+                                                    Next
+                                                    MessageBox.Show("Cleaned All Components", "Translator")
+                                                  End Sub,
+                                     Function()
+                                       Return CBool(Me.ProjectSettings IsNot Nothing)
+                                     End Function)
+        End If
+        Return _cleanProjectCommand
+      End Get
+    End Property
+
     Private _SaveAsCommand As RelayCommand
     Public ReadOnly Property SaveAsCommand As RelayCommand
       Get

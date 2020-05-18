@@ -96,6 +96,15 @@
         </ribbon:RibbonApplicationMenu>
       </ribbon:Ribbon.ApplicationMenu>
       <ribbon:RibbonTab x:Name="HomeTab" Header="Home" KeyTip="H">
+        <ribbon:RibbonGroup x:Name="ProjectGroup" Header="Project">
+          <ribbon:RibbonButton
+      Label="Clean"
+      LargeImageSource="{StaticResource CleanData}"
+      ToolTipTitle="Clean All Resources"
+      ToolTipDescription="Parse and resave all resx files and remove keys that are not there in the original"
+      Command="{Binding Path=CleanProjectCommand}"
+        />
+        </ribbon:RibbonGroup>
         <ribbon:RibbonGroup x:Name="EditGroup" Header="Edit">
           <ribbon:RibbonButton
       Label="Save"
@@ -358,8 +367,7 @@
       ToolTipTitle="Clean Resources"
       ToolTipDescription="Parse and resave all resx files and remove keys that are not there in the original"
       Command="{Binding Path=CleanCommand}"
-       >
-          </ribbon:RibbonButton>
+        />
         </ribbon:RibbonGroup>
         <ribbon:RibbonGroup x:Name="SnapshotGroup" Header="Snapshot">
           <ribbon:RibbonButton
