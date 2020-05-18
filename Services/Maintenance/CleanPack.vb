@@ -1,4 +1,5 @@
-﻿Imports DotNetNuke.Translator.Common
+﻿Imports System.IO
+Imports DotNetNuke.Translator.Common
 Imports DotNetNuke.Translator.Common.Globals
 Imports DotNetNuke.Translator.ViewModel
 
@@ -18,7 +19,13 @@ Namespace Services.Maintenance
         For Each k In keysToRemove
           trans.Resources.Remove(k)
         Next
-        trans.Save(projectSettings.DoNotUseLastModified)
+        If trans.Resources.Count = 0 Then
+          If File.Exists(trans.FilePath) Then
+            File.Delete(trans.FilePath)
+          End If
+        Else
+          trans.Save(projectSettings.DoNotUseLastModified)
+        End If
       Next
 
     End Sub

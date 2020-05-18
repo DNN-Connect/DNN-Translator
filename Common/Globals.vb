@@ -38,8 +38,8 @@ Namespace Common
   End Function
 
   Public Shared Function GetResourceFilePath(installationPath As String, resourceFile As String, locale As String) As String
-   resourceFile = Text.RegularExpressions.Regex.Replace(resourceFile, "(\.en\-US)?\.resx$", "")
-   Return String.Format("{0}{1}.{2}.resx", installationPath, resourceFile, locale)
+      resourceFile = Text.RegularExpressions.Regex.Replace(resourceFile, "(?i)(\.en\-US)?\.resx$", "")
+      Return String.Format("{0}{1}.{2}.resx", installationPath, resourceFile, locale)
   End Function
   Public Shared Function GetResourceFileKey(installationPath As String, resourceFile As String) As String
    resourceFile = resourceFile.Substring(installationPath.Length)
