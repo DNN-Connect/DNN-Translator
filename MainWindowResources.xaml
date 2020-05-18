@@ -37,58 +37,6 @@ This resource dictionary is used by the MainWindow.
     </StackPanel>
   </ControlTemplate>
 
-  <!-- 
-  This style configures both of the main content areas in the main window.
-  -->
-  <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
-    <Setter Property="Background" Value="Azure" />
-    <Setter Property="HeaderTemplate">
-      <Setter.Value>
-        <DataTemplate>
-          <Border 
-            Background="{StaticResource Brush_HeaderBackground}" 
-            BorderBrush="LightGray" 
-            BorderThickness="1" 
-            CornerRadius="5" 
-            Margin="4" 
-            Padding="4" 
-            SnapsToDevicePixels="True" 
-            >
-            <TextBlock 
-              FontSize="14"
-              FontWeight="Bold"
-              Foreground="White" 
-              HorizontalAlignment="Center"  
-              Text="{TemplateBinding Content}" 
-              />
-          </Border>
-        </DataTemplate>
-      </Setter.Value>
-    </Setter>
-    <Setter Property="IsTabStop" Value="False" />
-    <Setter Property="Template">
-      <Setter.Value>
-        <!-- 
-        This template ensures that content of a HeaderedContentControl 
-        fills the available vertical space. 
-        -->
-        <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
-          <DockPanel>
-            <ContentPresenter 
-              DockPanel.Dock="Top"
-              ContentSource="Header" 
-              ContentTemplate="{TemplateBinding HeaderTemplate}" 
-              />
-            <ContentPresenter 
-              ContentSource="Content" 
-              ContentTemplate="{TemplateBinding ContentTemplate}" 
-              />
-          </DockPanel>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
-
   <!--
   This style ensures that the borders in the main window are consistent.
   -->
