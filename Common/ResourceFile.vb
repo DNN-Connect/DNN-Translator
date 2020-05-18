@@ -93,10 +93,10 @@ Namespace Common
 
     End Sub
 
-    Public Overloads Sub Save()
+    Public Overloads Sub Save(minimal As Boolean)
       If Not String.IsNullOrEmpty(_FilePath) Then
 
-        Regenerate(False)
+        Regenerate(minimal)
         Save(_FilePath)
 
       End If

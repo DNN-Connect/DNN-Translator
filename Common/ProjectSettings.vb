@@ -13,6 +13,7 @@ Namespace Common
     Public Property AccessKey As Security.SecureString
     Public Property LocalUrl As String = ""
     Public Property OverrideOwner As Boolean = False
+    Public Property DoNotUseLastModified As Boolean = False
     Public Property OwnerName As String = ""
     Public Property OwnerEmail As String = ""
     Public Property OwnerUrl As String = ""
@@ -59,6 +60,7 @@ Namespace Common
         End If
         ReadSettingValue("LocalUrl", LocalUrl)
         ReadSettingValue("OverrideOwner", OverrideOwner)
+        ReadSettingValue("DoNotUseLastModified", DoNotUseLastModified)
         ReadSettingValue("OwnerName", OwnerName)
         ReadSettingValue("OwnerEmail", OwnerEmail)
         ReadSettingValue("OwnerUrl", OwnerUrl)
@@ -150,6 +152,7 @@ Namespace Common
       Setting("AccessKey", False) = Common.Globals.EncryptString(AccessKey)
       Setting("LocalUrl", False) = LocalUrl
       Setting("OverrideOwner", False) = OverrideOwner.ToString
+      Setting("DoNotUseLastModified", False) = DoNotUseLastModified.ToString
       Setting("OwnerName", False) = OwnerName
       Setting("OwnerEmail", False) = OwnerEmail
       Setting("OwnerUrl", False) = OwnerUrl
