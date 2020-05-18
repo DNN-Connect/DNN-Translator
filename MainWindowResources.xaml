@@ -10,42 +10,42 @@ This resource dictionary is used by the MainWindow.
   xmlns:proj="clr-namespace:DotNetNuke.Translator"
   >
 
- <com:BoolToVisibilityConverter x:Key="boolConverter" />
+  <com:BoolToVisibilityConverter x:Key="boolConverter" />
 
- <DataTemplate DataType="{x:Type vm:ResourceFileViewModel}">
-  <vw:ResourceFileView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
- </DataTemplate>
- <DataTemplate DataType="{x:Type vm:ResourceCollectionViewModel}">
-  <vw:ResourceFileView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
- </DataTemplate>
- <DataTemplate DataType="{x:Type vm:SearchViewModel}">
-  <vw:ResourceFileView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
- </DataTemplate>
- <DataTemplate DataType="{x:Type vm:LEMergeViewModel}">
-  <vw:LEMergeView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
- </DataTemplate>
- <DataTemplate DataType="{x:Type vm:ResourceVerifierViewModel}">
-  <vw:ResourceVerifierView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
- </DataTemplate>
- <DataTemplate DataType="{x:Type vm:SnapshotComparisonViewModel}">
-  <vw:SnapshotComparisonView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
- </DataTemplate>
+  <DataTemplate DataType="{x:Type vm:ResourceFileViewModel}">
+    <vw:ResourceFileView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+  </DataTemplate>
+  <DataTemplate DataType="{x:Type vm:ResourceCollectionViewModel}">
+    <vw:ResourceFileView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+  </DataTemplate>
+  <DataTemplate DataType="{x:Type vm:SearchViewModel}">
+    <vw:ResourceFileView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+  </DataTemplate>
+  <DataTemplate DataType="{x:Type vm:LEMergeViewModel}">
+    <vw:LEMergeView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+  </DataTemplate>
+  <DataTemplate DataType="{x:Type vm:ResourceVerifierViewModel}">
+    <vw:ResourceVerifierView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+  </DataTemplate>
+  <DataTemplate DataType="{x:Type vm:SnapshotComparisonViewModel}">
+    <vw:SnapshotComparisonView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+  </DataTemplate>
 
- <ControlTemplate x:Key="ComponentListing" TargetType="ComboBoxItem">
-  <StackPanel Orientation="Horizontal">
-   <TextBlock Text="{Binding FriendlyName}" TextAlignment="Left" TextWrapping="Wrap" Width="100" />
-  </StackPanel>
- </ControlTemplate>
+  <ControlTemplate x:Key="ComponentListing" TargetType="ComboBoxItem">
+    <StackPanel Orientation="Horizontal">
+      <TextBlock Text="{Binding FriendlyName}" TextAlignment="Left" TextWrapping="Wrap" Width="100" />
+    </StackPanel>
+  </ControlTemplate>
 
- <!-- 
+  <!-- 
   This style configures both of the main content areas in the main window.
   -->
- <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
-  <Setter Property="Background" Value="Azure" />
-  <Setter Property="HeaderTemplate">
-   <Setter.Value>
-    <DataTemplate>
-     <Border 
+  <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
+    <Setter Property="Background" Value="Azure" />
+    <Setter Property="HeaderTemplate">
+      <Setter.Value>
+        <DataTemplate>
+          <Border 
             Background="{StaticResource Brush_HeaderBackground}" 
             BorderBrush="LightGray" 
             BorderThickness="1" 
@@ -54,64 +54,64 @@ This resource dictionary is used by the MainWindow.
             Padding="4" 
             SnapsToDevicePixels="True" 
             >
-      <TextBlock 
+            <TextBlock 
               FontSize="14"
               FontWeight="Bold"
               Foreground="White" 
               HorizontalAlignment="Center"  
               Text="{TemplateBinding Content}" 
               />
-     </Border>
-    </DataTemplate>
-   </Setter.Value>
-  </Setter>
-  <Setter Property="IsTabStop" Value="False" />
-  <Setter Property="Template">
-   <Setter.Value>
-    <!-- 
+          </Border>
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <!-- 
         This template ensures that content of a HeaderedContentControl 
         fills the available vertical space. 
         -->
-    <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
-     <DockPanel>
-      <ContentPresenter 
+        <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
+          <DockPanel>
+            <ContentPresenter 
               DockPanel.Dock="Top"
               ContentSource="Header" 
               ContentTemplate="{TemplateBinding HeaderTemplate}" 
               />
-      <ContentPresenter 
+            <ContentPresenter 
               ContentSource="Content" 
               ContentTemplate="{TemplateBinding ContentTemplate}" 
               />
-     </DockPanel>
-    </ControlTemplate>
-   </Setter.Value>
-  </Setter>
- </Style>
+          </DockPanel>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
- <!--
+  <!--
   This style ensures that the borders in the main window are consistent.
   -->
- <Style x:Key="MainBorderStyle" TargetType="{x:Type Border}">
-  <Setter Property="Background" Value="WhiteSmoke" />
-  <Setter Property="BorderBrush" Value="LightGray" />
-  <Setter Property="BorderThickness" Value="1" />
-  <Setter Property="CornerRadius" Value="5" />
-  <Setter Property="SnapsToDevicePixels" Value="True" />
- </Style>
+  <Style x:Key="MainBorderStyle" TargetType="{x:Type Border}">
+    <Setter Property="Background" Value="WhiteSmoke" />
+    <Setter Property="BorderBrush" Value="LightGray" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="5" />
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+  </Style>
 
- <Style TargetType="TextBlock" x:Key="StatusBarTextBlock">
-  <Setter Property="TextWrapping" Value="NoWrap" />
-  <Setter Property="TextTrimming" Value="CharacterEllipsis" />
- </Style>
- 
- <!-- 
+  <Style TargetType="TextBlock" x:Key="StatusBarTextBlock">
+    <Setter Property="TextWrapping" Value="NoWrap" />
+    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+  </Style>
+
+  <!-- 
   This template explains how to render 
   a tab item with a close button.
   -->
- <DataTemplate x:Key="ClosableTabItemTemplate">
-   <DockPanel Width="120" DockPanel.Dock="Top">
-    <Button 
+  <DataTemplate x:Key="ClosableTabItemTemplate">
+    <DockPanel Width="120" DockPanel.Dock="Top">
+      <Button 
         Command="{Binding Path=CloseCommand}"
         Content="X"
         Cursor="Hand"
@@ -125,18 +125,18 @@ This resource dictionary is used by the MainWindow.
         VerticalContentAlignment="Bottom"
         Width="16" Height="16" 
         />
-    <ContentPresenter 
+      <ContentPresenter 
         Content="{Binding Path=DisplayName}" 
         VerticalAlignment="Center" 
         />
-   </DockPanel>
- </DataTemplate>
+    </DockPanel>
+  </DataTemplate>
 
- <!--
+  <!--
   This template explains how to render the 'Workspace' content area in the main window.
   -->
- <DataTemplate x:Key="WorkspacesTemplate">
-  <TabControl 
+  <DataTemplate x:Key="WorkspacesTemplate">
+    <TabControl 
       IsSynchronizedWithCurrentItem="True" 
       ItemsSource="{Binding}" 
       ItemTemplate="{StaticResource ClosableTabItemTemplate}"
@@ -144,20 +144,20 @@ This resource dictionary is used by the MainWindow.
     SelectedIndex="{Binding DataContext.SelectedTabIndex, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
       Margin="4"
       >
-  </TabControl>
- </DataTemplate>
+    </TabControl>
+  </DataTemplate>
 
- <Style x:Key="TreenodeButtonStyle" TargetType="Button">
-  <Setter Property="Template">
-   <Setter.Value>
-    <ControlTemplate TargetType="{x:Type Button}">
-     <StackPanel Orientation="Horizontal">
-      <Image Name="img" Width="20" Height="20" Stretch="None" Source="{Binding Image}"/>
-      <TextBlock Text="{Binding Name}" Margin="5,0" />
-     </StackPanel>
-    </ControlTemplate>
-   </Setter.Value>
-  </Setter>
- </Style>
+  <Style x:Key="TreenodeButtonStyle" TargetType="Button">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <StackPanel Orientation="Horizontal">
+            <Image Name="img" Width="20" Height="20" Stretch="None" Source="{Binding Image}"/>
+            <TextBlock Text="{Binding Name}" Margin="5,0" />
+          </StackPanel>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 </ResourceDictionary>
  

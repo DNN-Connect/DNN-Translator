@@ -207,6 +207,10 @@
     <Compile Include="View\TranslatorSettingsView.xaml.vb">
       <DependentUpon>TranslatorSettingsView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -336,16 +340,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\32\document-new-4.png" />
-    <Resource Include="Images\32\document-open-5.png" />
-    <Resource Include="Images\32\document-save-3.png" />
-    <Resource Include="Images\32\document-save-as-3.png" />
-    <Resource Include="Images\32\media-floppy-3.png" />
-    <Resource Include="Images\32\preferences-desktop-locale-3.png" />
-    <Resource Include="Images\32\preferences-system-3.png" />
-    <Resource Include="Images\32\text-html.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
@@ -355,64 +349,7 @@
     <EmbeddedResource Include="Resources\TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\16\format-justify-fill-4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\16\emblem-unreadable-2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\16\edit-copy-4.png" />
-    <Resource Include="Images\16\edit-cut-4.png" />
-    <Resource Include="Images\16\edit-paste-4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\16\system-search-3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\16\preferences-desktop-locale-3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\32\go-next-5.png" />
-    <Resource Include="Images\32\go-previous-5.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\16\go-next-5.png" />
-    <Resource Include="Images\16\go-previous-5.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\32\camera-photo-5.png" />
-    <Resource Include="Images\32\edit-find-4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\32\go-down-5.png" />
-    <Resource Include="Images\32\system-software-update-2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\16\help-browser-2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\16\preferences-system-3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\32\emblem-unreadable-2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\16\media-floppy-3.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="applications-internet-3.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\16\folder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\32\folder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\16\format-justify-left-4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\32\format-justify-left-4.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="SmithHtmlEditor\SmithHtmlEditor.csproj">
@@ -423,12 +360,6 @@
       <Project>{343ABC8A-D4D0-44A3-A767-A5450488FD57}</Project>
       <Name>TranslatorLibrary</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\16\go-down-5.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\16\system-software-update-2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
