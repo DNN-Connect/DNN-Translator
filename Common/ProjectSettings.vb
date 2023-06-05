@@ -73,6 +73,10 @@ Namespace Common
         Me.Location = projectSettingsFileOrDnnDirectory
       End If
 
+      If Not IO.Directory.Exists(Me.Location) Then
+        Exit Sub
+      End If
+
       CurrentSnapShot = New Snapshot(Location, Location)
 
       ' Load various DNN and reflect

@@ -1,7 +1,7 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.Collections.Specialized
 Imports System.ComponentModel
-
+Imports System.IO
 Imports DotNetNuke.Translator.Common
 Imports DotNetNuke.Translator.Services.Maintenance
 
@@ -478,6 +478,7 @@ Namespace ViewModel
       If Not IO.File.Exists(projectSettingsFile) Then
         MessageBox.Show("File no longer exists", "Selection Error", MessageBoxButton.OK)
         _RecentLocations.Remove(projectSettingsFile)
+        _RecentLocations.Save()
         MyBase.OnPropertyChanged("RecentLocationsList")
         Exit Sub
       End If
@@ -492,42 +493,43 @@ Namespace ViewModel
         _RecentLocations.Push(location)
         _RecentLocations.Save()
         _recentLocationsList = Nothing ' reset
+        MyBase.OnPropertyChanged("RecentLocationsList")
       ElseIf IO.Directory.Exists(location) Then ' it's a DNN directory
       End If
 
       IsBusy = True
       BusyMessage = "Opening Location"
-      _backgroundWorker = New BackgroundWorker
-      AddHandler _backgroundWorker.DoWork, AddressOf OpenLocation
-      AddHandler _backgroundWorker.RunWorkerCompleted, AddressOf OpenLocationCompleted
-      _backgroundWorker.RunWorkerAsync(location)
+      OpenLocation(location)
 
     End Sub
 
-    Private Sub OpenLocation(sender As Object, e As DoWorkEventArgs)
+    Private Sub OpenLocation(location As String)
 
-      Dim location As String = CType(e.Argument, String)
       ProjectSettings = New Common.ProjectSettings(location)
-      e.Result = ProjectSettings
+      Dim Result = ProjectSettings
 
-    End Sub
-
-    Private Sub OpenLocationCompleted(sender As Object, e As RunWorkerCompletedEventArgs)
-
-      Dim result As Common.ProjectSettings = CType(e.Result, Common.ProjectSettings)
-      If Not IO.Directory.Exists(ProjectSettings.Location) Then
+      If Not IO.Directory.Exists(Result.Location) Then
+        ' Show alert error message
+        MessageBox.Show("The location you selected does not exist", "Location Error", MessageBoxButton.OK)
+        ' Remove from recent locations
         If ProjectSettings.SettingsFileName <> "" Then
           _RecentLocations.Remove(ProjectSettings.SettingsFileName)
+          _RecentLocations.Save()
+          _recentLocationsList = Nothing ' reset
+          MyBase.OnPropertyChanged("RecentLocationsList")
         End If
-      Else
-        Me.ProjectSettings = result
-        If ProjectSettings.TargetLocale <> "" Then
-          SetLocale(ProjectSettings.TargetLocale)
-        End If
-        _treeContent = Nothing
-        _currentLocation = ProjectSettings.Location
-        MainStatus = "Location: " & ProjectSettings.Location
+        IsBusy = False
+        _opening = False
+        Exit Sub
       End If
+
+      Me.ProjectSettings = Result
+      If ProjectSettings.TargetLocale <> "" Then
+        SetLocale(ProjectSettings.TargetLocale)
+      End If
+      _treeContent = Nothing
+      _currentLocation = ProjectSettings.Location
+      MainStatus = "Location: " & ProjectSettings.Location
 
       MyBase.OnPropertyChanged("RecentLocationsList")
       MyBase.OnPropertyChanged("TreeContent")
@@ -640,10 +642,7 @@ Namespace ViewModel
           If IO.File.Exists(fbd.SelectedPath & "\web.config") AndAlso IO.File.Exists(fbd.SelectedPath & "\bin\dotnetnuke.dll") Then
             IsBusy = True
             BusyMessage = "Opening Location"
-            _backgroundWorker = New BackgroundWorker
-            AddHandler _backgroundWorker.DoWork, AddressOf OpenLocation
-            AddHandler _backgroundWorker.RunWorkerCompleted, AddressOf OpenNewCompleted
-            _backgroundWorker.RunWorkerAsync(fbd.SelectedPath)
+            OpenLocation(fbd.SelectedPath)
           Else
             MessageBox.Show("You must select the root of a DotNetNuke installation", "Selection Error", MessageBoxButton.OK)
           End If
@@ -656,7 +655,6 @@ Namespace ViewModel
 
       Dim result As Common.ProjectSettings = CType(e.Result, Common.ProjectSettings)
       result.TargetLocale = TranslatorSettings.DefaultTargetLocale
-      'result.Dictionary = TranslatorSettings.DefaultDictionary
       ShowSettingsScreen(result)
       IsBusy = False
 
