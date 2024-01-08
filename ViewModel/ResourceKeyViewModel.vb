@@ -38,7 +38,7 @@ Namespace ViewModel
         _changed = True
         Downloaded = False
 
-        Me.SetColor()
+        Me.SetTargetColor()
         Me.OnPropertyChanged("TargetValue")
         Me.OnPropertyChanged("Changed")
         Me.OnPropertyChanged("TargetColor")
@@ -122,7 +122,7 @@ Namespace ViewModel
     Public Property TargetColor() As SolidColorBrush
       Get
         If _targetColor Is Nothing Then
-          Me.SetColor()
+          Me.SetTargetColor()
         End If
         Return _targetColor
       End Get
@@ -237,11 +237,7 @@ Namespace ViewModel
     End Sub
     Public Sub HighlightTarget(color As String)
       _targetC = color
-      'HighlightTarget(CType((New BrushConverter).ConvertFrom(color), SolidColorBrush))
     End Sub
-    'Public Sub HighlightTarget(color As SolidColorBrush)
-    ' TargetColor = color
-    'End Sub
 
     Private _compareC As String = "#FFFFFF"
     Public Sub HighlightCompare()
@@ -249,11 +245,7 @@ Namespace ViewModel
     End Sub
     Public Sub HighlightCompare(color As String)
       _compareC = color
-      'HighlightCompare(CType((New BrushConverter).ConvertFrom(color), SolidColorBrush))
     End Sub
-    'Public Sub HighlightCompare(color As SolidColorBrush)
-    ' CompareColor = color
-    'End Sub
 
     Public Function Clone() As ResourceKeyViewModel
       Dim res As New ResourceKeyViewModel(OriginalResource, TranslatedResource, CompareValue, LEText)
@@ -268,10 +260,10 @@ Namespace ViewModel
       Me.OnPropertyChanged("TargetColor")
     End Sub
 
-    Private Sub SetColor()
+    Private Sub SetTargetColor()
       Dim col As String = ""
       If _targetValue = "" Then
-        col = "#F2DEDE"
+        col = "#faed5f"
       Else
         If _targetValue = OriginalValue Then
           col = "#F2DEDE"
