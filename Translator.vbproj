@@ -123,6 +123,7 @@
     <Compile Include="Services\Translation\Bing\AzureDataMarket.vb" />
     <Compile Include="Services\Translation\Bing\BingTranslationService.vb" />
     <Compile Include="Services\Translation\Google\GoogleTranslationService.vb" />
+    <Compile Include="Services\Translation\Google\TranslationResult.vb" />
     <Compile Include="Services\Translation\ITranslationService.vb" />
     <Compile Include="Services\Translation\TranslationController.vb" />
     <Compile Include="ViewModel\ActionableViewModel.vb" />
