@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Translator", "Translator.vbproj", "{DC7B7B19-07A7-44C9-A624-67895E092C52}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmithHtmlEditor", "SmithHtmlEditor\SmithHtmlEditor.csproj", "{84BADDA1-AB3A-4064-B87E-178D7446901D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslatorLibrary", "TranslatorLibrary\TranslatorLibrary.csproj", "{343ABC8A-D4D0-44A3-A767-A5450488FD57}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TranslatorSetup", "TranslatorSetup\TranslatorSetup.vdproj", "{5D6B4FC7-412C-4253-BBA3-2596FB275571}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmithHtmlEditor", "SmithHtmlEditor\SmithHtmlEditor.csproj", "{84BADDA1-AB3A-4064-B87E-178D7446901D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,16 +33,6 @@ Global
 		{DC7B7B19-07A7-44C9-A624-67895E092C52}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DC7B7B19-07A7-44C9-A624-67895E092C52}.Release|x86.ActiveCfg = Release|Any CPU
 		{DC7B7B19-07A7-44C9-A624-67895E092C52}.Release|x86.Build.0 = Release|Any CPU
-		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Release|x86.ActiveCfg = Release|Any CPU
 		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{343ABC8A-D4D0-44A3-A767-A5450488FD57}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -59,7 +49,20 @@ Global
 		{5D6B4FC7-412C-4253-BBA3-2596FB275571}.Release|Any CPU.ActiveCfg = Release
 		{5D6B4FC7-412C-4253-BBA3-2596FB275571}.Release|Any CPU.Build.0 = Release
 		{5D6B4FC7-412C-4253-BBA3-2596FB275571}.Release|Mixed Platforms.ActiveCfg = Release
+		{5D6B4FC7-412C-4253-BBA3-2596FB275571}.Release|Mixed Platforms.Build.0 = Release
 		{5D6B4FC7-412C-4253-BBA3-2596FB275571}.Release|x86.ActiveCfg = Release
+		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Debug|x86.Build.0 = Debug|Any CPU
+		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Release|x86.ActiveCfg = Release|Any CPU
+		{84BADDA1-AB3A-4064-B87E-178D7446901D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -19,9 +19,10 @@
     If _TranslationProviders Is Nothing Then
      _TranslationProviders = New Dictionary(Of String, String)
      _TranslationProviders.Add("none", "None")
-     _TranslationProviders.Add("bing", "Bing (Microsoft)")
-     _TranslationProviders.Add("google", "Google")
-    End If
+                    _TranslationProviders.Add("bing", "Bing (Microsoft)")
+                    _TranslationProviders.Add("google", "Google")
+                    _TranslationProviders.Add("azure", "Azure AI Cognitive Services (Microsoft Translator v3)")
+                End If
     Return _TranslationProviders
    End Get
   End Property
@@ -59,17 +60,35 @@
    End Set
   End Property
 
-  Public Property GoogleApiKey() As String
-   Get
-    Return _appSettings.GoogleApiKey
-   End Get
-   Set(ByVal value As String)
-    _appSettings.GoogleApiKey = value
-    Me.OnPropertyChanged("GoogleApiKey")
-   End Set
-  End Property
+        Public Property GoogleApiKey() As String
+            Get
+                Return _appSettings.GoogleApiKey
+            End Get
+            Set(ByVal value As String)
+                _appSettings.GoogleApiKey = value
+                Me.OnPropertyChanged("GoogleApiKey")
+            End Set
+        End Property
+        Public Property AzureApiKey() As String
+            Get
+                Return _appSettings.AzureApiKey
+            End Get
+            Set(ByVal value As String)
+                _appSettings.AzureApiKey = value
+                Me.OnPropertyChanged("AzureApiKey")
+            End Set
+        End Property
+        Public Property AzureRegion() As String
+            Get
+                Return _appSettings.AzureRegion
+            End Get
+            Set(ByVal value As String)
+                _appSettings.AzureRegion = value
+                Me.OnPropertyChanged("AzureRegion")
+            End Set
+        End Property
 
-  Public Property DefaultTargetLocale() As CultureInfo
+        Public Property DefaultTargetLocale() As CultureInfo
    Get
     Return AvailableLocales.FirstOrDefault(Function(x) x.Name = _appSettings.DefaultTargetLocale)
    End Get
