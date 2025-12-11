@@ -105,7 +105,7 @@ Namespace Common
         Using c As New SqlConnection(ConnectionString)
           c.Open()
           Dim q As SqlCommand = c.CreateCommand
-          q.CommandText = String.Format("SELECT p.*, dm.FolderName ModuleFolderName FROM {0}{1}Packages p LEFT JOIN {0}{1}DesktopModules dm ON dm.PackageID=p.PackageID WHERE p.IsSystemPackage=0 AND NOT p.FolderName IS NULL", DatabaseOwner, ObjectQualifier)
+          q.CommandText = String.Format("SELECT p.*, CASE WHEN LEFT(p.FolderName, 14) = 'DesktopModules' THEN SUBSTRING(p.FolderName, 16, 500) ELSE p.FolderName END ModuleFolderName FROM {0}{1}Packages p LEFT JOIN {0}{1}DesktopModules dm ON dm.PackageID=p.PackageID WHERE p.IsSystemPackage=0 AND NOT p.FolderName IS NULL", DatabaseOwner, ObjectQualifier)
           Using ir As SqlDataReader = q.ExecuteReader
             Do While ir.Read
               Dim package As New InstalledPackageViewModel(ir)

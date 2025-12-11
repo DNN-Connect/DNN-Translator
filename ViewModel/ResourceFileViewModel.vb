@@ -145,7 +145,7 @@ Namespace ViewModel
       End Select
       Dim objName As String = "Core"
       Dim objVersion As String = MainWindow.ProjectSettings.DotNetNukeVersion
-      For Each p As InstalledPackageViewModel In MainWindow.ProjectSettings.InstalledPackages
+      For Each p As InstalledPackageViewModel In MainWindow.ProjectSettings.InstalledPackages.OrderBy(Function(ip) ip.FolderName.Length)
         If _fileKey.StartsWith("DesktopModules\" & p.FolderName.Replace("/", "\")) Then
           objName = p.PackageName
           objVersion = p.Version

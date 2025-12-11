@@ -27,7 +27,7 @@ Namespace Services.Packing
 
       Using LanguagePackStream As New MemoryStream
         Using archive As New ZipArchive(LanguagePackStream, ZipArchiveMode.Create, False)
-          For Each package As ViewModel.InstalledPackageViewModel In projectSettings.InstalledPackages
+          For Each package As ViewModel.InstalledPackageViewModel In projectSettings.InstalledPackages.OrderByDescending(Function(p) p.FolderName.Length)
             If package.FriendlyName = packageFriendlyName Or packageFriendlyName = "Full" Then
               AddPackage(package, archive)
             End If
